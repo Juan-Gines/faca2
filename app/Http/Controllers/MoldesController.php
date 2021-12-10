@@ -68,8 +68,8 @@ class MoldesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $molde=Molde::findOrFail($id);
+    {        
+        $molde=Molde::find($id);
         
         return view('moldes.show',compact('molde'));
     }
@@ -81,8 +81,9 @@ class MoldesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $molde=Molde::findOrFail($id);
+    {       
+        $molde=Molde::find($id);
+        
         
         return view('moldes.edit',compact('molde'));
     }
@@ -96,7 +97,7 @@ class MoldesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $molde=Molde::findOrFail($id);
+        $molde=Molde::find($id);
         $molde->numero=$request->numero;
         $molde->nombre=$request->nombre;
         $molde->ubicacionReal=$request->ubicacionReal;
@@ -116,7 +117,7 @@ class MoldesController extends Controller
         $molde->cavidades=$request->cavidades;
         $molde->comentario=$request->comentario;
         $molde->save();
-        return view('moldes.show',$molde);
+        return view('moldes.show',$id);
     }
 
     /**

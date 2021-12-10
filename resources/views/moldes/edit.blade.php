@@ -45,8 +45,8 @@
       <textarea class="form-control" id="descripcion" name="comentario" rows="3"></textarea>
     </div>
     <div class="mb-3">
-      <button type="submit" class="btn btn-primary mb-3">Insertar registro</button>
-      <a href="{{route('moldes.index')}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
+      <button type="submit" class="btn btn-primary mb-3">Actualizar registro</button>
+      <a href="{{route('moldes.show',$molde->id)}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
     </div>
   </form>
 @endsection
