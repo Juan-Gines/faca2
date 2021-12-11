@@ -105,19 +105,19 @@ class MoldesController extends Controller
         $molde->versionActual=$request->versionActual;
         $molde->estado=$request->estado;        
         switch($request->estado){
-            case "form-success": $molde->estadoTexto="Ok";
+            case "table-success": $molde->estadoTexto="Ok";
                 break;
-            case "form-danger": $molde->estadoTexto="No ok";
+            case "table-danger": $molde->estadoTexto="No ok";
                 break;            
-            case "form-warning": $molde->estadoTexto="En reparación";
+            case "table-warning": $molde->estadoTexto="En reparación";
                 break;
             default: $molde->estadoTexto="Desconocido";
                 break;
         }
         $molde->cavidades=$request->cavidades;
         $molde->comentario=$request->comentario;
-        $molde->save();
-        return view('moldes.show',$id);
+        $molde->save();       
+        return relocate('moldes.show',$molde->id);
     }
 
     /**

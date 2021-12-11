@@ -4,7 +4,7 @@
   Registro de moldes
 @endsection
 @section('contenido')
-  <form method="POST" action="{{route('moldes.store')}}" class="container" style="max-width: 800px;">
+  <form method="POST" action="{{route('moldes.store')}}" class="container mt-5" style="max-width: 800px;">
     @csrf
     <div class="mb-3">
       <label for="numero" class="form-label">Numero</label>

@@ -1,10 +1,11 @@
 @extends('layouts.plantilla')
 
 @section('cabecera')
-  Registro de moldes
+  Editar molde nº {{$molde->numero}}
 @endsection
 @section('contenido')
-  <form method="POST" action="{{route('moldes.update')}}" class="container" style="max-width: 800px;">
+<div class="m-5">
+  <form method="POST" action="{{route('moldes.update',$molde->id)}}" class="container" style="max-width: 800px;">
     @csrf
     @method('PUT')
     <div class="mb-3">
@@ -38,17 +39,18 @@
     </div>
     <div class="mb-3">
       <label for="cavidades" class="form-label">Cavidades</label>
-      <input type="text" class="form-control" name="cavidades" id="cavidades">
+      <input type="text" class="form-control" name="cavidades" id="cavidades" value="{{$molde->cavidades}}">
     </div>
     <div class="mb-3">
       <label for="comentario" class="form-label">Comentario</label>
-      <textarea class="form-control" id="descripcion" name="comentario" rows="3"></textarea>
+      <textarea class="form-control" id="descripcion" name="comentario" rows="3" >{{$molde->comentario}}</textarea>
     </div>
     <div class="mb-3">
       <button type="submit" class="btn btn-primary mb-3">Actualizar registro</button>
       <a href="{{route('moldes.show',$molde->id)}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
     </div>
   </form>
+</div>
 @endsection
 @section('pie')
 @endsection

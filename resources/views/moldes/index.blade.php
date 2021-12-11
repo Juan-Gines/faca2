@@ -4,13 +4,12 @@
   Listado de moldes
 @endsection
 @section('contenido')  
-  <div class="container mt-3">
-    <div class="row justify-content-center">
-      <div class="col-auto mb-3 ">
-        <a href ="{{route('moldes.create')}}" ><button class="btn btn-primary" type="button">Nuevo registro</button></a>
-      </div>
+<div class="m-5">
+  <div class="row justify-content-center">
+    <div class="col-auto mb-3 ">
+      <a href ="{{route('moldes.create')}}" ><button class="btn btn-primary" type="button">Nuevo registro</button></a>
     </div>
-  </div>
+  </div>  
   <div class="row justify-content-center">
     <table class="table table-hover" style="max-width: 800px;" >
       <thead>                
@@ -42,6 +41,7 @@
       </tbody>
     </table>
   </div>
+</div>
 @endsection
 @section('pie')
 @endsection
