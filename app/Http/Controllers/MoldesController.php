@@ -15,9 +15,30 @@ class MoldesController extends Controller
      */
     public function index()
     {
-        $moldes=Molde::all();
-
+     
+        $moldes=Molde::all();       
         return view('moldes.index',compact('moldes'));
+    }
+    
+    public function listado($listado)
+    {
+        switch ($listado) {
+        case 'desconocido':
+            $moldes=Molde::where('estadoTexto','Desconocido')->get();
+            break;
+        case 'ok':
+            $moldes=Molde::where('estadoTexto','Ok')->get();
+            break;
+        case 'reparacion':
+            $moldes=Molde::where('estadoTexto','En reparación')->get();
+            break;
+        case 'nook':
+            $moldes=Molde::where('estadoTexto','No ok')->get();
+            break;
+        default:
+            $moldes=Molde::all();
+            break;
+        }
     }
 
     /**
@@ -117,7 +138,7 @@ class MoldesController extends Controller
         $molde->cavidades=$request->cavidades;
         $molde->comentario=$request->comentario;
         $molde->save();       
-        return relocate('moldes.show',$molde->id);
+        return view('moldes.show',compact('molde'));
     }
 
     /**

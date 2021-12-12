@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::resource('moldes',MoldesController::class);
 
+//Route::get('/moldes/listado/{listado}',[MoldesController::class,'listado',$listado]);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

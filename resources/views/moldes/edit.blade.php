@@ -31,10 +31,10 @@
     <div class="mb-3">
       <label for="estado" class="form-label">Estado</label>    
       <select class="form-select mb-3" name="estado" aria-label="estado" >
-        <option value="table-light">Desconocido</option>      
-        <option value="table-success">Ok</option>
-        <option value="table-warning">En reparación</option>
-        <option value="table-danger">No ok</option>      
+        <option  value="table-light" {{$molde->estado=="table-light"?"selected":""}}>Desconocido</option>      
+        <option class="text-success" value="table-success" {{$molde->estado=="table-success"?"selected":""}}>Ok</option>
+        <option class="text-warning" value="table-warning" {{$molde->estado=="table-warning"?"selected":""}}>En reparación</option>
+        <option class="text-danger" value="table-danger" {{$molde->estado=="table-danger"?"selected":""}}>No ok</option>      
       </select>
     </div>
     <div class="mb-3">
