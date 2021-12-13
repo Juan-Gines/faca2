@@ -29,10 +29,10 @@
     <div class="mb-3">
       <label for="estado" class="form-label">Estado</label>    
       <select class="form-select mb-3" name="estado" aria-label="estado" >
-        <option value="table-light">Desconocido</option>      
-        <option class="text-success" value="table-success">Ok</option>
-        <option class="text-warning" value="table-warning">En reparación</option>
-        <option class="text-danger" value="table-danger">No ok</option>      
+        <option value="light">Desconocido</option>      
+        <option class="text-success" value="success">Ok</option>
+        <option class="text-warning" value="warning">En reparación</option>
+        <option class="text-danger" value="danger">No ok</option>      
       </select>
     </div>
     <div class="mb-3">

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MoldesController;
+use Illuminate\Notifications\Action;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,9 @@ Route::get('/', function () {
 
 Route::resource('moldes',MoldesController::class);
 
-//Route::get('/moldes/listado/{listado}',[MoldesController::class,'listado',$listado]);
+/* Route::get('/moldes/listado/{listado}',function ($listado){
+    return Route::()[MoldesController::class,'listado',$listado]);
+} */
 
 Route::get('/dashboard', function () {
     return view('dashboard');

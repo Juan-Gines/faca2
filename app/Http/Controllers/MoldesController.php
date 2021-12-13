@@ -16,7 +16,7 @@ class MoldesController extends Controller
     public function index()
     {
      
-        $moldes=Molde::all();       
+        $moldes=Molde::all()->sortBy('numero');       
         return view('moldes.index',compact('moldes'));
     }
     
@@ -67,11 +67,11 @@ class MoldesController extends Controller
         $molde->versionActual=$request->versionActual;
         $molde->estado=$request->estado;
         switch($request->estado){
-            case "table-success": $molde->estadoTexto="Ok";
+            case "success": $molde->estadoTexto="Ok";
                 break;
-            case "table-danger": $molde->estadoTexto="No ok";
+            case "danger": $molde->estadoTexto="No ok";
                 break;            
-            case "table-warning": $molde->estadoTexto="En reparación";
+            case "warning": $molde->estadoTexto="En reparación";
                 break;
             default: $molde->estadoTexto="Desconocido";
                 break;
@@ -126,11 +126,11 @@ class MoldesController extends Controller
         $molde->versionActual=$request->versionActual;
         $molde->estado=$request->estado;        
         switch($request->estado){
-            case "table-success": $molde->estadoTexto="Ok";
+            case "success": $molde->estadoTexto="Ok";
                 break;
-            case "table-danger": $molde->estadoTexto="No ok";
+            case "danger": $molde->estadoTexto="No ok";
                 break;            
-            case "table-warning": $molde->estadoTexto="En reparación";
+            case "warning": $molde->estadoTexto="En reparación";
                 break;
             default: $molde->estadoTexto="Desconocido";
                 break;

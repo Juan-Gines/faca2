@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 
 @section('cabecera')
-  Información del molde nº {{$molde->numero}}
+  Info molde nº {{$molde->numero}}
 @endsection
 @section('contenido')
 <div class="container max-w-75 rounded">
@@ -25,7 +25,7 @@
     </div> 
     <div class="row ">
       <div class="col-md-3 offset-md-1 fw-bold mb-3"> Estado </div>
-      <div class="col-md-7 mb-3"> {{$molde->estadoTexto}}</div>
+      <div class="col-md-7 mb-3 text-{{$molde->estado!='light'?$molde->estado:''}} "> {{$molde->estadoTexto}}</div>
     </div> 
     <div class="row ">
       <div class="col-md-3 offset-md-1 fw-bold mb-3"> Cavidades  </div>
@@ -37,8 +37,8 @@
     </div> 
 
       <div class="col-md-12 offset-md-1 ml-2 mb-3">
-        <a href="{{route('moldes.edit',['molde'=>$molde->id])}}"><button class="btn btn-primary mb-3">Modificar registro</button></a>
-        <a href="{{route('moldes.index')}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
+        <a href="{{route('moldes.edit',['molde'=>$molde->id])}}"><button class="btn btn-primary mb-3">Modificar info</button></a>
+        <a href="{{route('moldes.index')}}"><button type="button" class="btn btn-primary ms-5 mb-3">Volver</button></a>
       </div>    
     </div>
   
