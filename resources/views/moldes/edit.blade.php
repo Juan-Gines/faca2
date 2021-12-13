@@ -1,10 +1,10 @@
 @extends('layouts.plantilla')
 
-@section('cabecera')
-  Editar molde nº {{$molde->numero}}
-@endsection
+
 @section('contenido')
-<div class="m-5">
+  <div class="row justify-content-center p-3">
+    <h2 class="text-center" style="color: #1652B5;">Actualiza molde nº {{$molde->numero}}</h2>
+  </div>
   <form method="POST" action="{{route('moldes.update',$molde->id)}}" class="container" style="max-width: 800px;">
     @csrf
     @method('PUT')
@@ -50,7 +50,7 @@
       <a href="{{route('moldes.show',$molde->id)}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
     </div>
   </form>
-</div>
+
 @endsection
 @section('pie')
 @endsection

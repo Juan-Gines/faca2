@@ -1,9 +1,10 @@
 @extends('layouts.plantilla')
 
-@section('cabecera')
-  Registro de moldes
-@endsection
 @section('contenido')
+
+  <div class="row justify-content-center p-3">
+    <h2 class="text-center" style="color: #1652B5;">Introduce nuevo molde</h2>
+  </div>
   <form method="POST" action="{{route('moldes.store')}}" class="container mt-5" style="max-width: 800px;">
     @csrf
     <div class="mb-3">
@@ -48,6 +49,7 @@
       <a href="{{route('moldes.index')}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
     </div>
   </form>
+
 @endsection
 @section('pie')
 @endsection
