@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MoldesController;
+use App\Http\Controllers\AccionesController;
 use Illuminate\Notifications\Action;
 
 /*
@@ -20,12 +21,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+Route::get('/moldes/listado/ok',[MoldesController::class,'ok']);
+Route::get('/moldes/listado/nook',[MoldesController::class,'nook']);
+Route::get('/moldes/listado/reparando',[MoldesController::class,'reparando']);
+Route::get('/moldes/listado/desconocido',[MoldesController::class,'desconocido']);
+
+Route::get('/moldes/buscar',[MoldesController::class,'buscar']);
+    
 Route::resource('moldes',MoldesController::class);
-
-/* Route::get('/moldes/listado/{listado}',function ($listado){
-    return Route::()[MoldesController::class,'listado',$listado]);
-} */
-
+Route::resource('acciones',AccionesController::class);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

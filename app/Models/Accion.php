@@ -9,6 +9,15 @@ class Accion extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'tipo',
+        'lugar',
+        'descripcion',
+        'reparacion',
+        'fechaEntrada',
+        'fechaSalida',        
+    ];
+
     public function molde()
     {
         return $this->belongsTo(Molde::class);

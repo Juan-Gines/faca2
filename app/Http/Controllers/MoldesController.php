@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accion;
 use Illuminate\Http\Request;
 
 use App\Models\Molde;
@@ -20,27 +21,42 @@ class MoldesController extends Controller
         return view('moldes.index',compact('moldes'));
     }
     
-    public function listado($listado)
+    public function ok()
     {
-        switch ($listado) {
-        case 'desconocido':
-            $moldes=Molde::where('estadoTexto','Desconocido')->get();
-            break;
-        case 'ok':
-            $moldes=Molde::where('estadoTexto','Ok')->get();
-            break;
-        case 'reparacion':
-            $moldes=Molde::where('estadoTexto','En reparación')->get();
-            break;
-        case 'nook':
-            $moldes=Molde::where('estadoTexto','No ok')->get();
-            break;
-        default:
-            $moldes=Molde::all();
-            break;
-        }
+     
+        $moldes=Molde::where('estado','success')->orderBy('numero')->get();       
+        return view('moldes.index',compact('moldes'));
     }
 
+    public function nook()
+    {
+     
+        $moldes=Molde::where('estado','danger')->orderBy('numero')->get();      
+        return view('moldes.index',compact('moldes'));
+    }
+
+    public function reparando()
+    {
+     
+        $moldes=Molde::where('estado','warning')->orderBy('numero')->get();       
+        return view('moldes.index',compact('moldes'));
+    }
+    public function desconocido()
+    {
+        $moldes=Molde::where('estado','light')->orderBy('numero')->get();       
+        return view('moldes.index',compact('moldes')); 
+        
+    }
+
+    public function buscar(Request $request){
+        $moldes=Molde::where('numero','like','%'.$request->busqueda.'%')
+                    ->orWhere('nombre','like','%'.$request->busqueda.'%')
+                    ->orWhere('ubicacionReal','like','%'.$request->busqueda.'%')
+                    ->orWhere('ubicacionActual','like','%'.$request->busqueda.'%')
+                    ->orderBy('numero')
+                    ->get();
+        return view('moldes.index',compact('moldes'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -91,8 +107,9 @@ class MoldesController extends Controller
     public function show($id)
     {        
         $molde=Molde::find($id);
+        $acciones=Molde::find($id)->accions;       
         
-        return view('moldes.show',compact('molde'));
+        return view('moldes.show',compact('molde','acciones'));
     }
 
     /**

@@ -1,8 +1,6 @@
 @extends('layouts.plantilla')
 
-@section('cabecera')
-  Listado de moldes
-@endsection
+
 @section('contenido')
 <div class="row justify-content-center p-3">
   <h2 class="text-center" style="color: #1652B5;">Listado de moldes</h2>
@@ -18,18 +16,19 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por estado</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown09">
-            <li><a class="dropdown-item bg-success" href="#">Ok</a></li>
-            <li><a class="dropdown-item bg-warning" href="#">En reparación</a></li>
-            <li><a class="dropdown-item bg-danger" href="#">No ok</a></li>
-            <li><a class="dropdown-item" href="#">Desconocido</a></li>
+            <li><a class="dropdown-item " href="{{route('moldes.index')}}">Todos</a></li>
+            <li><a class="dropdown-item bg-success" href="/faca2/public/moldes/listado/ok">Ok</a></li>
+            <li><a class="dropdown-item bg-warning" href="/faca2/public/moldes/listado/reparando">En reparación</a></li>
+            <li><a class="dropdown-item bg-danger" href="/faca2/public/moldes/listado/nook">No ok</a></li>
+            <li><a class="dropdown-item" href="/faca2/public/moldes/listado/desconocido">Desconocido</a></li>
           </ul>
         </li>
       </ul>
       <div class="col-auto m-3">
         <a href ="{{route('moldes.create')}}" ><button class="btn btn-primary" type="button">Nuevo registro</button></a>
       </div>
-      <form>
-        <input class="form-control" type="text" placeholder="Buscar..." aria-label="Search">
+      <form action="/faca2/public/moldes/buscar" method="GET">
+        <input class="form-control" type="text" name="busqueda" placeholder="Buscar..." aria-label="Search">
       </form>      
     </div>
   </div>

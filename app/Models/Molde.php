@@ -21,7 +21,7 @@ class Molde extends Model
         'comentario',
     ];
 
-    public function acciones()
+    public function accions()
     {
         return $this->hasMany(Accion::class);
     }

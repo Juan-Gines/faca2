@@ -15,15 +15,15 @@ class CreateMoldesTable extends Migration
     {
         Schema::create('moldes', function (Blueprint $table) {
             $table->id();
-            $table->string('numero');
-            $table->string('nombre');
-            $table->string('ubicacionReal');
-            $table->string('ubicacionActual');
-            $table->string('versionActual');
+            $table->string('numero')->unique();
+            $table->string('nombre')->nullable();
+            $table->string('ubicacionReal')->unique()->nullable();
+            $table->string('ubicacionActual')->nullable();
+            $table->string('versionActual')->nullable();
             $table->string('estado');
             $table->string('estadoTexto');
-            $table->string('cavidades');
-            $table->text('comentario');
+            $table->string('cavidades')->nullable();
+            $table->text('comentario')->nullable();
             $table->timestamps();
         });
     }

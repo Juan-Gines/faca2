@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Accion;
+use App\Models\Molde;
+
 class AccionesController extends Controller
 {
     /**
@@ -45,7 +48,9 @@ class AccionesController extends Controller
      */
     public function show($id)
     {
-        //
+        $accion=Accion::find($id);        
+
+        return view('acciones.show',compact('accion'));
     }
 
     /**

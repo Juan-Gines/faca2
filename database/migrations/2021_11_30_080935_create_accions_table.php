@@ -15,12 +15,13 @@ class CreateAccionsTable extends Migration
     {
         Schema::create('accions', function (Blueprint $table) {
             $table->id();
-            $table->integer('molde_id');
-            $table->string('tipo');            
-            $table->text('descripcion');
-            $table->text('reparacion');
-            $table->date('fechaEntrada');
-            $table->date('fechaSalida');
+            $table->integer('molde_id')->index();
+            $table->string('tipo');
+            $table->string('lugar');                        
+            $table->text('descripcion')->nullable();
+            $table->text('reparacion')->nullable();
+            $table->date('fechaEntrada')->nullable();
+            $table->date('fechaSalida')->nullable();
             $table->timestamps();
         });
     }
