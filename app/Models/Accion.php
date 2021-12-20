@@ -10,6 +10,7 @@ class Accion extends Model
     use HasFactory;
 
     protected $fillable = [
+        'molde_id',
         'tipo',
         'lugar',
         'descripcion',

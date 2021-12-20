@@ -29,7 +29,7 @@ Route::get('/moldes/listado/reparando',[MoldesController::class,'reparando']);
 Route::get('/moldes/listado/desconocido',[MoldesController::class,'desconocido']);
 
 Route::get('/moldes/buscar',[MoldesController::class,'buscar']);
-    
+Route::get('/acciones/nuevo',[AccionesController::class,'nuevo']);
 Route::resource('moldes',MoldesController::class);
 Route::resource('acciones',AccionesController::class);
 Route::get('/dashboard', function () {

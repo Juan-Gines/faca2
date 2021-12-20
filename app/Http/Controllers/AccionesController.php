@@ -26,9 +26,13 @@ class AccionesController extends Controller
      */
     public function create()
     {
-        //
+        //return view('acciones.create',compact('id'));
     }
-
+    public function nuevo(Molde $id)
+    {
+        $molde=Molde::find($id);
+        return view('acciones.create',compact('molde'));
+    }
     /**
      * Store a newly created resource in storage.
      *
