@@ -44,17 +44,19 @@
   </div>
   <div class="mb-5 mx-5 ">
     <div class="row justify-content-center mb-3">
-      <a href="/faca2/public/acciones/nuevo?id={{$molde->id}}" class="col-auto"><button class=" btn btn-primary mb-3">Iniciar acción</button></a>      
+      <a href="/faca2/public/acciones/nuevo/{{$molde->id}}" class="col-auto"><button class=" btn btn-primary mb-3">Iniciar acción</button></a>      
     </div>
     <div class="row justify-content-center">
       <table class="table table-hover"  >
         <thead>                
-          <tr>
-            <th>ID</th>
+          <tr>            
             <th>Fecha Entrada</th>
             <th>Fecha Salida</th>
-            <th>tipo</th>
-            <th>lugar</th>                    
+            <th>Descripción</th>
+            <th>Reparación</th>
+            <th>Tipo</th>
+            <th>Lugar</th>
+            <th>Ok</th>                    
           </tr>
         </thead>
         <tbody>

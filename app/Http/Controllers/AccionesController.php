@@ -28,7 +28,7 @@ class AccionesController extends Controller
     {
         //return view('acciones.create',compact('id'));
     }
-    public function nuevo(Molde $id)
+    public function nuevo($id)
     {
         $molde=Molde::find($id);
         return view('acciones.create',compact('molde'));
@@ -41,7 +41,9 @@ class AccionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $accion=$request->all();
+        $resultado=Accion::create($accion);
+        return view('moldes.show',$resultado->molde_id);
     }
 
     /**

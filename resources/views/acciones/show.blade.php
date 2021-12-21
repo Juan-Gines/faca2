@@ -3,7 +3,7 @@
 
 @section('contenido')
 <div class="row justify-content-center p-3">
-  <h2 class="text-center" style="color: #1652B5;">Info acción molde nº {{$accion->molde->numero}}</h2>
+  <h2 class="text-center" style="color: #1652B5;">Intervenciones en molde nº {{$accion->molde->numero}}</h2>
 </div>
   <div class="col  justify-content-center">
   <div class="row mb-3">
