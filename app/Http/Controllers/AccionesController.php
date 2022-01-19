@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\AccionsImport;
 use Illuminate\Http\Request;
 
 use App\Models\Accion;
 use App\Models\Molde;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AccionesController extends Controller
 {
@@ -42,8 +44,11 @@ class AccionesController extends Controller
     public function store(Request $request)
     {
         $accion=$request->all();
-        $resultado=Accion::create($accion);
-        return view('moldes.show',$resultado->molde_id);
+        $resultado=Accion::create($accion);       
+        $molde=Molde::find($request->molde_id);
+        $acciones=Molde::find($request->molde_id)->accions;       
+        
+        return view('moldes.show',compact('molde','acciones'));
     }
 
     /**
@@ -91,5 +96,11 @@ class AccionesController extends Controller
     public function destroy($id)
     {
         //
+    }
+    //importar excel
+    function importar(Request $request){
+        $molde_id=$request->molde_id;
+        $file=$request->file('accionExcel');
+        Excel::import(new AccionsImport($molde_id),$file );        
     }
 }

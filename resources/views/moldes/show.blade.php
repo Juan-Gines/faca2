@@ -44,7 +44,15 @@
   </div>
   <div class="mb-5 mx-5 ">
     <div class="row justify-content-center mb-3">
-      <a href="/faca2/public/acciones/nuevo/{{$molde->id}}" class="col-auto"><button class=" btn btn-primary mb-3">Iniciar acción</button></a>      
+      <div class="col-auto">
+        <form action="{{route('acciones.importar')}}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <input type="hidden" name="molde_id" id="molde_id" value="{{$molde->id}}">          
+          <input type="file" name="accionExcel" accept=".xlsx,.xls" id="accionExcel">
+          <button class=" btn btn-primary mb-3">Importar excel</button>
+        </form>
+      </div>
+      <a href="/faca2/public/acciones/nuevo/{{$molde->id}}" class="col-auto"><button class=" btn btn-primary mb-3">Nueva acción</button></a>      
     </div>
     <div class="row justify-content-center">
       <table class="table table-hover"  >
@@ -56,19 +64,22 @@
             <th>Reparación</th>
             <th>Tipo</th>
             <th>Lugar</th>
-            <th>Ok</th>                    
+            <th>Fecha prueba</th>
+            <th>¿Prueba Ok?</th>                    
           </tr>
         </thead>
         <tbody>
           @foreach($acciones as $accion)                            
-            <tr class="clickable-row">
-            
-              <td><a href="{{route('acciones.show',$accion->id)}}">{{$accion->id}}</a></td>
+            <tr class="clickable-row">              
               
-              <td>{{$accion->fechaEntrada}}</td>
-              <td>{{$accion->fechaSalida}}</td>
-              <td>{{$accion->tipo}}</td>
+              <td >{{!$accion->fechaEntrada =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaEntrada))->formatLocalized('%d/%m/%Y') : "" }}</td>
+              <td>{{!$accion->fechaSalida =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaEntrada))->formatLocalized('%d/%m/%Y') : ""}}</td>
+              <td class="overflow-auto">{{$accion->descripcion}}</td>
+              <td class="overflow-hidden">{{$accion->reparacion}}</td>
+              <td><a href="{{route('acciones.show',$accion->id)}}">{{$accion->tipo}}</a></td>
               <td>{{$accion->lugar}}</td>            
+              <td>{{!$accion->fechaPrueba =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaEntrada))->formatLocalized('%d/%m/%Y') :""}}</td>            
+              <td>{{$accion->ok}}</td>            
               
             </tr>
             

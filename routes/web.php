@@ -22,14 +22,16 @@ Route::get('/', function () {
 });
 
 
-
+Route::get('/moldes/guardar',[MoldesController::class,'import'])->name('moldes.guardar');
 Route::get('/moldes/listado/ok',[MoldesController::class,'ok']);
 Route::get('/moldes/listado/nook',[MoldesController::class,'nook']);
 Route::get('/moldes/listado/reparando',[MoldesController::class,'reparando']);
 Route::get('/moldes/listado/desconocido',[MoldesController::class,'desconocido']);
-
 Route::get('/moldes/buscar',[MoldesController::class,'buscar']);
+
 Route::get('/acciones/nuevo/{id}',[AccionesController::class,'nuevo']);
+Route::post('/acciones/importar',[AccionesController::class,'importar'])->name('acciones.importar');
+
 Route::resource('moldes',MoldesController::class);
 Route::resource('acciones',AccionesController::class);
 Route::get('/dashboard', function () {

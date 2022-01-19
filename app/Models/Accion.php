@@ -16,9 +16,11 @@ class Accion extends Model
         'descripcion',
         'reparacion',
         'fechaEntrada',
-        'fechaSalida',        
+        'fechaSalida',
+        'fechaPrueba',
+        'ok',        
     ];
-
+    
     public function molde()
     {
         return $this->belongsTo(Molde::class);

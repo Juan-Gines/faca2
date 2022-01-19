@@ -6,9 +6,9 @@
   <h2 class="text-center" style="color: #1652B5;">Intervenciones en molde nº {{$accion->molde->numero}}</h2>
 </div>
   <div class="col  justify-content-center">
-  <div class="row mb-3">
-      <a href="{{route('acciones.edit',['accione'=>$accion->id])}}"><button class="btn btn-primary col-auto mb-3">Modificar acción</button></a>
-      <a href="{{route('moldes.show',$accion->molde->id)}}"><button type="button" class="btn btn-primary ms-5 col-auto mb-3">Volver</button></a>
+  <div class="row justify-content-center mb-3">
+      <a href="{{route('acciones.edit',['accione'=>$accion->id])}}" class="col-auto"><button class="btn btn-primary mb-3">Modificar acción</button></a>
+      <a href="{{route('moldes.show',$accion->molde->id)}}" class="col-auto"><button type="button" class="btn btn-primary ms-5 mb-3">Volver</button></a>
     </div>     
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Tipo  </div>

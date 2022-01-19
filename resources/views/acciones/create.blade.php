@@ -11,12 +11,13 @@
     <div class="mb-3">
       <label for="tipo" class="form-label">Tipo</label>    
       <select class="form-select mb-3" name="tipo" aria-label="tipo" >
-        <option value="preventivo">Preventivo</option>      
-        <option value="correctivo">Correctivo</option>
-        <option value="colgar">Colgar en máquina</option>
-        <option value="sacar">Sacar de máquina</option>
-        <option value="enviar">Envio</option>      
-        <option value="recibir">Recepción</option>      
+        <option value="Preventivo">Preventivo</option>      
+        <option value="Correctivo">Correctivo</option>
+        <option value="Cambio de versión">Cambio de versión</option>
+        <option value="Colgar en máquina">Colgar en máquina</option>
+        <option value="Sacar de máquina">Sacar de máquina</option>
+        <option value="Enviar">Enviar</option>      
+        <option value="Recepcionar">Recepcionar</option>      
       </select>
     </div>
     <div class="mb-3">
@@ -38,6 +39,14 @@
     <div class="mb-3">
       <label for="lugar" class="form-label">Lugar</label>
       <input type="text" class="form-control" name="lugar" id="lugar">
+    </div>
+    <div class="mb-3">
+      <label for="fechaPrueba" class="form-label">Fecha prueba</label>
+      <input type="text" class="form-control" name="fechaPrueba" id="fechaPrueba">
+    </div>
+    <div class="mb-3">
+      <label for="ok" class="form-label">Prueba Ok</label>
+      <input type="text" class="form-control" name="ok" id="ok">
     </div>   
     <div class="mb-3">
       <button type="submit" class="btn btn-primary mb-3">Insertar nueva Accion</button>

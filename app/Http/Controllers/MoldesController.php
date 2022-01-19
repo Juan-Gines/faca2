@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\MoldesImport;
 use App\Models\Accion;
 use Illuminate\Http\Request;
 
 use App\Models\Molde;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MoldesController extends Controller
 {
@@ -136,6 +138,7 @@ class MoldesController extends Controller
     public function update(Request $request, $id)
     {
         $molde=Molde::find($id);
+        $acciones=Molde::find($id)->accions;
         $molde->numero=$request->numero;
         $molde->nombre=$request->nombre;
         $molde->ubicacionReal=$request->ubicacionReal;
@@ -155,7 +158,7 @@ class MoldesController extends Controller
         $molde->cavidades=$request->cavidades;
         $molde->comentario=$request->comentario;
         $molde->save();       
-        return view('moldes.show',compact('molde'));
+        return view('moldes.show',compact('molde','acciones'));
     }
 
     /**
@@ -168,4 +171,12 @@ class MoldesController extends Controller
     {
         //
     }
+
+    /*Importar de excel*/
+
+    public function import()
+    {
+        Excel::import(new MoldesImport,'listado/listado_moldes.xlsx');        
+    }
+    
 }

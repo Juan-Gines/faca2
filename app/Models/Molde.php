@@ -19,10 +19,11 @@ class Molde extends Model
         'estadoTexto',
         'cavidades',
         'comentario',
-    ];
-
+    ];    
     public function accions()
     {
         return $this->hasMany(Accion::class);
     }
+    
+    
 }
