@@ -72,7 +72,8 @@ class AccionesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $accion=Accion::find($id);       
+        return view('acciones.edit',compact('accion'));
     }
 
     /**
@@ -84,7 +85,19 @@ class AccionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $accion=accion::find($id);
+        $acciones=accion::find($id)->accions;
+        $accion->molde_id=$request->molde_id;
+        $accion->tipo=$request->tipo;
+        $accion->lugar=$request->lugar;
+        $accion->descripcion=$request->descripcion;
+        $accion->reparacion=$request->reparacion;
+        $accion->fechaSalida=$request->fechaSalida;        
+        $accion->fechaPrueba=$request->fechaPrueba;        
+        $accion->fechaEntrada=$request->fechaEntrada;        
+        $accion->ok=$request->ok;       
+        $accion->save();       
+        return view('acciones.show',compact('accion'));
     }
 
     /**
@@ -101,6 +114,10 @@ class AccionesController extends Controller
     function importar(Request $request){
         $molde_id=$request->molde_id;
         $file=$request->file('accionExcel');
-        Excel::import(new AccionsImport($molde_id),$file );        
+        Excel::import(new AccionsImport($molde_id),$file );       
+        $molde=Molde::find($molde_id);
+        $acciones=Molde::find($molde_id)->accions;       
+        
+        return view('moldes.show',compact('molde','acciones'));
     }
 }

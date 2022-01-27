@@ -58,8 +58,8 @@
       <table class="table table-hover"  >
         <thead>                
           <tr>            
-            <th>Fecha Entrada</th>
             <th>Fecha Salida</th>
+            <th>Fecha Entrada</th>
             <th>Descripción</th>
             <th>Reparación</th>
             <th>Tipo</th>
@@ -72,13 +72,13 @@
           @foreach($acciones as $accion)                            
             <tr class="clickable-row">              
               
+              <td>{{!$accion->fechaSalida =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaSalida))->formatLocalized('%d/%m/%Y') : ""}}</td>
               <td >{{!$accion->fechaEntrada =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaEntrada))->formatLocalized('%d/%m/%Y') : "" }}</td>
-              <td>{{!$accion->fechaSalida =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaEntrada))->formatLocalized('%d/%m/%Y') : ""}}</td>
               <td class="overflow-auto">{{$accion->descripcion}}</td>
               <td class="overflow-hidden">{{$accion->reparacion}}</td>
               <td><a href="{{route('acciones.show',$accion->id)}}">{{$accion->tipo}}</a></td>
               <td>{{$accion->lugar}}</td>            
-              <td>{{!$accion->fechaPrueba =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaEntrada))->formatLocalized('%d/%m/%Y') :""}}</td>            
+              <td>{{!$accion->fechaPrueba =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaPrueba))->formatLocalized('%d/%m/%Y') :""}}</td>            
               <td>{{$accion->ok}}</td>            
               
             </tr>

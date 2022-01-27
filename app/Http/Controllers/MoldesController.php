@@ -109,7 +109,7 @@ class MoldesController extends Controller
     public function show($id)
     {        
         $molde=Molde::find($id);
-        $acciones=Molde::find($id)->accions;       
+        $acciones=Molde::find($id)->accions;     
         
         return view('moldes.show',compact('molde','acciones'));
     }
@@ -177,6 +177,7 @@ class MoldesController extends Controller
     public function import()
     {
         Excel::import(new MoldesImport,'listado/listado_moldes.xlsx');        
+        
     }
     
 }
