@@ -5,11 +5,11 @@
 <div class="row justify-content-center p-3">
   <h2 class="text-center" style="color: #1652B5;">Listado de moldes</h2>
 </div>
-<div class="row justify-content-center">
+<!-- <div class="row justify-content-center">
   <div class="col-auto">
     <a href="{{route('moldes.guardar')}}"><button class="btn btn-primary" type="button">Leer excel</button></a>
   </div>
-</div>
+</div> -->
 <nav class="navbar navbar-expand-sm navbar-light bg-light rounded" aria-label="Eleventh navbar example">
   <div class="container-fluid">    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMoldes" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">

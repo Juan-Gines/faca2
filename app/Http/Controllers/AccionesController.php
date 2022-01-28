@@ -46,7 +46,7 @@ class AccionesController extends Controller
         $accion=$request->all();
         $resultado=Accion::create($accion);       
         $molde=Molde::find($request->molde_id);
-        $acciones=Molde::find($request->molde_id)->accions;       
+        $acciones=Molde::find($request->molde_id)->accions->sortBy('fechaEntrada');       
         
         return view('moldes.show',compact('molde','acciones'));
     }
@@ -116,7 +116,7 @@ class AccionesController extends Controller
         $file=$request->file('accionExcel');
         Excel::import(new AccionsImport($molde_id),$file );       
         $molde=Molde::find($molde_id);
-        $acciones=Molde::find($molde_id)->accions;       
+        $acciones=Molde::find($molde_id)->accions->sortBy('fechaEntrada');       
         
         return view('moldes.show',compact('molde','acciones'));
     }

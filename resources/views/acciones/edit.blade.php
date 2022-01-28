@@ -23,7 +23,7 @@
     </div>
     <div class="mb-3">
       <label for="fechaEntrada" class="form-label">Fecha de entrada</label>
-      <input type="date" class="form-control" name="fechaEntrada" id="fechaEntrada" value="{{$accion->fechaEntrada}}">
+      <input type="date" class="form-control" name="fechaEntrada" id="fechaEntrada" required value="{{$accion->fechaEntrada}}">
     </div>
     <div class="mb-3">
       <label for="fechaSalida" class="form-label">Fecha de salida</label>

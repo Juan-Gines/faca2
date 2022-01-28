@@ -48,7 +48,7 @@
         <form action="{{route('acciones.importar')}}" method="POST" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="molde_id" id="molde_id" value="{{$molde->id}}">          
-          <input type="file" name="accionExcel" accept=".xlsx,.xls" id="accionExcel">
+          <input type="file" name="accionExcel" accept=".xlsx,.xls" id="accionExcel" required>
           <button class=" btn btn-primary mb-3">Importar excel</button>
         </form>
       </div>

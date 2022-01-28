@@ -28,15 +28,15 @@
     </div>
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Fecha Entrada  </div>
-      <div class="col-md-4 mb-3"> {{$accion->fechaEntrada}}</div>
+      <div class="col-md-4 mb-3"> {{!$accion->fechaEntrada =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaEntrada))->formatLocalized("%d/%m/%Y") : ""}}</div>
     </div> 
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Fecha Salida  </div>
-      <div class="col-md-4 text-break mb-3">{{$accion->fechaSalida}}</div>
+      <div class="col-md-4 text-break mb-3">{{!$accion->fechaSalida =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaSalida))->formatLocalized("%d/%m/%Y") : ""}}</div>
     </div>       
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Fecha Prueba  </div>
-      <div class="col-md-4 text-break mb-3">{{$accion->fechaPrueba}}</div>
+      <div class="col-md-4 text-break mb-3">{{!$accion->fechaPrueba =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaPrueba))->formatLocalized("%d/%m/%Y") : ""}}</div>
     </div>       
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> ¿OK?  </div>

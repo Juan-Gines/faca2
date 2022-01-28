@@ -109,7 +109,7 @@ class MoldesController extends Controller
     public function show($id)
     {        
         $molde=Molde::find($id);
-        $acciones=Molde::find($id)->accions;     
+        $acciones=Molde::find($id)->accions->sortBy('fechaEntrada');     
         
         return view('moldes.show',compact('molde','acciones'));
     }
@@ -138,7 +138,7 @@ class MoldesController extends Controller
     public function update(Request $request, $id)
     {
         $molde=Molde::find($id);
-        $acciones=Molde::find($id)->accions;
+        $acciones=Molde::find($id)->accions->sortBy('fechaEntrada');
         $molde->numero=$request->numero;
         $molde->nombre=$request->nombre;
         $molde->ubicacionReal=$request->ubicacionReal;

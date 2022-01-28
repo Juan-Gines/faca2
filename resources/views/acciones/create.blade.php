@@ -22,7 +22,7 @@
     </div>
     <div class="mb-3">
       <label for="fechaEntrada" class="form-label">Fecha de entrada</label>
-      <input type="date" class="form-control" name="fechaEntrada" id="fechaEntrada">
+      <input type="date" class="form-control" name="fechaEntrada" id="fechaEntrada" required>
     </div>
     <div class="mb-3">
       <label for="fechaSalida" class="form-label">Fecha de salida</label>

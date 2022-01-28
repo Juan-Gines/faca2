@@ -39,7 +39,7 @@ class AccionsImport implements ToModel, WithStartRow
             }            
         }
         if(!$vacio){ 
-            $fechaEntrada=(trim($row[1])!="")?$this->transformDate(trim($row[1])):null;
+            $fechaEntrada=(trim($row[1])!="")?$this->transformDate(trim($row[1])):$this->transformDate(trim($row[0]));
             $fechaSalida=(trim($row[0])!="")?$this->transformDate(trim($row[0])):null;
             $fechaPrueba=(trim($row[5])!="")?$this->transformDate(trim($row[5])):null;
             $descripcion=(trim($row[2])=="")?null:$row[2];
@@ -70,8 +70,8 @@ class AccionsImport implements ToModel, WithStartRow
     public function model(array $row)
     {
         if(!$this->lineaVacia($row)){
-            $fechaEntrada=(trim($row[1])!="")?$this->transformDate(trim($row[1])):null;
             $fechaSalida=(trim($row[0])!="")?$this->transformDate(trim($row[0])):null;
+            $fechaEntrada=(trim($row[1])!="")?$this->transformDate(trim($row[1])):$fechaSalida;
             $fechaPrueba=(trim($row[5])!="")?$this->transformDate(trim($row[5])):null;
             return new Accion([
                 'fechaEntrada'=>$fechaEntrada,
