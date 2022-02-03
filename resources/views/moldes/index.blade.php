@@ -44,6 +44,7 @@
       <thead>                
         <tr>
           <th>Numero molde</th>
+          <th>Denominación</th>
           <th>Ubicación almacen</th>
           <th>Ubicación actual</th>
           <th>versión actual</th>
@@ -55,8 +56,8 @@
         @foreach($moldes as $molde)                            
           <tr class="table-{{$molde->estado}} clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$molde->nombre}}">
           
-            <td><a href="{{route('moldes.show',$molde->id)}}">{{$molde->numero}}</a></td>
-            
+            <td><a href="{{route('moldes.show',$molde->id)}}">{{$molde->numero}}</a></td>            
+            <td>{{$molde->nombre}}</td>
             <td>{{$molde->ubicacionReal}}</td>
             <td>{{$molde->ubicacionActual}}</td>
             <td>{{$molde->versionActual}}</td>

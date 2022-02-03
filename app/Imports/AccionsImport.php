@@ -3,8 +3,11 @@
 namespace App\Imports;
 
 use App\Models\Accion;
+use DateTime;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+
+use function PHPUnit\Framework\matches;
 
 class AccionsImport implements ToModel, WithStartRow
 {
@@ -23,8 +26,12 @@ class AccionsImport implements ToModel, WithStartRow
     {
         try {
             return \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value));
-        } catch (\ErrorException $e) {
-            return null;
+        } catch (\ErrorException $e) { 
+            if(preg_match('/d{2}\/d{2}\/d{4}/',$value,$matches)){
+                return date_format(new DateTime($matches[0]),'Y-m-d');
+            }else{          
+                return null;
+            }
         }
     }
 
