@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\AccionsImport;
+use App\Exports\AccionsExport;
 use Illuminate\Http\Request;
 
 use App\Models\Accion;
@@ -119,5 +120,20 @@ class AccionesController extends Controller
         $acciones=Molde::find($molde_id)->accions->sortBy('fechaEntrada');       
         
         return view('moldes.show',compact('molde','acciones'));
+    }
+
+    function exportar($id){
+        $molde=Molde::find($id);
+        $acciones=Accion::select(
+                                'fechaEntrada',
+                                'fechaSalida',
+                                'tipo',
+                                'descripcion',
+                                'reparacion',
+                                'lugar',
+                                'fechaPrueba',
+                                'ok'
+        )->where('molde_id',$id)->orderBy('fechaEntrada')->get();
+        return Excel::download(new AccionsExport($acciones,$molde),'prueba.xlsx');
     }
 }

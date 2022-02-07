@@ -7,6 +7,7 @@
   <title>Faca gestión </title>
   <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
   <link rel="stylesheet" href="{{asset('css/bootstrap.css.map')}}">
+  <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 </head>
 <body>
 <header class="p-3 bg-dark text-white">
@@ -25,7 +26,7 @@
       </div>
     </div>
   </header>       
-  <main class="container  bg-light">
+  <main class="container main-container bg-light">
     @yield('contenido')
   </main>
   <footer>

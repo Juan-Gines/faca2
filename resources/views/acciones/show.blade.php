@@ -7,7 +7,7 @@
 </div>
   <div class="col  justify-content-center">
   <div class="row justify-content-center mb-3">
-      <a href="{{route('acciones.edit',$accion->id)}}" class="col-auto"><button class="btn btn-primary mb-3">Modificar acción</button></a>
+      <a href="{{route('acciones.edit',$accion->id)}}" class="col-auto"><button class="btn btn-primary mb-3">Modificar Intervención<nav></nav></button></a>
       <a href="{{route('moldes.show',$accion->molde->id)}}" class="col-auto"><button type="button" class="btn btn-primary ms-5 mb-3">Volver</button></a>
     </div>     
     <div class="row ">

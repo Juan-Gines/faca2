@@ -5,11 +5,11 @@
 <div class="row justify-content-center p-3">
   <h2 class="text-center" style="color: #1652B5;">Listado de moldes</h2>
 </div>
-<!-- <div class="row justify-content-center">
+<div class="row justify-content-center">
   <div class="col-auto">
     <a href="{{route('moldes.guardar')}}"><button class="btn btn-primary" type="button">Leer excel</button></a>
   </div>
-</div> -->
+</div>
 <nav class="navbar navbar-expand-sm navbar-light bg-light rounded" aria-label="Eleventh navbar example">
   <div class="container-fluid">    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMoldes" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,17 +21,17 @@
           <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por estado</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown09">
             <li><a class="dropdown-item " href="{{route('moldes.index')}}">Todos</a></li>
-            <li><a class="dropdown-item bg-success" href="/faca2/public/moldes/listado/ok">Ok</a></li>
-            <li><a class="dropdown-item bg-warning" href="/faca2/public/moldes/listado/reparando">En reparación</a></li>
-            <li><a class="dropdown-item bg-danger" href="/faca2/public/moldes/listado/nook">No ok</a></li>
-            <li><a class="dropdown-item" href="/faca2/public/moldes/listado/desconocido">Desconocido</a></li>
+            <li><a class="dropdown-item bg-success" href="{{route('moldes.ok')}}">Ok</a></li>
+            <li><a class="dropdown-item bg-warning" href="{{route('moldes.reparando')}}">En reparación</a></li>
+            <li><a class="dropdown-item bg-danger" href="{{route('moldes.nook')}}">No ok</a></li>
+            <li><a class="dropdown-item" href="{{route('moldes.desconocido')}}">Desconocido</a></li>
           </ul>
         </li>
       </ul>
       <div class="col-auto m-3">
         <a href ="{{route('moldes.create')}}" ><button class="btn btn-primary" type="button">Nuevo registro</button></a>
       </div>
-      <form action="/faca2/public/moldes/buscar" method="GET">
+      <form action="{{route('moldes.buscar')}}" method="GET">
         <input class="form-control" type="text" name="busqueda" placeholder="Buscar..." aria-label="Search">
       </form>      
     </div>
@@ -54,7 +54,7 @@
       </thead>
       <tbody>
         @foreach($moldes as $molde)                            
-          <tr class="table-{{$molde->estado}} clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$molde->nombre}}">
+          <tr class="table-{{$molde->estado}} clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$molde->comentario}}">
           
             <td><a href="{{route('moldes.show',$molde->id)}}">{{$molde->numero}}</a></td>            
             <td>{{$molde->nombre}}</td>

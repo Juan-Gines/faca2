@@ -40,7 +40,7 @@
     </div>       
   </div>
   <div class="row justify-content-center p-3">
-    <h2 class="text-center" style="color: #1652B5;">Acciones</h2>
+    <h2 class="text-center" style="color: #1652B5;">Intervenciones</h2>
   </div>
   <div class="mb-5 mx-5 ">
     <div class="row justify-content-center mb-3">
@@ -52,7 +52,8 @@
           <button class=" btn btn-primary mb-3">Importar excel</button>
         </form>
       </div>
-      <a href="/faca2/public/acciones/nuevo/{{$molde->id}}" class="col-auto"><button class=" btn btn-primary mb-3">Nueva acción</button></a>      
+      <a href="{{route('acciones.nuevo',$molde->id)}}" class="col-auto"><button class=" btn btn-primary mb-3">Nueva intervención</button></a>      
+      <a href="{{route('acciones.exportar',$molde->id)}}" class="col-auto"><button class=" btn btn-primary mb-3">Excel</button></a>      
     </div>
     <div class="row justify-content-center">
       <table class="table table-hover"  >
