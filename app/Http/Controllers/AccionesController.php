@@ -123,17 +123,7 @@ class AccionesController extends Controller
     }
 
     function exportar($id){
-        $molde=Molde::find($id);
-        $acciones=Accion::select(
-                                'fechaEntrada',
-                                'fechaSalida',
-                                'tipo',
-                                'descripcion',
-                                'reparacion',
-                                'lugar',
-                                'fechaPrueba',
-                                'ok'
-        )->where('molde_id',$id)->orderBy('fechaEntrada')->get();
-        return Excel::download(new AccionsExport($acciones,$molde),'prueba.xlsx');
+        $molde=Molde::find($id);        
+        return (new AccionsExport($molde));
     }
 }
