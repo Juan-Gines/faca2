@@ -126,6 +126,10 @@ return [
             'escape_character' => '\\',
             'contiguous'       => false,
             'input_encoding'   => 'UTF-8',
+            'excel_compatibility'    => false,
+            'line_ending'  => PHP_EOL,
+            'use_bom'                => true,
+            'include_separator_line' => false,
         ],
 
         /*

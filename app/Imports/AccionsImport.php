@@ -25,14 +25,17 @@ class AccionsImport implements ToModel, WithStartRow
     public function transformDate($value, $format = 'd/m/Y')
     {
         try {
-            return \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value));
-        } catch (\ErrorException $e) { 
-            if(preg_match('/d{2}\/d{2}\/d{4}/',$value,$matches)){
-                return date_format(new DateTime($matches[0]),'Y-m-d');
-            }else{          
-                return null;
+            
+                return \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value));
+            
+        } catch (\ErrorException $e) {
+            if(preg_match('/^(\d{2}\/\d{2}\/\d{4})/',$value,$matches)){
+                $match=explode("/",$matches[0]);
+                return $match[2]."-".$match[1]."-".$match[0];                
+            }else{
+                return $value;
             }
-        }
+        } // 10/02/2022        
     }
 
     public function lineaVacia($row){
@@ -61,7 +64,7 @@ class AccionsImport implements ToModel, WithStartRow
                     $descripcion==$accion->descripcion &&
                     $reparacion==$accion->reparacion &&
                     $lugar==$accion->lugar &&
-                    strtotime($fechaPrueba)==strtotime($accion->fechaPrueba) &&
+                    $fechaPrueba==$accion->fechaPrueba &&
                     $ok==$accion->ok  
                     ){
                         $vacio=true;
@@ -78,15 +81,14 @@ class AccionsImport implements ToModel, WithStartRow
     {
         if(!$this->lineaVacia($row)){
             $fechaSalida=(trim($row[0])!="")?$this->transformDate(trim($row[0])):null;
-            $fechaEntrada=(trim($row[1])!="")?$this->transformDate(trim($row[1])):$fechaSalida;
-            $fechaPrueba=(trim($row[5])!="")?$this->transformDate(trim($row[5])):null;
+            $fechaEntrada=(trim($row[1])!="")?$this->transformDate(trim($row[1])):$fechaSalida;            
             return new Accion([
                 'fechaEntrada'=>$fechaEntrada,
                 'fechaSalida'=>$fechaSalida,
                 'descripcion'=>$row[2],
                 'reparacion'=>$row[3],
                 'lugar'=>$row[4],
-                'fechaPrueba'=>$fechaPrueba,
+                'fechaPrueba'=>$row[5],
                 'ok'=>$row[6],
                 'tipo'=>'Reparación',
                 'molde_id'=>$this->molde_id
