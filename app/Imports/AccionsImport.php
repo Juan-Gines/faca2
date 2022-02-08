@@ -39,7 +39,7 @@ class AccionsImport implements ToModel, WithStartRow
         $vacio=true;
         
         foreach($row as $campo){            
-            if ($campo=="") $vacio= true;
+            if (trim($campo)=="") $vacio= true;
             else{                
                 $vacio=false;
                 break;                
@@ -48,7 +48,7 @@ class AccionsImport implements ToModel, WithStartRow
         if(!$vacio){ 
             $fechaEntrada=(trim($row[1])!="")?$this->transformDate(trim($row[1])):$this->transformDate(trim($row[0]));
             $fechaSalida=(trim($row[0])!="")?$this->transformDate(trim($row[0])):null;
-            $fechaPrueba=(trim($row[5])!="")?$this->transformDate(trim($row[5])):null;
+            $fechaPrueba=(trim($row[5])=="")?null:trim($row[5]);
             $descripcion=(trim($row[2])=="")?null:$row[2];
             $reparacion=(trim($row[3])=="")?null:$row[3];
             $lugar=(trim($row[4])=="")?null:$row[4];
