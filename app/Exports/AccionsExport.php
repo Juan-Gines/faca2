@@ -50,12 +50,14 @@ class AccionsExport implements
 
     protected $version;
 
+    protected $count;
+
     public function __construct($molde)
     {        
         $this->molde=$molde;
         $this->time=date('Y_m_d');
         $this->version=explode('/',$this->molde->versionActual);
-        $this->fileName=$this->molde->numero.'0'.$this->version[0].'0'.'_'.$this->version[1].$this->time.'.xlsx';
+        $this->fileName=$this->molde->numero.'0'.$this->version[0].'0'.$this->version[1].'_'.$this->time.'.xlsx';
     }    
 
     public function headings(): array
@@ -83,7 +85,8 @@ class AccionsExport implements
     }
 
     public function collection()
-    {        
+    {
+        $this->count=Accion::where('molde_id',$this->molde->id)->count();        
         return Accion::where('molde_id',$this->molde->id)->orderBy('fechaEntrada')->get();
     }
     
@@ -92,9 +95,7 @@ class AccionsExport implements
         $drawing = new Drawing();
         $drawing->setName('Logo');
         $drawing->setDescription('This is my logo');
-        $drawing->setPath(public_path('/images/logo.png'));
-        /* $drawing->getHeight('20');
-        $drawing->setWidth('250'); */        
+        $drawing->setPath(public_path('/images/logo.png'));                
         $drawing->setCoordinates('A1');
         $drawing->setOffsetX('60');
         $drawing->setOffsetY('10');
@@ -190,7 +191,111 @@ class AccionsExport implements
                         ]
                     ]
                 ]);
-
+                $event->sheet->getStyle('A6:A'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('B6:B'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('C6:C'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('D6:D'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('E6:E'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('F6:F'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('G6:G'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getDefaultRowDimension()->setRowHeight(20);                
+                $event->sheet->getStyle('B6:B'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('C6:C'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('D6:D'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('E6:E'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('F6:F'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
+                $event->sheet->getStyle('G6:G'.($this->count+6))->applyFromArray([
+                    'borders'=>[
+                        'allBorders'=>[
+                            'borderStyle'=>\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color'=>['argb' => '00000000']
+                        ]
+                    ]
+                ]);
             }
         ];
     }
