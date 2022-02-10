@@ -25,16 +25,18 @@ class AccionsImport implements ToModel, WithStartRow
     public function transformDate($value, $format = 'd/m/Y')
     {
         try {
-            
+            if(is_numeric($value)){
                 return \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value));
+            }else{
+                if(preg_match('/^(\d{2}\/\d{2}\/\d{4})/',$value,$matches)){
+                    $match=explode("/",$matches[0]);
+                    return $match[2]."-".$match[1]."-".$match[0];
+                }
+            }
             
         } catch (\ErrorException $e) {
-            if(preg_match('/^(\d{2}\/\d{2}\/\d{4})/',$value,$matches)){
-                $match=explode("/",$matches[0]);
-                return $match[2]."-".$match[1]."-".$match[0];                
-            }else{
-                return $value;
-            }
+                            
+            return null;
         } // 10/02/2022        
     }
 
@@ -51,7 +53,7 @@ class AccionsImport implements ToModel, WithStartRow
         if(!$vacio){ 
             $fechaEntrada=(trim($row[1])!="")?$this->transformDate(trim($row[1])):$this->transformDate(trim($row[0]));
             $fechaSalida=(trim($row[0])!="")?$this->transformDate(trim($row[0])):null;
-            $fechaPrueba=(trim($row[5])=="")?null:trim($row[5]);
+            $fechaPrueba=(trim($row[5])=="")?null:$row[5];
             $descripcion=(trim($row[2])=="")?null:$row[2];
             $reparacion=(trim($row[3])=="")?null:$row[3];
             $lugar=(trim($row[4])=="")?null:$row[4];

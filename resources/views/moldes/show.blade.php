@@ -79,7 +79,7 @@
               <td class="overflow-hidden">{{$accion->reparacion}}</td>
               <td><a href="{{route('acciones.show',$accion->id)}}">{{$accion->tipo}}</a></td>
               <td>{{$accion->lugar}}</td>            
-              <td>{{!$accion->fechaPrueba =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaPrueba))->formatLocalized('%d/%m/%Y') :""}}</td>            
+              <td>{{is_numeric($accion->fechaPrueba) && strlen($accion->fechaPrueba)==5 ? \Carbon\Carbon::parse(strtotime($accion->fechaEntrada))->formatLocalized('%d/%m/%Y') : $accion->fechaPrueba}}</td>            
               <td>{{$accion->ok}}</td>            
               
             </tr>

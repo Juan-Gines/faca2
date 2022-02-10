@@ -22,7 +22,7 @@ class CreateAccionsTable extends Migration
             $table->text('reparacion')->nullable();
             $table->date('fechaEntrada')->nullable();
             $table->date('fechaSalida')->nullable();
-            $table->date('fechaPrueba')->nullable();
+            $table->text('fechaPrueba')->nullable();
             $table->string('ok')->nullable();
             $table->timestamps();
         });

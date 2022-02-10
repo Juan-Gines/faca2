@@ -19,7 +19,7 @@ class CreateMoldesTable extends Migration
             $table->string('nombre')->nullable();
             $table->string('ubicacionReal')->nullable();
             $table->string('ubicacionActual')->nullable();
-            $table->string('versionActual')->nullable();
+            $table->string('versionActual')->nullable()->default('0/0');
             $table->string('estado')->nullable()->default('light');
             $table->string('estadoTexto')->nullable()->default('Desconocido');
             $table->string('cavidades')->nullable();
