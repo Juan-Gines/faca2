@@ -28,6 +28,7 @@ Route::get('/moldes/listado/nook',[MoldesController::class,'nook'])->name('molde
 Route::get('/moldes/listado/reparando',[MoldesController::class,'reparando'])->name('moldes.reparando');;
 Route::get('/moldes/listado/desconocido',[MoldesController::class,'desconocido'])->name('moldes.desconocido');;
 Route::get('/moldes/buscar',[MoldesController::class,'buscar'])->name('moldes.buscar');;
+Route::get('/moldes/directorio',[MoldesController::class,'directorio'])->name('moldes.directorio');;
 
 Route::get('/acciones/nuevo/{id}',[AccionesController::class,'nuevo'])->name('acciones.nuevo');
 Route::post('/acciones/importar',[AccionesController::class,'importar'])->name('acciones.importar','id');

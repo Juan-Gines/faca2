@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\AccionsImport;
 use App\Imports\MoldesImport;
 use App\Models\Accion;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\Molde;
+use Directory;
+use DirectoryIterator;
+use Exception;
+use FilesystemIterator;
+use Illuminate\Contracts\Filesystem\Filesystem as FilesystemFilesystem;
 use Maatwebsite\Excel\Facades\Excel;
+use Nette\Utils\FileSystem;
+use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 
 class MoldesController extends Controller
 {
@@ -178,6 +186,57 @@ class MoldesController extends Controller
     {
         Excel::import(new MoldesImport,'listado/listado_moldes.xlsx');        
         
+    }
+
+    public function directorio(){
+        
+        
+        $directorios= new RecursiveDirectoryIterator('informes',FilesystemIterator::SKIP_DOTS);
+        echo"<pre>";
+        foreach ($directorios as $direc) {
+            $dir= new RecursiveDirectoryIterator($direc->getPathname(), FilesystemIterator::SKIP_DOTS);
+            echo $direc->getFilename()."<br>";
+            foreach ($dir as $di) {
+                if($di->isDir()){
+                    $d= new RecursiveDirectoryIterator($di->getPathname(), FilesystemIterator::SKIP_DOTS);
+                    foreach($d as $f){
+                        if($f->isFile()&& substr($f->getFilename(),0,4)==$direc->getFilename()&&$f->getExtension()=='xlsx'){
+                            echo $f->getFileInfo()."<br>";                                                               
+                            try{
+                                $molde_id=$molde_id=Molde::select('id')->where('numero',$direc->getFilename())->get();
+                                $molde_id=$molde_id[0]->id;
+                                var_dump($molde_id);
+                            }catch(Exception $e){
+                                $molde=new Molde;
+                                $molde->numero=$direc->getFilename();
+                                $molde->save();
+                                $molde_id=$molde->getKey();
+                            }                                                                                    
+                            Excel::import(new AccionsImport($molde_id),$f->getFileInfo() );
+                        }
+                    }
+                }elseif($di->isFile()&& substr($di->getFilename(),0,4)==$direc->getFilename()&&$di->getExtension()=='xlsx'){
+                    echo $di->getFileInfo()."<br>";
+                    try{
+                        $molde_id=$molde_id=Molde::select('id')->where('numero',$direc->getFilename())->get();
+                        $molde_id=$molde_id[0]->id;
+                        var_dump($molde_id);
+                    }catch(Exception $e){
+                        $molde=new Molde;
+                        $molde->numero=$direc->getFilename();
+                        $molde->save();
+                        $molde_id=$molde->getKey();
+                    }                  
+                    Excel::import(new AccionsImport($molde_id),$di->getFileInfo());
+                }
+                /* var_dump($d->getPathname());
+                echo "es directorio: ".$d->isDir()." es archivo: ".$d->isFile()." extension: ".$d->getExtension()." fileinfo: ".$d->getFileInfo()."<br>"; */
+            }            
+        }
+        echo"</pre>";
+        //linkear en linux ln -s path1 path2
+        //en windows mklink /j xxx\public\storage path2
+        //C:\Users\Juan Gines\Desktop\archivospacasa\informes
     }
     
 }

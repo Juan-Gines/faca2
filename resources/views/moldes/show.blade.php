@@ -57,16 +57,16 @@
     </div>
     <div class="row justify-content-center">
       <table class="table table-hover"  >
-        <thead>                
+        <thead class="table-dark table-header-historial text-center">                
           <tr>            
-            <th>Fecha Salida</th>
-            <th>Fecha Entrada</th>
-            <th>Descripción</th>
-            <th>Reparación</th>
-            <th>Tipo</th>
-            <th>Lugar</th>
-            <th>Fecha prueba</th>
-            <th>¿Prueba Ok?</th>                    
+            <th scope="col">Fecha Salida</th>
+            <th scope="col">Fecha Entrada</th>
+            <th scope="col">Motivo intervención</th>
+            <th scope="col">Intervención efectuada</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Lugar</th>
+            <th scope="col">Fecha / Prueba Nº</th>
+            <th scope="col">¿Prueba Ok?</th>                    
           </tr>
         </thead>
         <tbody>

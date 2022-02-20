@@ -9,8 +9,11 @@
   <div class="col-auto">
     <a href="{{route('moldes.guardar')}}"><button class="btn btn-primary" type="button">Leer excel</button></a>
   </div>
+  <div class="col-auto">
+    <a href="{{route('moldes.directorio')}}"><button class="btn btn-primary" type="button">obtener directorio</button></a>
+  </div>
 </div>
-<nav class="navbar navbar-expand-sm navbar-light bg-light rounded" aria-label="Eleventh navbar example">
+<nav class="navbar navbar-expand-sm navbar-light bg-light rounded navbar-fixed" aria-label="Eleventh navbar example">
   <div class="container-fluid">    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMoldes" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -40,16 +43,16 @@
 <div class="m-5">
   
   <div class="row justify-content-center">
-    <table class="table table-hover"  >
-      <thead>                
+    <table class="table table-hover  text-center"  >
+      <thead  class="table-dark table-header-fix">                
         <tr>
-          <th>Numero molde</th>
-          <th>Denominación</th>
-          <th>Ubicación almacen</th>
-          <th>Ubicación actual</th>
-          <th>versión actual</th>
-          <th>Estado</th>
-          <th>Cavidades</th>
+          <th scope="col">Numero molde</th>
+          <th scope="col">Denominación</th>
+          <th scope="col">Ubicación almacen</th>
+          <th scope="col">Ubicación actual</th>
+          <th scope="col">versión actual</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Cavidades</th>
         </tr>
       </thead>
       <tbody>
