@@ -34,6 +34,10 @@ Route::get('/acciones/nuevo/{id}',[AccionesController::class,'nuevo'])->name('ac
 Route::post('/acciones/importar',[AccionesController::class,'importar'])->name('acciones.importar','id');
 Route::get('/acciones/exportar/{id}',[AccionesController::class,'exportar'])->name('acciones.exportar');
 
+Route::get('/produccion/show',function(){
+    return view('produccion.show');
+})->name('produccion.show');
+
 Route::resource('moldes',MoldesController::class);
 Route::resource('acciones',AccionesController::class);
 Route::get('/dashboard', function () {
