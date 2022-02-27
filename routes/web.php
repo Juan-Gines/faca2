@@ -29,6 +29,7 @@ Route::get('/moldes/listado/reparando',[MoldesController::class,'reparando'])->n
 Route::get('/moldes/listado/desconocido',[MoldesController::class,'desconocido'])->name('moldes.desconocido');;
 Route::get('/moldes/buscar',[MoldesController::class,'buscar'])->name('moldes.buscar');;
 Route::get('/moldes/directorio',[MoldesController::class,'directorio'])->name('moldes.directorio');;
+Route::get('moldes/savedata',[MoldesController::class,'export'])->name('moldes.savedata');
 
 Route::get('/acciones/nuevo/{id}',[AccionesController::class,'nuevo'])->name('acciones.nuevo');
 Route::post('/acciones/importar',[AccionesController::class,'importar'])->name('acciones.importar','id');
@@ -37,6 +38,8 @@ Route::get('/acciones/exportar/{id}',[AccionesController::class,'exportar'])->na
 Route::get('/produccion/show',function(){
     return view('produccion.show');
 })->name('produccion.show');
+
+
 
 Route::resource('moldes',MoldesController::class);
 Route::resource('acciones',AccionesController::class);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MoldesExport;
 use App\Imports\AccionsImport;
 use App\Imports\MoldesImport;
 use App\Models\Accion;
@@ -184,13 +185,10 @@ class MoldesController extends Controller
 
     public function import()
     {
-        Excel::import(new MoldesImport,'listado/listado_moldes.xlsx');        
-        
+        Excel::import(new MoldesImport,'listado/tablamoldes.xlsx');       
     }
 
-    public function directorio(){
-        
-        
+    public function directorio(){       
         $directorios= new RecursiveDirectoryIterator('informes',FilesystemIterator::SKIP_DOTS);
         echo"<pre>";
         foreach ($directorios as $direc) {
@@ -239,4 +237,7 @@ class MoldesController extends Controller
         //C:\Users\Juan Gines\Desktop\archivospacasa\informes
     }
     
+    public function export(){
+        return Excel::download(new MoldesExport,'tablamoldes.xlsx');
+    }
 }

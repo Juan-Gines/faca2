@@ -22,11 +22,15 @@ class MoldesImport implements ToModel, WithStartRow
     {
         if($row[0]!=""){
             return new Molde([
-                'numero'=>$row[0],
-                'nombre'=>$row[1],
-                'ubicacionReal'=>$row[2],
-                'estado'=>'light',
-                'estadoTexto'=>'Desconocido'
+                'numero'=>$row[1],
+                'nombre'=>$row[2],
+                'ubicacionReal'=>$row[3],
+                'ubicacionActual'=>$row[4],
+                'versionActual'=>$row[5],
+                'estado'=>$row[6],
+                'estadoTexto'=>$row[7],
+                'cavidades'=>$row[8],
+                'comentario'=>$row[9],
             ]);
         }       
         
@@ -34,6 +38,6 @@ class MoldesImport implements ToModel, WithStartRow
 
     public function startRow(): int
     {
-        return 7;
+        return 2;
     }
 }
