@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Accion;
 use App\Models\Molde;
+use App\Models\Referencia;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AccionesController extends Controller
@@ -33,8 +34,8 @@ class AccionesController extends Controller
     }
     public function nuevo($id)
     {
-        $molde=Molde::find($id);
-        return view('acciones.create',compact('molde'));
+        $referencia=Referencia::find($id);
+        return view('acciones.create',compact('referencia'));
     }
     /**
      * Store a newly created resource in storage.
@@ -46,10 +47,10 @@ class AccionesController extends Controller
     {
         $accion=$request->all();
         $resultado=Accion::create($accion);       
-        $molde=Molde::find($request->molde_id);
-        $acciones=Molde::find($request->molde_id)->accions->sortBy('fechaEntrada');       
+        $referencia=Referencia::find($request->referencia_id);
+        $acciones=Referencia::find($request->referencia_id)->accions->sortBy('fechaEntrada');       
         
-        return view('moldes.show',compact('molde','acciones'));
+        return view('referencias.show',compact('referencia','acciones'));
     }
 
     /**
@@ -86,9 +87,8 @@ class AccionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $accion=accion::find($id);
-        $acciones=accion::find($id)->accions;
-        $accion->molde_id=$request->molde_id;
+        $accion=Accion::find($id);                
+        $accion->referencia_id=$request->referencia_id;
         $accion->tipo=$request->tipo;
         $accion->lugar=$request->lugar;
         $accion->descripcion=$request->descripcion;
@@ -113,13 +113,12 @@ class AccionesController extends Controller
     }
     //importar excel
     function importar(Request $request){
-        $molde_id=$request->molde_id;
+        $referencia_id=$request->referencia_id;
         $file=$request->file('accionExcel');
-        Excel::import(new AccionsImport($molde_id),$file );       
-        $molde=Molde::find($molde_id);
-        $acciones=Molde::find($molde_id)->accions->sortBy('fechaEntrada');       
-        
-        return view('moldes.show',compact('molde','acciones'));
+        Excel::import(new AccionsImport($referencia_id),$file );       
+        $referencia=Referencia::find($referencia_id);
+        $acciones=Referencia::find($referencia_id)->accions->sortBy('fechaEntrada');      
+        return view('referencias.show',compact('referencia','acciones'));
     }
 
     function exportar($id){

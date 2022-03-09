@@ -3,12 +3,12 @@
 @section('contenido')
 
   <div class="row justify-content-center p-3">
-    <h2 class="text-center" style="color: #1652B5;">Modificar intervención molde nº {{$accion->molde_id}}</h2>
+    <h2 class="text-center" style="color: #1652B5;">Modificar intervención referencia nº {{$accion->referencia->numero}}</h2>
   </div>
   <form method="POST" action="{{route('acciones.update',$accion->id)}}" class="container mt-5" style="max-width: 800px;">
     @csrf
     @method('PUT')
-    <input type="hidden" name="molde_id" id="molde_id" value="{{$accion->molde_id}}">
+    <input type="hidden" name="referencia_id" id="referencia_id" value="{{$accion->referencia->id}}">
     <div class="mb-3">
       <label for="tipo" class="form-label">Tipo</label>    
       <select class="form-select mb-3" name="tipo" aria-label="tipo" value="" >

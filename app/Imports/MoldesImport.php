@@ -23,10 +23,10 @@ class MoldesImport implements ToModel, WithStartRow
         if($row[0]!=""){
             return new Molde([
                 'numero'=>$row[1],
-                'nombre'=>$row[2],
+                'descripcion'=>$row[2],                                
                 'ubicacionReal'=>$row[3],
                 'ubicacionActual'=>$row[4],
-                'versionActual'=>$row[5],
+                'versionActual'=>$row[5],                
                 'estado'=>$row[6],
                 'estadoTexto'=>$row[7],
                 'cavidades'=>$row[8],

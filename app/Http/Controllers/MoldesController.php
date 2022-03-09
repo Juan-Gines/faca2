@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Exports\MoldesExport;
 use App\Imports\AccionsImport;
 use App\Imports\MoldesImport;
+use App\Imports\ReferenciasImports;
+use App\Imports\VersionsImport;
 use App\Models\Accion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -28,43 +30,43 @@ class MoldesController extends Controller
     public function index()
     {
      
-        $moldes=Molde::all()->sortBy('numero');       
+        $moldes=Molde::all()->sortByDesc('numero');               
         return view('moldes.index',compact('moldes'));
     }
     
     public function ok()
     {
      
-        $moldes=Molde::where('estado','success')->orderBy('numero')->get();       
+        $moldes=Molde::where('estado','success')->orderBy('numero','desc')->get();       
         return view('moldes.index',compact('moldes'));
     }
 
     public function nook()
     {
      
-        $moldes=Molde::where('estado','danger')->orderBy('numero')->get();      
+        $moldes=Molde::where('estado','danger')->orderBy('numero','desc')->get();      
         return view('moldes.index',compact('moldes'));
     }
 
     public function reparando()
     {
      
-        $moldes=Molde::where('estado','warning')->orderBy('numero')->get();       
+        $moldes=Molde::where('estado','warning')->orderBy('numero','desc')->get();        
         return view('moldes.index',compact('moldes'));
     }
     public function desconocido()
     {
-        $moldes=Molde::where('estado','light')->orderBy('numero')->get();       
+        $moldes=Molde::where('estado','light')->orderBy('numero','desc')->get();        
         return view('moldes.index',compact('moldes')); 
         
     }
 
     public function buscar(Request $request){
-        $moldes=Molde::where('numero','like','%'.$request->busqueda.'%')
-                    ->orWhere('nombre','like','%'.$request->busqueda.'%')
+        $moldes=Molde::where('numero','like','%'.$request->busqueda.'%')                    
                     ->orWhere('ubicacionReal','like','%'.$request->busqueda.'%')
                     ->orWhere('ubicacionActual','like','%'.$request->busqueda.'%')
-                    ->orderBy('numero')
+                    ->orWhere('descripcion','like','%'.$request->busqueda.'%')
+                    ->orderBy('numero','desc')
                     ->get();
         return view('moldes.index',compact('moldes'));
     }
@@ -86,9 +88,9 @@ class MoldesController extends Controller
      */
     public function store(Request $request)
     {
-        $molde=new Molde;
+        $molde=new Molde;        
         $molde->numero=$request->numero;
-        $molde->nombre=$request->nombre;
+        $molde->descripcion=$request->descripcion;        
         $molde->ubicacionReal=$request->ubicacionReal;
         $molde->ubicacionActual=$request->ubicacionActual;
         $molde->versionActual=$request->versionActual;
@@ -117,10 +119,8 @@ class MoldesController extends Controller
      */
     public function show($id)
     {        
-        $molde=Molde::find($id);
-        $acciones=Molde::find($id)->accions->sortBy('fechaEntrada');     
-        
-        return view('moldes.show',compact('molde','acciones'));
+        $molde=Molde::find($id);             
+        return view('moldes.show',compact('molde'));
     }
 
     /**
@@ -131,9 +131,7 @@ class MoldesController extends Controller
      */
     public function edit($id)
     {       
-        $molde=Molde::find($id);
-        
-        
+        $molde=Molde::find($id);        
         return view('moldes.edit',compact('molde'));
     }
 
@@ -146,10 +144,9 @@ class MoldesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $molde=Molde::find($id);
-        $acciones=Molde::find($id)->accions->sortBy('fechaEntrada');
+        $molde=Molde::find($id);        
         $molde->numero=$request->numero;
-        $molde->nombre=$request->nombre;
+        $molde->descripcion=$request->descripcion;
         $molde->ubicacionReal=$request->ubicacionReal;
         $molde->ubicacionActual=$request->ubicacionActual;
         $molde->versionActual=$request->versionActual;
@@ -167,7 +164,7 @@ class MoldesController extends Controller
         $molde->cavidades=$request->cavidades;
         $molde->comentario=$request->comentario;
         $molde->save();       
-        return view('moldes.show',compact('molde','acciones'));
+        return view('moldes.show',compact('molde'));
     }
 
     /**
@@ -185,7 +182,8 @@ class MoldesController extends Controller
 
     public function import()
     {
-        Excel::import(new MoldesImport,'listado/tablamoldes.xlsx');       
+        Excel::import(new MoldesImport,'listado/tablamoldes.xlsx');
+        Excel::import(new ReferenciasImports,'listado/tablamoldes.xlsx');
     }
 
     public function directorio(){       
@@ -210,7 +208,7 @@ class MoldesController extends Controller
                                 $molde->save();
                                 $molde_id=$molde->getKey();
                             }                                                                                    
-                            Excel::import(new AccionsImport($molde_id),$f->getFileInfo() );
+                            //Excel::import(new AccionsImport($molde_id),$f->getFileInfo() );
                         }
                     }
                 }elseif($di->isFile()&& substr($di->getFilename(),0,4)==$direc->getFilename()&&$di->getExtension()=='xlsx'){
@@ -225,7 +223,7 @@ class MoldesController extends Controller
                         $molde->save();
                         $molde_id=$molde->getKey();
                     }                  
-                    Excel::import(new AccionsImport($molde_id),$di->getFileInfo());
+                    //Excel::import(new AccionsImport($molde_id),$di->getFileInfo());
                 }
                 /* var_dump($d->getPathname());
                 echo "es directorio: ".$d->isDir()." es archivo: ".$d->isFile()." extension: ".$d->getExtension()." fileinfo: ".$d->getFileInfo()."<br>"; */

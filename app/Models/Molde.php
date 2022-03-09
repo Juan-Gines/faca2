@@ -11,19 +11,18 @@ class Molde extends Model
 
     protected $fillable = [
         'numero',
-        'nombre',
-        'ubicacionReal',
-        'ubicacionActual',
+        'descripcion',
         'versionActual',
+        'ubicacionReal',
+        'ubicacionActual',        
         'estado',
         'estadoTexto',
         'cavidades',
-        'comentario',
+        'comentario',        
     ];    
-    public function accions()
+    
+    public function referencias()
     {
-        return $this->hasMany(Accion::class);
-    }
-    
-    
+        return $this->hasMany(Version::class);
+    }    
 }

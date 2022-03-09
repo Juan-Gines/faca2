@@ -13,11 +13,11 @@ class AccionsImport implements ToModel, WithStartRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    private $molde_id=null;
+    private $referencia_id=null;
 
-    public function __construct($molde_id)
+    public function __construct($referencia_id)
     {
-        $this->molde_id=$molde_id;
+        $this->referencia_id=$referencia_id;
     }
     public function transformDate($value, $format = 'd/m/Y')
     {
@@ -55,7 +55,7 @@ class AccionsImport implements ToModel, WithStartRow
             $reparacion=(trim($row[3])=="")?null:$row[3];
             $lugar=(trim($row[4])=="")?null:$row[4];
             $ok=(trim($row[6])=="")?null:$row[6];           
-            $acciones=Accion::where('molde_id',$this->molde_id)->get();
+            $acciones=Accion::where('referencia_id',$this->referencia_id)->get();
             foreach($acciones as $accion){
                                 
                 if(strtotime($fechaSalida)==strtotime($accion->fechaSalida) &&
@@ -90,7 +90,7 @@ class AccionsImport implements ToModel, WithStartRow
                 'fechaPrueba'=>$row[5],
                 'ok'=>$row[6],
                 'tipo'=>'Reparación',
-                'molde_id'=>$this->molde_id
+                'referencia_id'=>$this->referencia_id,
             ]);
         }           
     }

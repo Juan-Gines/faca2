@@ -10,7 +10,7 @@ class Accion extends Model
     use HasFactory;
 
     protected $fillable = [
-        'molde_id',
+        'referencia_id',        
         'tipo',
         'lugar',
         'descripcion',
@@ -21,8 +21,8 @@ class Accion extends Model
         'ok',        
     ];
     
-    public function molde()
+    public function referencia()
     {
-        return $this->belongsTo(Molde::class);
-    }
+        return $this->belongsTo(Referencia::class);
+    }    
 }

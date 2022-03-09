@@ -9,12 +9,12 @@
     @csrf
     @method('PUT')
     <div class="mb-3">
-      <label for="numero" class="form-label">Numero</label>
+      <label for="numero" class="form-label">Número</label>
       <input type="text" class="form-control" value="{{$molde->numero}}" name="numero" id="numero">
     </div>
     <div class="mb-3">
-      <label for="nombre" class="form-label">Nombre</label>
-      <input type="text" class="form-control" value="{{$molde->nombre}}" name="nombre" id="nombre">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <input type="text" class="form-control" value="{{$molde->descripcion}}" name="descripcion" id="descripcion">
     </div>
     <div class="mb-3">
       <label for="ubicacionReal" class="form-label">Ubicación real</label>

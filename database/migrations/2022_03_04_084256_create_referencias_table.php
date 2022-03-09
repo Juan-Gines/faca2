@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMoldesTable extends Migration
+class CreateReferenciasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateMoldesTable extends Migration
      */
     public function up()
     {
-        Schema::create('moldes', function (Blueprint $table) {
+        Schema::create('referencias', function (Blueprint $table) {
             $table->id();
-            $table->string('numero')->nullable();            
-            $table->string('ubicacionReal')->nullable();
-            $table->string('ubicacionActual')->nullable();
-            $table->string('versionActual')->nullable();
+            $table->integer('molde_id');
+            $table->string('numero')->nullable();
             $table->string('descripcion')->nullable();
-            $table->string('estado')->nullable()->default('light');
-            $table->string('estadoTexto')->nullable()->default('Desconocido');
+            $table->string('ubicacion')->nullable();
+            $table->string('estado')->nullable();
+            $table->string('estadoTexto')->nullable();
             $table->string('cavidades')->nullable();
             $table->text('comentario')->nullable();
+            $table->string('fotoPieza')->nullable();            
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ class CreateMoldesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moldes');
+        Schema::dropIfExists('referencias');
     }
 }

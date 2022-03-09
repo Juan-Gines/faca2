@@ -15,7 +15,7 @@ class CreateAccionsTable extends Migration
     {
         Schema::create('accions', function (Blueprint $table) {
             $table->id();
-            $table->integer('molde_id')->index();
+            $table->integer('referencia_id')->index();            
             $table->string('tipo')->nullable()->default("reparacion");
             $table->string('lugar')->nullable();                                    
             $table->text('descripcion')->nullable();

@@ -15,7 +15,7 @@
   <div class="col-auto">
     <a href="{{route('moldes.savedata')}}"><button class="btn btn-primary" type="button">obtener excel</button></a>
   </div>
-</div>
+</div> 
 <nav class="navbar navbar-expand-sm navbar-light bg-light rounded navbar-fixed" aria-label="Eleventh navbar example">
   <div class="container-fluid">    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMoldes" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,14 +42,13 @@
       </form>      
     </div>
   </div>
-</nav>  
-<div class="m-5">
-  
+</nav> 
+<div class="m-5">  
   <div class="row justify-content-center">
     <table class="table table-hover  text-center"  >
       <thead  class="table-dark table-header-fix">                
         <tr>
-          <th scope="col">Numero molde</th>
+          <th scope="col">Molde</th>
           <th scope="col">Denominación</th>
           <th scope="col">Ubicación almacen</th>
           <th scope="col">Ubicación actual</th>
@@ -58,11 +57,11 @@
           <th scope="col">Cavidades</th>
         </tr>
       </thead>
-      <tbody>
-        @foreach($moldes as $molde)                            
+      <tbody>        
+        @foreach($moldes as $molde)        
           <tr class="table-{{$molde->estado}} clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$molde->comentario}}">          
             <td><a href="{{route('moldes.show',$molde->id)}}">{{$molde->numero}}</a></td>            
-            <td>{{$molde->nombre}}</td>
+            <td>{{$molde->descripcion}}</td>
             <td>{{$molde->ubicacionReal}}</td>
             <td>{{$molde->ubicacionActual}}</td>
             <td>{{$molde->versionActual}}</td>
