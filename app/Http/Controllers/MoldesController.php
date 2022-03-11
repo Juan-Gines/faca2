@@ -183,11 +183,11 @@ class MoldesController extends Controller
     public function import()
     {
         Excel::import(new MoldesImport,'listado/tablamoldes.xlsx');
-        Excel::import(new ReferenciasImports,'listado/tablamoldes.xlsx');
+        Excel::import(new ReferenciasImports,'listado/tablareferencias.xlsx');
     }
 
     public function directorio(){       
-        $directorios= new RecursiveDirectoryIterator('informes',FilesystemIterator::SKIP_DOTS);
+        /* $directorios= new RecursiveDirectoryIterator('informes',FilesystemIterator::SKIP_DOTS);
         echo"<pre>";
         foreach ($directorios as $direc) {
             $dir= new RecursiveDirectoryIterator($direc->getPathname(), FilesystemIterator::SKIP_DOTS);
@@ -227,13 +227,13 @@ class MoldesController extends Controller
                 }
                 /* var_dump($d->getPathname());
                 echo "es directorio: ".$d->isDir()." es archivo: ".$d->isFile()." extension: ".$d->getExtension()." fileinfo: ".$d->getFileInfo()."<br>"; */
-            }            
-        }
-        echo"</pre>";
+            //}            
+        //}
+        //echo"</pre>";
         //linkear en linux ln -s path1 path2
         //en windows mklink /j xxx\public\storage path2
-        //C:\Users\Juan Gines\Desktop\archivospacasa\informes
-    }
+        //C:\Users\Juan Gines\Desktop\archivospacasa\informes*/
+    } 
     
     public function export(){
         return Excel::download(new MoldesExport,'tablamoldes.xlsx');

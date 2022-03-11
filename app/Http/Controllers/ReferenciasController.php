@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Exception;
 use FilesystemIterator;
+use App\Imports\AccionsImport;
 
 class ReferenciasController extends Controller
 {
@@ -194,7 +195,7 @@ class ReferenciasController extends Controller
     {
         //
     }
-    public function export(){
+    public function exportar(){
         return Excel::download(new ReferenciasExport,'tablareferencias.xlsx');
     }
 
@@ -203,7 +204,7 @@ class ReferenciasController extends Controller
         echo"<pre>";
         foreach ($directorios as $direc) {
             $dir= new RecursiveDirectoryIterator($direc->getPathname(), FilesystemIterator::SKIP_DOTS);
-            echo $direc->getFilename()."<br>";
+            echo "1-".$direc->getFilename()."<br>";
             foreach ($dir as $di) {
                 if($di->isDir()){
                     $d= new RecursiveDirectoryIterator($di->getPathname(), FilesystemIterator::SKIP_DOTS);
@@ -213,19 +214,36 @@ class ReferenciasController extends Controller
                             if(preg_match("#[0-9]{4}#",$version))$version=$version;
                             elseif(preg_match("#[_ ]{1}[0-9]{1}[_ ]{1}[0-9]{1}#",$version))$version=str_replace(["_"," "],"0",$version);
                             else $version="0000";
-                            $version= $direc->getFilename().$version; 
-                            echo $version."<br>";                                                             
+                            $version= $direc->getFilename().$version;
+                            $molde= substr($version,0,6)."00";
+                            echo "2-Referencia ".$version."<br>";
+                            echo "4-Molde ".$molde."<br>";
                             try{
-                                $referencia_id=$referencia_id=Referencia::select('id')->where('numero',$version)->get();
-                                $referencia_id=$referencia_id[0]->id;
-                                var_dump($referencia_id);
+                                $molde_id=Molde::select('id')->where('numero',$molde)->get()[0]->id;
+                                echo "6-molde id ".$molde_id."<br><br>";
                             }catch(Exception $e){
+                                echo "6-molde id no encontrado";
+                                $molde=new Molde;
+                                $molde->numero=$molde;
+                                $molde->comentario="Registro agregado automáticamente. Por favor rellene los datos que faltan.";
+                                $molde->save();
+                                $molde_id=$molde->getKey();
+                            }                                                                                         
+                            try{
+                                $referencia_id=Referencia::select('id')->where('numero',$version)->get();
+                                $referencia_id=$referencia_id[0]->id;
+                                echo "5-".$referencia_id."<br>";                                
+                            }catch(Exception $e){
+                                echo "no se encontro la referencia ".$version."<br>";
                                 $referencia=new Referencia;
-                                $referencia->numero=$direc->getFilename();
+                                $referencia->numero=$version;
+                                $referencia->molde_id=$molde_id;
+                                $referencia->comentario="Registro agregado automáticamente. Por favor rellene los datos que faltan.";
                                 $referencia->save();
                                 $referencia_id=$referencia->getKey();
-                            }                                                                                    
-                            //Excel::import(new AccionsImport($referencia_id),$f->getFileInfo() );
+                            }
+                                                                                                                 
+                            Excel::import(new AccionsImport($referencia_id),$f->getFileInfo() );
                         }
                     }
                 }elseif($di->isFile()&& substr($di->getFilename(),0,4)==$direc->getFilename()&&$di->getExtension()=='xlsx'){
@@ -233,19 +251,36 @@ class ReferenciasController extends Controller
                     if(preg_match("#[0-9]{4}#",$version))$version=$version;
                     elseif(preg_match("#[_ ]{1}[0-9]{1}[_ ]{1}[0-9]{1}#",$version))$version=str_replace(["_"," "],"0",$version);
                     else $version="0000";
-                    $version= $direc->getFilename().$version; 
-                    echo $version."<br>";
+                    $version= $direc->getFilename().$version;
+                    $molde= substr($version,0,6)."00"; 
+                    echo "3-Referencia ".$version."<br>";
+                    echo "4-Molde ".$molde."<br>";
                     try{
-                        $referencia_id=$referencia_id=Referencia::select('id')->where('numero',$direc->getFilename())->get();
-                        $referencia_id=$referencia_id[0]->id;
-                        var_dump($referencia_id);
+                        $molde_id=Molde::select('id')->where('numero',$molde)->get()[0]->id;
+                        echo "6-molde id ".$molde_id."<br><br>";
                     }catch(Exception $e){
+                        echo "6-molde id no encontrado";
+                        $molde=new Molde;
+                        $molde->numero=$molde;
+                        $molde->comentario="Registro agregado automáticamente. Por favor rellene los datos que faltan.";
+                        $molde->save();
+                        $molde_id=$molde->getKey();
+                    }
+                    try{
+                        $referencia_id=Referencia::select('id')->where('numero',$version)->get();
+                        $referencia_id=$referencia_id[0]->id;
+                        echo "5-".$referencia_id."<br><br>";
+                    }catch(Exception $e){
+                        echo "no se encontro la referencia ".$version."<br><br>";
                         $referencia=new Referencia;
-                        $referencia->numero=$direc->getFilename();
+                        $referencia->numero=$version;
+                        $referencia->molde_id=$molde_id;
+                        $referencia->comentario="Registro agregado automáticamente. Por favor rellene los datos que faltan.";
                         $referencia->save();
                         $referencia_id=$referencia->getKey();
-                    }                  
-                    //Excel::import(new AccionsImport($referencia_id),$di->getFileInfo());
+                    }
+                                       
+                    Excel::import(new AccionsImport($referencia_id),$di->getFileInfo());
                 }
                 /* var_dump($d->getPathname());
                 echo "es directorio: ".$d->isDir()." es archivo: ".$d->isFile()." extension: ".$d->getExtension()." fileinfo: ".$d->getFileInfo()."<br>"; */

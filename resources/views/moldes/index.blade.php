@@ -15,7 +15,7 @@
   <div class="col-auto">
     <a href="{{route('moldes.savedata')}}"><button class="btn btn-primary" type="button">obtener excel</button></a>
   </div>
-</div> 
+</div>  
 <nav class="navbar navbar-expand-sm navbar-light bg-light rounded navbar-fixed" aria-label="Eleventh navbar example">
   <div class="container-fluid">    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMoldes" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
         </li>
       </ul>
       <div class="col-auto m-3">
-        <a href ="{{route('moldes.create')}}" ><button class="btn btn-primary" type="button">Nuevo registro</button></a>
+        <a href ="{{route('moldes.create')}}" ><button class="btn btn-primary" type="button">Nuevo molde</button></a>
       </div>
       <form action="{{route('moldes.buscar')}}" method="GET">
         <input class="form-control" type="text" name="busqueda" placeholder="Buscar..." aria-label="Search">

@@ -38,11 +38,11 @@
     </div>
     <div class="mb-3">
       <label for="molde_id" class="form-label">Molde base</label>
-      <input type="text" class="form-control" list="listaMoldes" name="molde_id" id="molde_id" required pattern="[0-9]{8}" placeholder="Ejem. 11110000">
-      <datalist id="listaMoldes" size="5">
+      <input type="text" class="form-control" list="lista" name="molde_id" id="molde_id" required pattern="[0-9]{8}" placeholder="Ejem. 11110000">
+      <datalist id="lista">      
         @foreach($moldes as $molde)          
-            <option>{{$molde->numero}}</option>      
-        @endforeach
+            <option value="{{$molde->numero}}"></option>     
+        @endforeach          
       </datalist>
     </div>    
     <div class="mb-3">

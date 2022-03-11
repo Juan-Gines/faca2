@@ -16,13 +16,15 @@ class ReferenciasImports implements ToModel, WithStartRow
     public function model(array $row)
     {
         return new Referencia([
-            'molde_id'=>$row[0],
-            'numero'=>$row[1],
-            'descripcion'=>$row[2],                         
-            'estado'=>$row[6],
-            'estadoTexto'=>$row[7],
-            'cavidades'=>$row[8],
-            'comentario'=>$row[9],
+            'molde_id'=>$row[1],
+            'numero'=>$row[2],
+            'descripcion'=>$row[3],                         
+            'ubicacion'=>$row[4],                         
+            'estado'=>$row[5],
+            'estadoTexto'=>$row[6],
+            'cavidades'=>$row[7],
+            'comentario'=>$row[8],
+            'fotoPieza'=>$row[9],
         ]);
     }
 

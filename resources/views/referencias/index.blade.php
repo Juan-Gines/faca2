@@ -5,9 +5,12 @@
 <div class="row justify-content-center p-3">
   <h2 class="text-center" style="color: #1652B5;">Listado de referencias</h2>
 </div>
-<div class="col-auto">
+ <div class="col-auto">
     <a href="{{route('referencias.directorio')}}"><button class="btn btn-primary" type="button">obtener directorio</button></a>
-  </div>
+ </div>
+ <div class="col-auto">
+    <a href="{{route('referencias.exportar')}}"><button class="btn btn-primary" type="button">obtener excel</button></a>
+ </div> 
 <nav class="navbar navbar-expand-sm navbar-light bg-light rounded navbar-fixed" aria-label="Eleventh navbar example">
   <div class="container-fluid">    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsReferencias" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">

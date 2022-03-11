@@ -23,6 +23,6 @@ class Molde extends Model
     
     public function referencias()
     {
-        return $this->hasMany(Version::class);
+        return $this->hasMany(Referencia::class);
     }    
 }

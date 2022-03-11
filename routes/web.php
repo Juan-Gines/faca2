@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MoldesController;
 use App\Http\Controllers\AccionesController;
 use App\Http\Controllers\ReferenciasController;
+use App\Http\Controllers\MaquinasController;
+use App\Http\Controllers\PedidosController;
 use Illuminate\Notifications\Action;
 
 /*
@@ -42,7 +44,12 @@ Route::get('/referencias/listado/reparando',[ReferenciasController::class,'repar
 Route::get('/referencias/listado/desconocido',[ReferenciasController::class,'desconocido'])->name('referencias.desconocido');;
 Route::get('/referencias/buscar',[ReferenciasController::class,'buscar'])->name('referencias.buscar');
 Route::get('/referencias/directorio',[ReferenciasController::class,'directorio'])->name('referencias.directorio');;
+Route::get('/referencias/exportar',[ReferenciasController::class,'exportar'])->name('referencias.exportar');
 
+
+Route::get('/maquinas/buscar',[MaquinasController::class,'buscar'])->name('maquinas.buscar');
+
+Route::get('/pedidos/buscar',[PedidosController::class,'buscar'])->name('pedidos.buscar');
 
 Route::get('/produccion/show',function(){
     return view('produccion.show');
@@ -53,6 +60,9 @@ Route::get('/produccion/show',function(){
 Route::resource('referencias',ReferenciasController::class);
 Route::resource('moldes',MoldesController::class);
 Route::resource('acciones',AccionesController::class);
+Route::resource('maquinas',MaquinasController::class);
+Route::resource('pedidos',PedidosController::class);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

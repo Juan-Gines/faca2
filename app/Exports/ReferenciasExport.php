@@ -4,8 +4,9 @@ namespace App\Exports;
 
 use App\Models\Referencia;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ReferenciasExport implements FromCollection
+class ReferenciasExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection

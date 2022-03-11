@@ -22,6 +22,8 @@
           <li><a href="{{route('moldes.index')}}" class="nav-link px-2 text-secondary">Moldes</a></li>
           <li><a href="{{route('referencias.index')}}" class="nav-link px-2 text-secondary">Referencias</a></li>
           <li><a href="{{route('produccion.show')}}" class="nav-link px-2 text-white">Producción</a></li>
+          <li><a href="{{route('maquinas.index')}}" class="nav-link px-2 text-white">Máquinas</a></li>
+          <li><a href="{{route('pedidos.index')}}" class="nav-link px-2 text-white">Pedidos</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Reparaciones</a></li>          
         </ul>      
       </div>
