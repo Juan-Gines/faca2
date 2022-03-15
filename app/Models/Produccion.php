@@ -15,4 +15,9 @@ class Produccion extends Model
         'fecha',
         'cantidad',
     ];
+
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class);
+    }
 }

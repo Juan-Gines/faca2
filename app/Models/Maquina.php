@@ -16,4 +16,9 @@ class Maquina extends Model
         'activa',
         'pedido_id',
     ];
+
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class);
+    }
 }

@@ -3,11 +3,11 @@
 @section('contenido')
 
   <div class="row justify-content-center p-3">
-    <h2 class="text-center" style="color: #1652B5;">Crear nueva acción molde nº {{$molde->numero}}</h2>
+    <h2 class="text-center" style="color: #1652B5;">Crear nueva acción referencia nº {{$referencia->numero}}</h2>
   </div>
   <form method="POST" action="{{route('acciones.store')}}" class="container mt-5" style="max-width: 800px;">
     @csrf
-    <input type="hidden" name="molde_id" id="molde_id" value="{{$molde->id}}">
+    <input type="hidden" name="referencia_id" id="referencia_id" value="{{$referencia->id}}">
     <div class="mb-3">
       <label for="tipo" class="form-label">Tipo</label>    
       <select class="form-select mb-3" name="tipo" aria-label="tipo" >
@@ -50,7 +50,7 @@
     </div>   
     <div class="mb-3">
       <button type="submit" class="btn btn-primary mb-3">Insertar nueva Accion</button>
-      <a href="{{route('moldes.show',$molde->id)}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
+      <a href="{{route('referencias.show',$referencia->id)}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
     </div>
   </form>
 

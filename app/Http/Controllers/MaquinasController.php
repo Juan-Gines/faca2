@@ -87,7 +87,7 @@ class MaquinasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $maquina=new Maquina;
+        $maquina=Maquina::find($id);
         $maquina->numero=$request->numero;
         $maquina->descripcion=$request->descripcion;
         $maquina->sala=$request->sala;

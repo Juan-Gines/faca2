@@ -13,6 +13,22 @@
       <input type="text" class="form-control" value="{{$referencia->numero}}" required pattern="[0-9]{8}" name="numero" id="numero">
     </div>
     <div class="mb-3">
+      <label for="tipo" class="form-label">Tipo</label>    
+      <select class="form-select mb-3" name="tipo" aria-label="tipo" >
+        <option value="Tapa" {{$referencia->tipo=='Tapa' ? 'selected':''}}>Tapa</option>      
+        <option value="Tarro" {{$referencia->tipo=='Tarro' ? 'selected':''}}>Tarro</option>
+        <option value="Tapones" {{$referencia->tipo=='Tapones' ? 'selected':''}}>Tapones</option>
+        <option value="Sealed" {{$referencia->tipo=='Sealed' ? 'selected':''}}>Sealed</option>      
+        <option value="Rejilla" {{$referencia->tipo=='Rejilla' ? 'selected':''}}>Rejilla</option>      
+        <option value="Polvera" {{$referencia->tipo=='Polvera' ? 'selected':''}}>Polvera</option>
+        <option value="Obturador" {{$referencia->tipo=='Obturador' ? 'selected':''}}>Obturador</option>
+        <option value="Dispenser" {{$referencia->tipo=='Dispenser' ? 'selected':''}}>Dispenser</option>      
+        <option value="Cubilete" {{$referencia->tipo=='Cubilete' ? 'selected':''}}>Cubilete</option>
+        <option value="Contra obturador" {{$referencia->tipo=='Contra obturador' ? 'selected':''}}>Contra obturador</option>
+        <option value="Botella" {{$referencia->tipo=='Botella' ? 'selected':''}}>Botella</option>      
+      </select>
+    </div>
+    <div class="mb-3">
       <label for="descripcion" class="form-label">Descripción</label>
       <input type="text" class="form-control" value="{{$referencia->descripcion}}" name="descripcion" id="descripcion">
     </div>

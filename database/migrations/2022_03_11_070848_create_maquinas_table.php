@@ -18,7 +18,7 @@ class CreateMaquinasTable extends Migration
             $table->integer('numero');
             $table->string('descripcion')->nullable();
             $table->string('sala')->nullable();
-            $table->boolean('activa')->nullable();            
+            $table->boolean('activa')->nullable();                        
             $table->timestamps();
         });
     }

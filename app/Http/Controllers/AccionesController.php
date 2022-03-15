@@ -28,9 +28,10 @@ class AccionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //return view('acciones.create',compact('id'));
+        $referencia=Referencia::find($id);
+        return view('acciones.create',compact('referencia'));
     }
     public function nuevo($id)
     {

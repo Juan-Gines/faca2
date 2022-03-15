@@ -15,4 +15,9 @@ class Merma extends Model
         'sala',
         'purga',
     ];
+
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class);
+    }
 }

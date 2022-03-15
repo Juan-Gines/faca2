@@ -25,6 +25,11 @@ class Referencia extends Model
         return $this->hasMany(Accion::class);
     }
 
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class);
+    }
+
     public function molde(){
         return $this->belongsTo(Molde::class);
     }

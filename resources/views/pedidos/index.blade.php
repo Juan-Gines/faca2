@@ -28,6 +28,7 @@
           <th scope="col">Pedido número</th>
           <th scope="col">Referencia</th>
           <th scope="col">Denominación</th>
+          <th scope="col">Máquina</th>
           <th scope="col">Piezas totales</th>
           <th scope="col">Piezas parciales</th>
           <th scope="col">Estado</th>          
@@ -35,17 +36,18 @@
           <th scope="col">Fin</th>           
         </tr>
       </thead>
-      <tbody>        
+      <tbody>                
         @foreach($pedidos as $pedido)        
-          <tr class="table-{{$pedido->estado}} clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$pedido->comentario}}">          
+          <tr class="table-{{$color[$pedido->estado]}} clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$pedido->comentario}}">          
             <td><a href="{{route('pedidos.show',$pedido->id)}}">{{$pedido->numero}}</a></td>            
-            <td></td>
-            <td></td>                        
+            <td>{{$pedido->referencia->numero}}</td>
+            <td>{{$pedido->referencia->descripcion}}</td>                        
+            <td>{{$pedido->maquina->numero}}</td>                       
             <td>{{$pedido->totalPiezas}}</td>                       
             <td></td>                       
-            <td>{{$pedido->estado}}</td>                       
-            <td>{{!$accion->fechaInicio =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaInicio))->formatLocalized('%d/%m/%Y') : ""}}</td>                       
-            <td>{{!$accion->fechaFin =="" ? \Carbon\Carbon::parse(strtotime($accion->fechaFin))->formatLocalized('%d/%m/%Y') : ""}}</td>                       
+            <td>{{$texto[$pedido->estado]}}</td>                       
+            <td>{{!$pedido->fechaInicio =="" ? \Carbon\Carbon::parse(strtotime($pedido->fechaInicio))->formatLocalized('%d/%m/%Y') : ""}}</td>                       
+            <td>{{!$pedido->fechaFin =="" ? \Carbon\Carbon::parse(strtotime($pedido->fechaFin))->formatLocalized('%d/%m/%Y') : ""}}</td>                       
           </tr>          
         @endforeach
       </tbody>

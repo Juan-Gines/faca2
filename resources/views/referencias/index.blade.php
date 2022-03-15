@@ -44,6 +44,7 @@
       <thead  class="table-dark table-header-fix">                
         <tr>
           <th scope="col">Referencia</th>
+          <th scope="col">Tipo</th>
           <th scope="col">Denominación</th>
           <th scope="col">Ubicación almacen</th>                    
           <th scope="col">Estado</th>
@@ -54,6 +55,7 @@
         @foreach($referencias as $referencia)        
           <tr class="table-{{$referencia->estado}} clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$referencia->comentario}}">          
             <td><a href="{{route('referencias.show',$referencia->id)}}">{{$referencia->numero}}</a></td>            
+            <td>{{$referencia->tipo}}</td>
             <td>{{$referencia->descripcion}}</td>
             <td>{{$referencia->ubicacion}}</td>                        
             <td>{{$referencia->estadoTexto}}</td>

@@ -20,11 +20,11 @@ class MoldesExport implements FromCollection,WithHeadings
     {
         return[
             'id',
-            'Numero',
-            'Descripción',
+            'Numero',            
             'Ubicación almacen',
-            'Ubicación actual',
+            'Ubicación actual',            
             'Versión actual',
+            'Descripción',
             'Estado',
             'Estado Texto',
             'Cavidades',

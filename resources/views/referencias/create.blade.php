@@ -12,6 +12,22 @@
       <input type="text" class="form-control" required pattern="[0-9]{8}" name="numero" id="numero">
     </div>
     <div class="mb-3">
+      <label for="tipo" class="form-label">Tipo</label>    
+      <select class="form-select mb-3" name="tipo" aria-label="tipo" >
+        <option value="tapa">Tapa</option>      
+        <option value="Tarro">Tarro</option>
+        <option value="Tapones">Tapones</option>
+        <option value="Sealed">Sealed</option>      
+        <option value="Rejilla">Rejilla</option>      
+        <option value="Polvera">Polvera</option>
+        <option value="Obturador">Obturador</option>
+        <option value="Dispenser">Dispenser</option>      
+        <option value="Cubilete">Cubilete</option>
+        <option value="Contra obturador">Contra obturador</option>
+        <option value="Botella">Botella</option>      
+      </select>
+    </div>
+    <div class="mb-3">
       <label for="descripcion" class="form-label">Descripción</label>
       <input type="text" class="form-control" name="descripcion" id="descripcion">
     </div>

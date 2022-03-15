@@ -17,6 +17,7 @@ class CreateReferenciasTable extends Migration
             $table->id();
             $table->integer('molde_id');
             $table->string('numero')->nullable();
+            $table->string('tipo')->nullable();            
             $table->string('descripcion')->nullable();
             $table->string('ubicacion')->nullable();
             $table->string('estado')->nullable();

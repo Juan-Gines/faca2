@@ -14,6 +14,10 @@
       <a href="{{route('referencias.index')}}"class="col-auto"><button type="button" class=" btn btn-primary mb-3">Volver</button></a>
     </div>     
     <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Tipo  </div>
+      <div class="col-md-4 mb-3"> {{$referencia->tipo}}</div>
+    </div> 
+    <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Nombre  </div>
       <div class="col-md-4 mb-3"> {{$referencia->descripcion}}</div>
     </div> 

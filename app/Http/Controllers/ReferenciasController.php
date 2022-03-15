@@ -92,7 +92,7 @@ class ReferenciasController extends Controller
             );                        
             $referencia=new Referencia;        
             $referencia->molde_id=$molde->id;
-            $referencia->numero=$request->numero;
+            $referencia->tipo=$request->tipo;
             $referencia->descripcion=$request->descripcion;        
             $referencia->ubicacion=$request->ubicacion;            
             $referencia->estado=$request->estado;
@@ -162,6 +162,7 @@ class ReferenciasController extends Controller
             $referencia=Referencia::find($id);        
             $referencia->molde_id=$molde->id;
             $referencia->numero=$request->numero;
+            $referencia->tipo=$request->tipo;
             $referencia->descripcion=$request->descripcion;        
             $referencia->ubicacion=$request->ubicacion;            
             $referencia->estado=$request->estado;

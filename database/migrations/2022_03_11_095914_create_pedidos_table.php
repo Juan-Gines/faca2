@@ -15,6 +15,7 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
+            $table->string('numero')->nullable();
             $table->integer('maquina_id')->nullable();
             $table->integer('referencia_id')->nullable();
             $table->integer('totalPiezas')->nullable();
