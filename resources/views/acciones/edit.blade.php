@@ -50,8 +50,8 @@
       <input type="text" class="form-control" name="ok" id="ok" value="{{$accion->ok}}">
     </div>   
     <div class="mb-3">
-      <button type="submit" class="btn btn-primary mb-3">Modificar Accion</button>
-      <a href="{{route('acciones.show',$accion->id)}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
+      <button type="submit" class="btn btn-success mb-3"><i class="fa-solid fa-circle-check icon"></i>Guardar</button>
+      <a href="{{route('acciones.show',$accion->id)}}"><button type="button" class="btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
     </div>
   </form>
 

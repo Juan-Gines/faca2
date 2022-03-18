@@ -10,8 +10,8 @@
 </div>
   <div class="col  justify-content-center">
     <div class="row justify-content-center mb-3">
-      <a href="{{route('referencias.edit',$referencia->id)}}" class="col-auto"><button class=" btn btn-primary mb-3">Modificar info</button></a>
-      <a href="{{route('referencias.index')}}"class="col-auto"><button type="button" class=" btn btn-primary mb-3">Volver</button></a>
+      <a href="{{route('referencias.edit',$referencia->id)}}" class="col-auto"><button class=" btn btn-info mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Modificar info</button></a>
+      <a href="{{route('referencias.index')}}"class="col-auto"><button type="button" class=" btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
     </div>     
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Tipo  </div>
@@ -50,17 +50,23 @@
     <h2 class="text-center" style="color: #1652B5;">Intervenciones</h2>
   </div>
   <div class="mb-5 mx-5 ">
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-around mb-3">
       <div class="col-auto">
-        <form action="{{route('acciones.importar')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('acciones.importar')}}" class="row justify" method="POST" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="referencia_id" id="referencia_id" value="{{$referencia->id}}">          
-          <input type="file" name="accionExcel" accept=".xlsx,.xls" id="accionExcel" required>
-          <button class=" btn btn-primary mb-3">Importar excel</button>
+          <div class="row"> 
+            <div class="col">           
+             <input class="form-control" name="accionExcel" accept=".xlsx,.xls" type="file" id="accionExcel" required>                      
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-warning"><i class="fa-solid fa-file-import icon"></i>Importar excel</button>
+            </div>
+          </div>
         </form>
       </div>
-      <a href="{{route('acciones.nuevo',$referencia->id)}}" class="col-auto"><button class=" btn btn-primary mb-3">Nueva intervención</button></a>      
-      <a href="{{route('acciones.exportar',$referencia->id)}}" class="col-auto"><button class=" btn btn-primary mb-3">Excel</button></a>      
+      <a href="{{route('acciones.nuevo',$referencia->id)}}" class="col-auto"><button class=" btn btn-primary mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Nueva intervención</button></a>      
+      <a href="{{route('acciones.exportar',$referencia->id)}}" class="col-auto"><button class=" btn btn-success mb-3"><i class="fa-regular fa-file-excel icon"></i>Excel</button></a>      
     </div>
     <div class="row justify-content-center">
       <table class="table table-hover"  >

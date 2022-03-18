@@ -11,7 +11,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>     
     <div class="col-auto m-3">
-      <a href ="{{route('maquinas.create')}}" ><button class="btn btn-primary" type="button">Nueva máquina</button></a>
+      <a href ="{{route('maquinas.create')}}" ><button class="btn btn-primary" type="button"><i class="fa-regular fa-clipboard icon"></i>Nueva máquina</button></a>
     </div>
     <div class="col-auto m-3">
       <form action="{{route('maquinas.buscar')}}" method="GET">

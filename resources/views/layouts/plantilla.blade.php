@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
   <link rel="stylesheet" href="{{asset('css/bootstrap.css.map')}}">
   <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+  <script src="https://kit.fontawesome.com/42d4031566.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header class="p-3 bg-dark text-white">
@@ -29,7 +30,7 @@
       </div>
     </div>
   </header>       
-  <main class="container main-container bg-light">
+  <main class="container main-container">
     @yield('contenido')
   </main>
   <footer>

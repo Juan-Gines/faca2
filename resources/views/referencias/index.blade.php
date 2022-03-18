@@ -5,18 +5,21 @@
 <div class="row justify-content-center p-3">
   <h2 class="text-center" style="color: #1652B5;">Listado de referencias</h2>
 </div>
- <div class="col-auto">
+ <!-- <div class="col-auto">
     <a href="{{route('referencias.directorio')}}"><button class="btn btn-primary" type="button">obtener directorio</button></a>
  </div>
  <div class="col-auto">
     <a href="{{route('referencias.exportar')}}"><button class="btn btn-primary" type="button">obtener excel</button></a>
- </div> 
-<nav class="navbar navbar-expand-sm navbar-light bg-light rounded navbar-fixed" aria-label="Eleventh navbar example">
+ </div>  -->
+<nav class="navbar navbar-expand-sm navbar-light rounded navbar-fixed" aria-label="Eleventh navbar example">
   <div class="container-fluid">    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsReferencias" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>    
     <div class="collapse navbar-collapse  justify-content-md-center" id="navbarsReferencias" >
+      <div class="col-auto m-3">
+        <a href ="{{route('referencias.create')}}" ><button class="btn btn-primary" type="button"><i class="fa-regular fa-clipboard icon" ></i>Nueva referencia</button></a>
+      </div>
       <ul class="navbar-nav mb-2 mb-lg-2">                
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por estado</a>
@@ -28,10 +31,7 @@
             <li><a class="dropdown-item" href="{{route('referencias.desconocido')}}">Desconocido</a></li>
           </ul>
         </li>
-      </ul>
-      <div class="col-auto m-3">
-        <a href ="{{route('referencias.create')}}" ><button class="btn btn-primary" type="button">Nueva referencia</button></a>
-      </div>
+      </ul>      
       <form action="{{route('referencias.buscar')}}" method="GET">
         <input class="form-control" type="text" name="busqueda" placeholder="Buscar..." aria-label="Search">
       </form>      

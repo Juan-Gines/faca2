@@ -7,6 +7,8 @@ use App\Http\Controllers\AccionesController;
 use App\Http\Controllers\ReferenciasController;
 use App\Http\Controllers\MaquinasController;
 use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\ProduccionesController;
+use App\Http\Controllers\MermasController;
 use Illuminate\Notifications\Action;
 
 /*
@@ -51,6 +53,10 @@ Route::get('/maquinas/buscar',[MaquinasController::class,'buscar'])->name('maqui
 
 Route::get('/pedidos/buscar',[PedidosController::class,'buscar'])->name('pedidos.buscar');
 
+Route::get('/producciones/nuevo/{id}',[ProduccionesController::class,'nuevo'])->name('producciones.nuevo');
+
+Route::get('/mermas/nuevo/{id}',[MermasController::class,'nuevo'])->name('mermas.nuevo');
+
 Route::get('/produccion/show',function(){
     return view('produccion.show');
 })->name('produccion.show');
@@ -62,6 +68,8 @@ Route::resource('moldes',MoldesController::class);
 Route::resource('acciones',AccionesController::class);
 Route::resource('maquinas',MaquinasController::class);
 Route::resource('pedidos',PedidosController::class);
+Route::resource('producciones',ProduccionesController::class);
+Route::resource('mermas',MermasController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

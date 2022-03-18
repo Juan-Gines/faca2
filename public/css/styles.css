@@ -11,15 +11,15 @@ h3 {
 }
 
 .main-container {
-    max-width: 90%;
+    max-width: 100%;
 }
 
 .table-header-fix {
     position: sticky;
-    top: 85px;
+    top: 70px;
     z-index: 10;
 }
-.navbar-fixed {
+.navbar-fixed {    
     position: sticky;
     top: 0;
     z-index: 20;
@@ -70,3 +70,10 @@ h3 {
     align-self: flex-start;
     font-weight: 700;
 }
+.icon{        
+    margin-right: 5px;
+}
+.badge-estado-fs{
+    font-size: 14px;
+}
+

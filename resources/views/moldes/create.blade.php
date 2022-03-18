@@ -30,10 +30,10 @@
     <div class="mb-3">
       <label for="estado" class="form-label">Estado</label>    
       <select class="form-select mb-3" name="estado" aria-label="estado" >
-        <option value="light">Desconocido</option>      
-        <option class="text-success" value="success">Ok</option>
-        <option class="text-warning" value="warning">En reparación</option>
-        <option class="text-danger" value="danger">No ok</option>      
+        <option value="0">Desconocido</option>      
+        <option class="text-success" value="2">Ok</option>
+        <option class="text-warning" value="1">En reparación</option>
+        <option class="text-danger" value="3">No ok</option>      
       </select>
     </div>
     <div class="mb-3">
@@ -45,8 +45,8 @@
       <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
     </div>
     <div class="mb-3">
-      <button type="submit" class="btn btn-primary mb-3">Insertar registro</button>
-      <a href="{{route('moldes.index')}}"><button type="button" class="btn btn-primary mb-3">Volver</button></a>
+      <button type="submit" class="btn btn-success mb-3"><i class="fa-solid fa-circle-check icon"></i>Guardar</button>
+      <a href="{{route('moldes.index')}}"><button type="button" class="btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
     </div>
   </form>
 

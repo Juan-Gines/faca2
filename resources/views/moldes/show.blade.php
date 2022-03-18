@@ -8,8 +8,8 @@
 </div>
 <div class="col  justify-content-center">
   <div class="row justify-content-center mb-3">
-    <a href="{{route('moldes.edit',$molde->id)}}" class="col-auto"><button class=" btn btn-primary mb-3">Modificar info</button></a>
-    <a href="{{route('moldes.index')}}"class="col-auto"><button type="button" class=" btn btn-primary mb-3">Volver</button></a>
+    <a href="{{route('moldes.edit',$molde->id)}}" class="col-auto"><button class=" btn btn-info mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Modificar info</button></a>
+    <a href="{{route('moldes.index')}}"class="col-auto"><button type="button" class=" btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
   </div>     
   <div class="row ">
     <div class="col-md-3 offset-md-3 fw-bold mb-3"> Nombre  </div>

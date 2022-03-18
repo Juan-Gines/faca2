@@ -5,13 +5,13 @@
 <div class="row justify-content-center p-3">
   <h2 class="text-center" style="color: #1652B5;">Listado de pedidos</h2>
 </div>
-<nav class="navbar navbar-expand-sm navbar-light bg-light rounded navbar-fixed" aria-label="Eleventh navbar example">
+<nav class="navbar navbar-expand-sm navbar-light rounded navbar-fixed" aria-label="Eleventh navbar example">
   <div class="container-fluid justify-content-md-center">    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarspedidos" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>     
     <div class="col-auto m-3">
-      <a href ="{{route('pedidos.create')}}" ><button class="btn btn-primary" type="button"><i class="fa-regular fa-clipboard icon"></i>Nuevo pedido</button></a>
+      <a href ="{{route('pedidos.create')}}" ><button class="btn btn-primary" type="button"><i class="fa-regular fa-clipboard icon" >Nuevo pedido</button></a>
     </div>
     <div class="col-auto m-3">
       <form action="{{route('pedidos.buscar')}}" method="GET">

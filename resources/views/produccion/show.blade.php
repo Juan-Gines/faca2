@@ -2,189 +2,130 @@
 
 
 @section('contenido')
-<div class="row justify-content-center p-3 mb-5">
-  <h1 class="text-center" style="color: #1652B5;">Producción actual</h1>
-</div>  
-<div class="row justify-content-center mb-5"> 
-  <table class="table table-hover  text-center"  >
-    <thead  class="table-primary">
-      <tr class="table-danger table-header-historial header--extra">
-        <th scope="col" colspan="8">Sala A</th>
-      </tr>                
-      <tr class=" table-header-historial2">
-        <th scope="col" >Máquina</th>
-        <th scope="col">Pedido</th>
-        <th scope="col">Referencia</th>
-        <th scope="col">Denominación</th>
-        <th scope="col">Piezas totales</th>
-        <th scope="col">Piezas parciales</th>
-        <th scope="col">Estado</th>          
-        <th scope="col">Observaciones</th>          
-      </tr>
-    </thead>
-    <tbody>
-      @for($i=1; $i < 20; $i++)                            
-        <tr class="table clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" >
-        
-          <th scope="row" title="Click para ver descripción del pedido">Máquina {{$i}}</th>
-          <td title="Click para ver descripción del pedido">21254412454</td>            
-          <td title="Click para ver descripción del pedido">1860/0/1</td>
-          <td title="Click para ver descripción del pedido">Tapa 200 cc</td>
-          <td title="Click para ver descripción del pedido">10000</td>
-          <td title="Click para ver descripción del pedido">2586</td>
-          <td title="Click para ver las opciones de estado">
-            <select name="status" id="status">
-              <option value="1">Produciendo</option>
-              <option value="1">Preparando máquina</option>
-              <option value="1">Molde roto</option>
-              <option value="1">Máquina rota</option>
-              <option value="1">Pruebas</option>
-              <option value="1">Fin producción</option>
-              <option value="1">ok</option>
-            </select>
-          </td>
-          <td title="Click para ver descripción del pedido">Molde en reparación Cornellá</td>
-          
-        </tr>
-        
-      @endfor
-    </tbody>
-  </table>
-  <table class="table table-hover  text-center"  >
-    <thead  class="table-primary">
-      <tr class="table-danger table-header-historial header--extra">
-        <th scope="col" colspan="8">Sala B</th>
-      </tr>                
-      <tr class=" table-header-historial2">
-        <th scope="col" >Máquina</th>
-        <th scope="col">Pedido</th>
-        <th scope="col">Referencia</th>
-        <th scope="col">Denominación</th>
-        <th scope="col">Piezas totales</th>
-        <th scope="col">Piezas parciales</th>
-        <th scope="col">Estado</th>          
-        <th scope="col">Observaciones</th>          
-      </tr>
-    </thead>
-    <tbody>
-      @for($i=1; $i < 20; $i++)                            
-        <tr class="table clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" >
-        
-          <th scope="row" title="Click para ver descripción del pedido">Máquina {{$i}}</th>
-          <td title="Click para ver descripción del pedido">21254412454</td>            
-          <td title="Click para ver descripción del pedido">1860/0/1</td>
-          <td title="Click para ver descripción del pedido">Tapa 200 cc</td>
-          <td title="Click para ver descripción del pedido">10000</td>
-          <td title="Click para ver descripción del pedido">2586</td>
-          <td title="Click para ver las opciones de estado">
-            <select name="status" id="status">
-              <option value="1">Produciendo</option>
-              <option value="1">Preparando máquina</option>
-              <option value="1">Molde roto</option>
-              <option value="1">Máquina rota</option>
-              <option value="1">Pruebas</option>
-              <option value="1">Fin producción</option>
-              <option value="1">ok</option>
-            </select>
-          </td>
-          <td title="Click para ver descripción del pedido">Molde en reparación Cornellá</td>
-          
-        </tr>
-        
-      @endfor
-    </tbody>
-  </table>    
+<pre>
+  
+</pre>
+<div class="row justify-content-center p-3">
+  <h2 class="text-center" style="color: #1652B5;">Info Pedido nº {{$pedido->numero}}</h2>
 </div>
-<div class="row justify-content-center p-3 mb-5">
-  <h2 class="text-center" style="color: #1652B5;">Detalles del pedido 124512154</h2>
-</div>
-<div class="info mb-5">    
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Máquina </span><span class="info-item__text
-    "> 52 </span>
-  </div>    
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Fecha inicio </span><span class="info-item__text
-    "> 22/02/2022 </span>
+  <div class="col  justify-content-center">
+    <div class="row justify-content-center mb-3">
+      <a href="{{route('pedidos.edit',$pedido->id)}}" class="col-auto"><button class=" btn btn-info mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Modificar info</button></a>
+      <a href="{{route('pedidos.index')}}"class="col-auto"><button type="button" class=" btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
+    </div>     
+    <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Número  </div>
+      <div class="col-md-4 mb-3"> {{$pedido->numero}}</div>
+    </div> 
+    <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Máquina </div>
+      <div class="col-md-4 mb-3"> {{$pedido->maquina->numero}}</div>
+    </div>   
+    <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Referencia </div>
+      <div class="col-md-4 mb-3 "> {{$pedido->referencia->numero}}</div>
+    </div> 
+    <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Descripción </div>
+      <div class="col-md-4 mb-3 "> {{$pedido->referencia->descripcion}}</div>
+    </div> 
+    <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Piezas totales </div>
+      <div class="col-md-4 mb-3 "> {{$pedido->totalPiezas}}</div>
+    </div>     
+    <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Estado </div>
+      <div class="col-md-4 mb-3 text-{{$color[$pedido->estado]}} "> {{$texto[$pedido->estado]}}</div>
+    </div> 
+    <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Fecha inicio </div>
+      <div class="col-md-4 mb-3 "> {{!$pedido->fechaInicio =="" ? \Carbon\Carbon::parse(strtotime($pedido->fechaInicio))->formatLocalized('%d/%m/%Y') : ""}}</div>
+    </div> 
+    <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Fecha Fin </div>
+      <div class="col-md-4 mb-3 "> {{!$pedido->fechaFin =="" ? \Carbon\Carbon::parse(strtotime($pedido->fechaFin))->formatLocalized('%d/%m/%Y') : ""}}</div>
+    </div>
+    <div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Tiempo ciclo (seg) </div>
+      <div class="col-md-4 mb-3 "> {{$pedido->tiempoCiclo}}</div>
+    </div><div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Peso pieza (grs) </div>
+      <div class="col-md-4 mb-3 "> {{$pedido->pesoPieza}}</div>
+    </div><div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Cavidades </div>
+      <div class="col-md-4 mb-3 "> {{$pedido->cavidades}}</div>
+    </div> 
+    </div><div class="row ">
+      <div class="col-md-3 offset-md-3 fw-bold mb-3"> Material </div>
+      <div class="col-md-4 mb-3 "> {{$pedido->materia}}</div>
+    </div> 
   </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Referencia </span><span class="info-item__text
-    "> 1485/0/2 </span>
-  </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Descripción pieza </span><span class="info-item__text
-    "> Tapa 200 mónaco refill install referent mode </span>
-  </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Peso gr. </span><span class="info-item__text
-    "> 37.58</span>
-  </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Tiempo ciclo </span><span class="info-item__text"> 26.58</span>
-  </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Cavidades </span><span class="info-item__text
-    "> 4</span>
-  </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Horas </span><span class="info-item__text
-    "> 14.8</span>
-  </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Material </span><span class="info-item__text
-    "> SAN</span>
-  </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Cantidad Fabricada (uds) </span><span class="info-item__text
-    "> 4571</span>
-  </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Merma sala </span><span class="info-item__text
-    "> 6</span>
-  </div>
-  <div class="info-item">
-    <span class=" bg-secondary info-item__title">Merma puesta apunto </span><span class="info-item__text
-    "> 10</span>
-  </div>
-  <div class="info-item">
-    <span class="bg-secondary info-item__title">Merma producción % </span><span class="info-item__text
-    "> 4.67%</span>
-  </div>    
-</div>
-<div class="row justify-content-center p-3 mb-5">
-  <h3 class="text-center" style="color: #1652B5;">Producción por turnos</h3>
-</div>
-<div class="row justify-content-center">
-  <table class="table table-hover  text-center"  >
-    <thead  class="table-primary table-header-historial">                
-      <tr>
-        <th scope="col">Fecha</th>
-        <th scope="col">Turno</th>
-        <th scope="col">Nº piezas máquina</th>
-        <th scope="col">Nº piezas turno</th>
-        <th scope="col">Merma máquina</th>
-        <th scope="col">Merma sala</th>                   
-        <th scope="col">Observaciones</th>                   
-      </tr>
-    </thead>
-    <tbody>
-      @for($i=1; $i < 10; $i++)                            
-        <tr class="table clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" >
-        
-          <td>22/02/2022</td>
-          <td>Tarde</td>            
-          <td>14000</td>
-          <td>2000</td>
-          <td>1Kg</td>
-          <td>2Kg</td>           
-          <td>Piezas contaminadas</td>
-        </tr>
-        
-      @endfor
-    </tbody>
-  </table>
-</div>
-<script src="{{asset('js/produccion.js')}}"></script>   
+  <section class="row justify-content-center">
+    <article class="col-auto ">
+      <div class="row justify-content-center p-3">
+        <h2 class="text-center" style="color: #1652B5;">Producciones</h2>
+      </div>
+      <div class="mb-5 mx-5 ">
+        <div class="row justify-content-center mb-3">
+          <div class="col-auto">         
+            <a href="{{route('producciones.nuevo',$pedido->id)}}" class="col-auto"><button class=" btn btn-primary mb-3"><i class="fa-regular fa-clipboard icon" >Nuevo registro</button></a>                  
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <table class="table table-hover"  >
+            <thead class="table-dark table-header-historial text-center">                
+              <tr>            
+                <th scope="col">Turno</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Cantidad</th>                                    
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($producciones as $produccion)                            
+                <tr class="clickable-row">            
+                  <td>{{$produccion->turno}}</td>
+                  <td >{{!$produccion->fecha =="" ? \Carbon\Carbon::parse(strtotime($produccion->fecha))->formatLocalized('%d/%m/%Y') : "" }}</td>
+                  <td >{{$produccion->cantidad}}</td>                             
+                </tr>          
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+    <article class="col-auto">
+      <div class="row justify-content-center p-3">
+        <h2 class="text-center" style="color: #1652B5;">Mermas</h2>
+      </div>
+      <div class="mb-5 mx-5 ">
+        <div class="row justify-content-center mb-3">
+          <div class="col-auto">
+           <a href="{{route('mermas.nuevo',$pedido->id)}}" class="col-auto"><button class=" btn btn-primary mb-3">Nuevo registro</button></a>      
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <table class="table table-hover"  >
+            <thead class="table-dark table-header-historial text-center">                
+              <tr>            
+                <th scope="col">Fecha</th>
+                <th scope="col">Salas</th>
+                <th scope="col">Purga</th>                                    
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($mermas as $merma)                            
+                <tr class="clickable-row">            
+                  <td>{{!$merma->fecha =="" ? \Carbon\Carbon::parse(strtotime($merma->fecha))->formatLocalized('%d/%m/%Y') : ""}}</td>                  
+                  <td>{{$merma->sala}}</td>            
+                  <td>{{$merma->purga}}</td>                            
+                </tr>          
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+  </section>  
 @endsection
 @section('pie')
 @endsection

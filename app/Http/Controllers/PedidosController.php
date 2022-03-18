@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use App\Models\Referencia;
 use App\Models\Maquina;
+use App\Models\Produccion;
 use Illuminate\Http\Request;
 
 class PedidosController extends Controller
@@ -24,7 +25,8 @@ class PedidosController extends Controller
         $color=$this->color;
         $texto=$this->texto;
         $pedidos=Pedido::all();
-        return view('pedidos.index',compact('pedidos','color','texto'));
+        $producciones=Produccion::all()->sortByDesc('cantidad');                              
+        return view('pedidos.index',compact('pedidos','color','texto','producciones'));
     }
 
     /**

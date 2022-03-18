@@ -27,37 +27,52 @@ class MoldesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $color=['secondary','warning','success','danger','primary'];
+
+    protected $texto=['Desconocido','En reparación','Ok','No ok','Primario'];
+     
     public function index()
     {
      
-        $moldes=Molde::all()->sortByDesc('numero');               
-        return view('moldes.index',compact('moldes'));
+        $moldes=Molde::all()->sortByDesc('numero');
+        $color=$this->color;               
+        $texto=$this->texto;               
+        return view('moldes.index',compact('moldes','color','texto'));
     }
     
     public function ok()
     {
      
-        $moldes=Molde::where('estado','success')->orderBy('numero','desc')->get();       
-        return view('moldes.index',compact('moldes'));
+        $moldes=Molde::where('estado','2')->orderBy('numero','desc')->get();
+        $color=$this->color;               
+        $texto=$this->texto;       
+        return view('moldes.index',compact('moldes','color','texto'));
     }
 
     public function nook()
     {
      
-        $moldes=Molde::where('estado','danger')->orderBy('numero','desc')->get();      
-        return view('moldes.index',compact('moldes'));
+        $moldes=Molde::where('estado','3')->orderBy('numero','desc')->get();
+        $color=$this->color;               
+        $texto=$this->texto;      
+        return view('moldes.index',compact('moldes','color','texto'));
     }
 
     public function reparando()
     {
      
-        $moldes=Molde::where('estado','warning')->orderBy('numero','desc')->get();        
-        return view('moldes.index',compact('moldes'));
+        $moldes=Molde::where('estado','1')->orderBy('numero','desc')->get();
+        $color=$this->color;               
+        $texto=$this->texto;        
+        return view('moldes.index',compact('moldes','color','texto'));
     }
     public function desconocido()
     {
-        $moldes=Molde::where('estado','light')->orderBy('numero','desc')->get();        
-        return view('moldes.index',compact('moldes')); 
+        $moldes=Molde::where('estado','0')->orderBy('numero','desc')->get();
+        $color=$this->color;               
+        $texto=$this->texto;        
+        return view('moldes.index',compact('moldes','color','texto')); 
         
     }
 
@@ -68,7 +83,9 @@ class MoldesController extends Controller
                     ->orWhere('descripcion','like','%'.$request->busqueda.'%')
                     ->orderBy('numero','desc')
                     ->get();
-        return view('moldes.index',compact('moldes'));
+        $color=$this->color;               
+        $texto=$this->texto;
+        return view('moldes.index',compact('moldes','color','texto'));
     }
     /**
      * Show the form for creating a new resource.
