@@ -41,7 +41,7 @@
 <div class="m-5">  
   <div class="row justify-content-center">
     <table class="table table-hover  text-center"  >
-      <thead  class="table-dark table-header-fix">                
+      <thead  class="table-primary table-header-fix">                
         <tr>
           <th scope="col">Referencia</th>
           <th scope="col">Tipo</th>
@@ -51,19 +51,24 @@
           <th scope="col">Cavidades</th>
         </tr>
       </thead>
-      <tbody>        
+      <tbody>
+        @if($referencias->count()<=0)
+          <tr><td colspan="7"> No hay registros que mostrar</td></tr>
+        @endif        
         @foreach($referencias as $referencia)        
-          <tr class="table-{{$referencia->estado}} clickable-row" data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$referencia->comentario}}">          
-            <td><a href="{{route('referencias.show',$referencia->id)}}">{{$referencia->numero}}</a></td>            
+          <tr class="table-{{$referencia->estado==0?'light':$color[$referencia->estado]}} " data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$referencia->comentario}}">          
+            <td><a href="{{route('referencias.show',$referencia->id)}}"><span class="badge bg-primary rounded-pill fs-6">{{$referencia->numero}}</span></a></td>            
             <td>{{$referencia->tipo}}</td>
             <td>{{$referencia->descripcion}}</td>
             <td>{{$referencia->ubicacion}}</td>                        
-            <td>{{$referencia->estadoTexto}}</td>
+            <td><span class="badge bg-{{$color[$referencia->estado]}} {{$referencia->estado==1? 'text-dark':''}} rounded-pill badge-estado-fs ">{{$texto[$referencia->estado]}}</span></td>
             <td>{{$referencia->cavidades}}</td>           
           </tr>          
         @endforeach
       </tbody>
     </table>
+    {{$referencias->links()}}
+    <p>Mostrando {{$referencias->firstItem()}}-{{$referencias->lastItem()}} de {{$referencias->total()}} referencia(s)</p>
   </div>
 </div>
 @endsection

@@ -20,37 +20,51 @@ class ReferenciasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $color=['secondary','warning','success','danger','primary'];
+
+    protected $texto=['Desconocido','En reparación','Ok','No ok','Primario'];
+
     public function index()
-    {
-     
-        $referencias=Referencia::all()->sortByDesc('numero');               
-        return view('referencias.index',compact('referencias'));
+    {    
+        $referencias=Referencia::orderBy('numero','desc')->paginate(20);
+        $color=$this->color;               
+        $texto=$this->texto;               
+        return view('referencias.index',compact('referencias','color','texto'));
     }
     
     public function ok()
     {
      
-        $referencias=Referencia::where('estado','success')->orderBy('numero','desc')->get();       
-        return view('referencias.index',compact('referencias'));
+        $referencias=Referencia::where('estado','2')->orderBy('numero','desc')->get();
+        $color=$this->color;               
+        $texto=$this->texto;       
+        return view('referencias.index',compact('referencias','color','texto'));
     }
 
     public function nook()
     {
      
-        $referencias=Referencia::where('estado','danger')->orderBy('numero','desc')->get();      
-        return view('referencias.index',compact('referencias'));
+        $referencias=Referencia::where('estado','3')->orderBy('numero','desc')->get();
+        $color=$this->color;               
+        $texto=$this->texto;      
+        return view('referencias.index',compact('referencias','color','texto'));
     }
 
     public function reparando()
     {
      
-        $referencias=Referencia::where('estado','warning')->orderBy('numero','desc')->get();        
-        return view('referencias.index',compact('referencias'));
+        $referencias=Referencia::where('estado','1')->orderBy('numero','desc')->get();
+        $color=$this->color;               
+        $texto=$this->texto;        
+        return view('referencias.index',compact('referencias','color','texto'));
     }
     public function desconocido()
     {
-        $referencias=Referencia::where('estado','light')->orderBy('numero','desc')->get();        
-        return view('referencias.index',compact('referencias')); 
+        $referencias=Referencia::where('estado','0')->orderBy('numero','desc')->get();
+        $color=$this->color;               
+        $texto=$this->texto;        
+        return view('referencias.index',compact('referencias','color','texto')); 
         
     }
 
@@ -60,7 +74,9 @@ class ReferenciasController extends Controller
                     ->orWhere('descripcion','like','%'.$request->busqueda.'%')
                     ->orderBy('numero','desc')
                     ->get();
-        return view('referencias.index',compact('referencias'));
+        $color=$this->color;               
+        $texto=$this->texto;
+        return view('referencias.index',compact('referencias','color','texto'));
     }
 
     /**

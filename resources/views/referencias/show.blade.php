@@ -60,7 +60,7 @@
              <input class="form-control" name="accionExcel" accept=".xlsx,.xls" type="file" id="accionExcel" required>                      
             </div>
             <div class="col-auto">
-              <button class="btn btn-warning"><i class="fa-solid fa-file-import icon"></i>Importar excel</button>
+              <button class="btn btn-warning"><i class="fa-solid fa-file-import icon"></i>Informe</button>
             </div>
           </div>
         </form>

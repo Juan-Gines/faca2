@@ -20,7 +20,7 @@ class CreateReferenciasTable extends Migration
             $table->string('tipo')->nullable();            
             $table->string('descripcion')->nullable();
             $table->string('ubicacion')->nullable();
-            $table->string('estado')->nullable();
+            $table->string('estado')->nullable()->default('0');
             $table->string('estadoTexto')->nullable();
             $table->string('cavidades')->nullable();
             $table->text('comentario')->nullable();

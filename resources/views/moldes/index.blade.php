@@ -48,11 +48,11 @@
 </nav> 
 <div class="mx-5">  
   <div class="row justify-content-center">
-    <table class="table table-hover text-center"  >
+    <table class="table table-hover rounded text-center"  >
       <thead  class="table-primary table-header-fix">                
         <tr>
-          <th scope="col">Molde</th>
-          <th scope="col">Denominación</th>
+          <th scope="col">Molde</th>          
+          <th scope="col">Descripción</th>          
           <th scope="col">Ubicación almacen</th>
           <th scope="col">Ubicación actual</th>
           <th scope="col">versión actual</th>
@@ -60,20 +60,26 @@
           <th scope="col">Cavidades</th>
         </tr>
       </thead>
-      <tbody>        
+      <tbody>
+        @if($moldes->count()<=0)
+        <tr><td colspan="7"> No hay registros que mostrar</td></tr>
+        @endif        
         @foreach($moldes as $molde)        
-          <tr class="table-{{$molde->estado==0?'light':$color[$molde->estado]}} " data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$molde->comentario}}">          
-            <td><a href="{{route('moldes.show',$molde->id)}}"><span class="badge bg-primary rounded-pill fs-6">{{$molde->numero}}</span></a></td>            
-            <td class="text-start">{{$molde->descripcion}}</td>
-            <td class="text-end">{{$molde->ubicacionReal}}</td>
-            <td class="text-end">{{$molde->ubicacionActual}}</td>
-            <td class="text-end">{{$molde->versionActual}}</td>
+          <tr class="table-{{$molde->estado==0?'light':$color[$molde->estado]}} " data-bs-toggle="tooltip" data-bs-placement="auto" title="{{$molde->descripcion}}">          
+            <td data-bs-toggle="tooltip" data-bs-placement="auto" title="Click para editar la info del molde"><a href="{{route('moldes.show',$molde->id)}}"><span class="badge bg-primary rounded-pill fs-6">{{$molde->numero}}</span></a></td>
+            <td>{{$molde->descripcion}}</td>           
+            <td> {{$molde->ubicacionReal}}</td>
+            <td> {{$molde->ubicacionActual}}</td>
+            <td> {{$molde->versionActual}}</td>
             <td><span class="badge bg-{{$color[$molde->estado]}} {{$molde->estado==1? 'text-dark':''}} rounded-pill badge-estado-fs ">{{$texto[$molde->estado]}}</span></td>
-            <td class="text-end">{{$molde->cavidades}}</td>           
-          </tr>          
-        @endforeach
-      </tbody>
+            <td> {{$molde->cavidades}}</td>           
+          </tr>                    
+        @endforeach        
+      </tbody>      
     </table>
+    {{$moldes->links()}}
+        <p>Mostrando {{$moldes->firstItem()}}-{{$moldes->lastItem()}} de {{$moldes->total()}} molde(s)</p>
+    
   </div>
 </div>
 @endsection
