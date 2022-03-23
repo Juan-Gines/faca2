@@ -36,7 +36,7 @@ class ReferenciasController extends Controller
     public function ok()
     {
      
-        $referencias=Referencia::where('estado','2')->orderBy('numero','desc')->get();
+        $referencias=Referencia::where('estado','2')->orderBy('numero','desc')->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;       
         return view('referencias.index',compact('referencias','color','texto'));
@@ -45,7 +45,7 @@ class ReferenciasController extends Controller
     public function nook()
     {
      
-        $referencias=Referencia::where('estado','3')->orderBy('numero','desc')->get();
+        $referencias=Referencia::where('estado','3')->orderBy('numero','desc')->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;      
         return view('referencias.index',compact('referencias','color','texto'));
@@ -54,14 +54,14 @@ class ReferenciasController extends Controller
     public function reparando()
     {
      
-        $referencias=Referencia::where('estado','1')->orderBy('numero','desc')->get();
+        $referencias=Referencia::where('estado','1')->orderBy('numero','desc')->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;        
         return view('referencias.index',compact('referencias','color','texto'));
     }
     public function desconocido()
     {
-        $referencias=Referencia::where('estado','0')->orderBy('numero','desc')->get();
+        $referencias=Referencia::where('estado','0')->orderBy('numero','desc')->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;        
         return view('referencias.index',compact('referencias','color','texto')); 
@@ -73,7 +73,7 @@ class ReferenciasController extends Controller
                     ->orWhere('ubicacion','like','%'.$request->busqueda.'%')                    
                     ->orWhere('descripcion','like','%'.$request->busqueda.'%')
                     ->orderBy('numero','desc')
-                    ->get();
+                    ->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;
         return view('referencias.index',compact('referencias','color','texto'));

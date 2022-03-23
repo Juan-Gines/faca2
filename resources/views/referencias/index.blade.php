@@ -11,7 +11,7 @@
  <div class="col-auto">
     <a href="{{route('referencias.exportar')}}"><button class="btn btn-primary" type="button">obtener excel</button></a>
  </div>  -->
-<nav class="navbar navbar-expand-sm navbar-light rounded navbar-fixed" aria-label="Eleventh navbar example">
+<nav class="navbar navbar-expand-sm navbar-light rounded navbar-fixed bg-white" aria-label="Eleventh navbar example">
   <div class="container-fluid">    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsReferencias" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -43,12 +43,12 @@
     <table class="table table-hover  text-center"  >
       <thead  class="table-primary table-header-fix">                
         <tr>
-          <th scope="col">Referencia</th>
-          <th scope="col">Tipo</th>
-          <th scope="col">Denominación</th>
-          <th scope="col">Ubicación almacen</th>                    
-          <th scope="col">Estado</th>
-          <th scope="col">Cavidades</th>
+          <th scope="col" id="numero">Referencia</th>
+          <th scope="col" id="tipo">Tipo</th>
+          <th scope="col" id="nombre">Denominación</th>
+          <th scope="col" id="ubicacion">Ubicación almacen</th>                    
+          <th scope="col" id="estado">Estado</th>
+          <th scope="col" id="cavidades">Cavidades</th>
         </tr>
       </thead>
       <tbody>

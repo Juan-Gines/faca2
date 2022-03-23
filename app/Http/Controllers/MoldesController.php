@@ -43,7 +43,7 @@ class MoldesController extends Controller
     
     public function ok()
     {     
-        $moldes=Molde::where('estado','2')->orderBy('numero','desc')->get();
+        $moldes=Molde::where('estado','2')->orderBy('numero','desc')->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;       
         return view('moldes.index',compact('moldes','color','texto'));
@@ -51,7 +51,7 @@ class MoldesController extends Controller
 
     public function nook()
     {     
-        $moldes=Molde::where('estado','3')->orderBy('numero','desc')->get();
+        $moldes=Molde::where('estado','3')->orderBy('numero','desc')->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;      
         return view('moldes.index',compact('moldes','color','texto'));
@@ -59,14 +59,14 @@ class MoldesController extends Controller
 
     public function reparando()
     {     
-        $moldes=Molde::where('estado','1')->orderBy('numero','desc')->get();
+        $moldes=Molde::where('estado','1')->orderBy('numero','desc')->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;        
         return view('moldes.index',compact('moldes','color','texto'));
     }
     public function desconocido()
     {
-        $moldes=Molde::where('estado','0')->orderBy('numero','desc')->get();
+        $moldes=Molde::where('estado','0')->orderBy('numero','desc')->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;        
         return view('moldes.index',compact('moldes','color','texto')); 
@@ -79,7 +79,7 @@ class MoldesController extends Controller
                     ->orWhere('ubicacionActual','like','%'.$request->busqueda.'%')
                     ->orWhere('descripcion','like','%'.$request->busqueda.'%')
                     ->orderBy('numero','desc')
-                    ->get();
+                    ->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;
         return view('moldes.index',compact('moldes','color','texto'));
