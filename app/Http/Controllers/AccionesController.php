@@ -75,10 +75,7 @@ class AccionesController extends Controller
     public function edit($id)
     {
         $accion=Accion::find($id);       
-        return view('acciones.edit',compact('accion'));               
-        $referencia=$accion->referencia->id;
-        $acciones=$referencia->accions->sortBy('fechaEntrada');      
-        return view('referencias.show',compact('referencia','acciones'));
+        return view('acciones.edit',compact('accion'));      
     }
 
     /**
@@ -113,7 +110,10 @@ class AccionesController extends Controller
     public function destroy($id)
     {
         $borrar=Accion::find($id);
-        $borrar->delete();
+        $referencia=$borrar->referencia->id; 
+        $acciones=$referencia->accions->sortBy('fechaEntrada');      
+        $borrar->delete();            
+        return view('referencias.show',compact('referencia','acciones'));
     }
     //importar excel
     function importar(Request $request){

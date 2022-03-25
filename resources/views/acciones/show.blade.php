@@ -42,10 +42,12 @@
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> ¿OK?  </div>
       <div class="col-md-4 text-break mb-3">{{$accion->ok}}</div>
     </div>  
-    <form class="row justify-content-center mb-3">
+    <form method="post" action="{{route('acciones.destroy',$accion->id)}}">
       @csrf
       @method('DELETE')
-      <a href="{{route('acciones.destroy',$accion->id)}}" class="col-auto"><button class="btn btn-danger mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Borrar Intervención<nav></nav></button></a>
+      <div class="text-center mb-3">
+       <button class="btn btn-danger mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Borrar Intervención</button>
+      </div>
     </form>        
   </div>  
 @endsection
