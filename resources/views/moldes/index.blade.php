@@ -2,6 +2,11 @@
 
 
 @section('contenido')
+<script>
+  var campo={{Js::from($campo)}};
+  var orden={{Js::from($orden)}};
+  var url='{{route('moldes.index')}}';    
+</script>
 <div class="row justify-content-center p-3">
   <h2 class="text-center" style="color: #1652B5;">Listado de moldes</h2>
 </div>
@@ -51,13 +56,41 @@
     <table class="table table-hover rounded text-center"  >
       <thead  class="table-primary table-header-fix">                
         <tr>
-          <th scope="col">Molde</th>          
-          <th scope="col">Descripción</th>          
-          <th scope="col">Ubicación almacen</th>
-          <th scope="col">Ubicación actual</th>
-          <th scope="col">versión actual</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Cavidades</th>
+          <th scope="col">
+            <div id="numero" class="dedo">                
+              <span>Molde</span>
+            </div>            
+          </th>          
+          <th scope="col">             
+              <div id="descripcion" class="dedo">                
+                <span>Descripción</span>
+              </div>                      
+          </th>          
+          <th scope="col">
+            <div id="ubicacionReal" class="dedo">                
+              <span>Ubicación Almacen</span>
+            </div>                       
+          </th>          
+          <th scope="col">
+            <div id="ubicacionActual" class="dedo">                
+              <span>Ubicación Actual</span>
+            </div>                   
+          </th>          
+          <th scope="col">
+            <div id="versionActual" class="dedo">                
+              <span>Versión Actual</span>
+            </div>             
+          </th>          
+          <th scope="col">
+            <div id="estado" class="dedo">                
+              <span>Estado</span>
+            </div>            
+          </th>          
+          <th scope="col">
+            <div id="cavidades" class="dedo">                
+              <span>Cavidades</span>
+            </div>                      
+          </th>         
         </tr>
       </thead>
       <tbody>
@@ -77,11 +110,11 @@
         @endforeach        
       </tbody>      
     </table>
-    {{$moldes->links()}}
-        <p>Mostrando {{$moldes->firstItem()}}-{{$moldes->lastItem()}} de {{$moldes->total()}} molde(s)</p>
-    
+    {!! $moldes->appends(Request::except('page'))->render() !!}
+        <p>Mostrando {{$moldes->firstItem()}}-{{$moldes->lastItem()}} de {{$moldes->total()}} molde(s)</p>   
   </div>
 </div>
+<script src="{{asset('js/moldes_index.js')}}"></script>
 @endsection
 @section('pie')
 @endsection

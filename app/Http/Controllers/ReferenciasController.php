@@ -109,19 +109,10 @@ class ReferenciasController extends Controller
             $referencia=new Referencia;        
             $referencia->molde_id=$molde->id;
             $referencia->tipo=$request->tipo;
+            $referencia->numero=$request->numero;
             $referencia->descripcion=$request->descripcion;        
             $referencia->ubicacion=$request->ubicacion;            
-            $referencia->estado=$request->estado;
-            switch($request->estado){
-                case "success": $referencia->estadoTexto="Ok";
-                    break;
-                case "danger": $referencia->estadoTexto="No ok";
-                    break;            
-                case "warning": $referencia->estadoTexto="En reparación";
-                    break;
-                default: $referencia->estadoTexto="Desconocido";
-                    break;
-            }       
+            $referencia->estado=$request->estado;             
             $referencia->cavidades=$request->cavidades;
             $referencia->comentario=$request->comentario;
             $referencia->save();
@@ -141,8 +132,10 @@ class ReferenciasController extends Controller
     public function show($id)
     {
         $referencia=Referencia::find($id);        
-        $acciones=Referencia::find($id)->accions->sortBy('fechaEntrada'); 
-        return view('referencias.show',compact('referencia','acciones'));
+        $acciones=Referencia::find($id)->accions->sortBy('fechaEntrada');
+        $color=$this->color;               
+        $texto=$this->texto; 
+        return view('referencias.show',compact('referencia','acciones','color','texto'));
     }
 
     /**
@@ -155,7 +148,9 @@ class ReferenciasController extends Controller
     {
         $referencia=Referencia::find($id);
         $moldes=Molde::where('numero','like','%0')->get();
-        return view('referencias.edit',compact('referencia','moldes'));
+        $color=$this->color;               
+        $texto=$this->texto;
+        return view('referencias.edit',compact('referencia','moldes','color','texto'));
     }
 
     /**
@@ -181,22 +176,14 @@ class ReferenciasController extends Controller
             $referencia->tipo=$request->tipo;
             $referencia->descripcion=$request->descripcion;        
             $referencia->ubicacion=$request->ubicacion;            
-            $referencia->estado=$request->estado;
-            switch($request->estado){
-                case "success": $referencia->estadoTexto="Ok";
-                    break;
-                case "danger": $referencia->estadoTexto="No ok";
-                    break;            
-                case "warning": $referencia->estadoTexto="En reparación";
-                    break;
-                default: $referencia->estadoTexto="Desconocido";
-                    break;
-            }       
+            $referencia->estado=$request->estado;                   
             $referencia->cavidades=$request->cavidades;
             $referencia->comentario=$request->comentario;
             $referencia->save();
-            $acciones=Referencia::find($id)->accions->sortBy('fechaEntrada');            
-            return view('referencias.show',compact('referencia','acciones'));
+            $acciones=Referencia::find($id)->accions->sortBy('fechaEntrada');
+            $color=$this->color;               
+            $texto=$this->texto;            
+            return view('referencias.show',compact('referencia','acciones','color','texto'));
         }else{
             return "no se guardo nada";
         }

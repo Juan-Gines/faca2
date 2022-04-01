@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Faca gestión </title>
   <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
   <link rel="stylesheet" href="{{asset('css/bootstrap.css.map')}}">
   <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-  <script src="https://kit.fontawesome.com/42d4031566.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/42d4031566.js" crossorigin="anonymous"></script>  
 </head>
 <body>
 <header class="p-3 bg-dark text-white">
@@ -22,10 +23,10 @@
           <li><a href="#" class="nav-link px-2 text-white">Inicio</a></li>
           <li><a href="{{route('moldes.index')}}" class="nav-link px-2 text-secondary">Moldes</a></li>
           <li><a href="{{route('referencias.index')}}" class="nav-link px-2 text-secondary">Referencias</a></li>
-          <li class="nav-link px-2 text-white">Producción</li>
+          <li><a href="#" class="nav-link px-2 text-white">Producción</a></li>
           <li><a href="{{route('maquinas.index')}}" class="nav-link px-2 text-white">Máquinas</a></li>
           <li><a href="{{route('pedidos.index')}}" class="nav-link px-2 text-white">Pedidos</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Reparaciones</a></li>          
+          <li><a href="#" class="nav-link px-2 text-white">Taller</a></li>          
         </ul>      
       </div>
     </div>

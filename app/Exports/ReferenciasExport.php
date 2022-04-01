@@ -20,7 +20,7 @@ class ReferenciasExport implements FromCollection, WithHeadings
         return[
             'id',
             'Molde_id',
-            'numero',
+            'Numero',
             'Descripción',
             'Ubicación almacen',            
             'Estado',

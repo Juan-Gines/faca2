@@ -18,6 +18,12 @@ class AccionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $color=['secondary','warning','success','danger','primary'];
+
+    protected $texto=['Desconocido','En reparación','Ok','No ok','Primario'];
+
+
     public function index()
     {
         //
@@ -49,8 +55,9 @@ class AccionesController extends Controller
         $resultado=Accion::create($accion);       
         $referencia=Referencia::find($request->referencia_id);
         $acciones=Referencia::find($request->referencia_id)->accions->sortBy('fechaEntrada');       
-        
-        return view('referencias.show',compact('referencia','acciones'));
+        $color=$this->color;
+        $texto=$this->texto;
+        return view('referencias.show',compact('referencia','acciones','color','texto'));
     }
 
     /**
@@ -110,10 +117,12 @@ class AccionesController extends Controller
     public function destroy($id)
     {
         $borrar=Accion::find($id);
-        $referencia=$borrar->referencia->id; 
-        $acciones=$referencia->accions->sortBy('fechaEntrada');      
+        $referencia=Referencia::find($borrar->referencia->id); 
+        $acciones=$referencia->accions->sortBy('fechaEntrada');
+        $color=$this->color;
+        $texto=$this->texto;      
         $borrar->delete();            
-        return view('referencias.show',compact('referencia','acciones'));
+        return view('referencias.show',compact('referencia','acciones','color','texto'));
     }
     //importar excel
     function importar(Request $request){
@@ -121,12 +130,14 @@ class AccionesController extends Controller
         $file=$request->file('accionExcel');
         Excel::import(new AccionsImport($referencia_id),$file );       
         $referencia=Referencia::find($referencia_id);
-        $acciones=Referencia::find($referencia_id)->accions->sortBy('fechaEntrada');      
-        return view('referencias.show',compact('referencia','acciones'));
+        $acciones=Referencia::find($referencia_id)->accions->sortBy('fechaEntrada');
+        $color=$this->color;
+        $texto=$this->texto;      
+        return view('referencias.show',compact('referencia','acciones','color','texto'));
     }
 
     function exportar($id){
-        $molde=Molde::find($id);        
-        return (new AccionsExport($molde));
+        $referencia=Referencia::find($id);        
+        return (new AccionsExport($referencia));
     }
 }

@@ -33,12 +33,14 @@ class MoldesController extends Controller
     protected $texto=['Desconocido','En reparación','Ok','No ok','Primario'];     
     public function index(Request $request)
     {
-        $orderCampo=$request->campo;     
-        $orderDireccion=$request->direccion;     
-        $moldes=Molde::orderBy('numero','desc')->paginate(20);
+        // $campos=['numero','descripcion','ubicacionReal','ubicacionActual','versionActual','estado','cavidades'];
+
+        $campo=request('campo','numero'); 
+        $orden=request('orden','desc');    
+        $moldes=Molde::orderBy($campo,$orden)->paginate(20);
         $color=$this->color;               
         $texto=$this->texto;               
-        return view('moldes.index',compact('moldes','color','texto'));
+        return view('moldes.index',compact('moldes','color','texto','campo','orden'));
     }
     
     public function ok()
@@ -108,17 +110,7 @@ class MoldesController extends Controller
         $molde->ubicacionReal=$request->ubicacionReal;
         $molde->ubicacionActual=$request->ubicacionActual;
         $molde->versionActual=$request->versionActual;
-        $molde->estado=$request->estado;
-        switch($request->estado){
-            case "success": $molde->estadoTexto="Ok";
-                break;
-            case "danger": $molde->estadoTexto="No ok";
-                break;            
-            case "warning": $molde->estadoTexto="En reparación";
-                break;
-            default: $molde->estadoTexto="Desconocido";
-                break;
-        }       
+        $molde->estado=$request->estado;               
         $molde->cavidades=$request->cavidades;
         $molde->comentario=$request->comentario;
         $molde->save();
@@ -133,8 +125,10 @@ class MoldesController extends Controller
      */
     public function show($id)
     {        
-        $molde=Molde::find($id);             
-        return view('moldes.show',compact('molde'));
+        $molde=Molde::find($id);
+        $color=$this->color;               
+        $texto=$this->texto;             
+        return view('moldes.show',compact('molde','color','texto'));
     }
 
     /**
@@ -145,8 +139,10 @@ class MoldesController extends Controller
      */
     public function edit($id)
     {       
-        $molde=Molde::find($id);        
-        return view('moldes.edit',compact('molde'));
+        $molde=Molde::find($id);
+        $color=$this->color;               
+        $texto=$this->texto;        
+        return view('moldes.edit',compact('molde','color','texto'));
     }
 
     /**
@@ -164,21 +160,13 @@ class MoldesController extends Controller
         $molde->ubicacionReal=$request->ubicacionReal;
         $molde->ubicacionActual=$request->ubicacionActual;
         $molde->versionActual=$request->versionActual;
-        $molde->estado=$request->estado;        
-        switch($request->estado){
-            case "success": $molde->estadoTexto="Ok";
-                break;
-            case "danger": $molde->estadoTexto="No ok";
-                break;            
-            case "warning": $molde->estadoTexto="En reparación";
-                break;
-            default: $molde->estadoTexto="Desconocido";
-                break;
-        }
+        $molde->estado=$request->estado;      
         $molde->cavidades=$request->cavidades;
         $molde->comentario=$request->comentario;
-        $molde->save();       
-        return view('moldes.show',compact('molde'));
+        $molde->save();
+        $color=$this->color;               
+        $texto=$this->texto;       
+        return view('moldes.show',compact('molde','color','texto'));
     }
 
     /**

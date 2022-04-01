@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Accion;
+use App\Models\Referencia;
 use Illuminate\Contracts\Support\Responsable;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -40,7 +41,7 @@ class AccionsExport implements
 
     
 
-    protected $molde;
+    protected $referencia;
 
     use Exportable;
 
@@ -52,12 +53,12 @@ class AccionsExport implements
 
     protected $count;
 
-    public function __construct($molde)
+    public function __construct(Referencia $referencia)
     {        
-        $this->molde=$molde;
+        $this->referencia=$referencia;
         $this->time=date('Y_m_d');
-        $this->version=explode('/',$this->molde->versionActual);
-        $this->fileName=$this->molde->numero.'0'.$this->version[0].'0'.$this->version[1].'_'.$this->time.'.xlsx';
+        $this->version=explode('/',$this->referencia->versionActual);
+        $this->fileName=$this->referencia->numero.'_Informe.xlsx';
     }    
 
     public function headings(): array
@@ -65,7 +66,7 @@ class AccionsExport implements
         return [
             [' ',' ','INFORME REPARACIÓ MOTLLE',' ','RE.RE.02'],
             ['REFERÈNCIA','DENOMINACIÓ'],
-            [$this->molde->numero.' '.$this->molde->versionActual,$this->molde->nombre],
+            [$this->referencia->numero,$this->referencia->descripcion],
             [],
             ['DATA SORTIDA','DATA ENTRADA','MOTIU REPARACIÓ/MODIFICACIÓ','REPARACIÓ /MODIFICACIÓ  EFECTUADA','Intern/ Packmol',' DATA / PROVA Nº.','OK?'],
         ];
@@ -86,8 +87,8 @@ class AccionsExport implements
 
     public function collection()
     {
-        $this->count=Accion::where('molde_id',$this->molde->id)->count();        
-        return Accion::where('molde_id',$this->molde->id)->orderBy('fechaEntrada')->get();
+        $this->count=Accion::where('referencia_id',$this->referencia->id)->count();        
+        return Accion::where('referencia_id',$this->referencia->id)->orderBy('fechaEntrada')->get();
     }
     
     public function drawings()
@@ -159,6 +160,8 @@ class AccionsExport implements
                                             ->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DDMMYYYY);
                 $event->sheet->getStyle('B')->getNumberFormat()
                                             ->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DDMMYYYY);
+                $event->sheet->getStyle('A3:B3')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_GENERAL);
+
                 $event->sheet->getStyle('A1:G1')->applyFromArray([
                     'borders'=>[
                         'allBorders'=>[

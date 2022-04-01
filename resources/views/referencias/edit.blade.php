@@ -39,10 +39,10 @@
     <div class="mb-3">
       <label for="estado" class="form-label">Estado</label>    
       <select class="form-select mb-3" name="estado" aria-label="estado" >
-        <option  value="light" {{$referencia->estado=="light"?"selected":""}}>Desconocido</option>      
-        <option class="text-success" value="success" {{$referencia->estado=="success"?"selected":""}}>Ok</option>
-        <option class="text-warning" value="warning" {{$referencia->estado=="warning"?"selected":""}}>En reparación</option>
-        <option class="text-danger" value="danger" {{$referencia->estado=="danger"?"selected":""}}>No ok</option>      
+        <option  value="0" {{$referencia->estado=="0"?"selected":""}}>Desconocido</option>      
+        <option class="text-success" value="2" {{$referencia->estado=="2"?"selected":""}}>Ok</option>
+        <option class="text-warning" value="1" {{$referencia->estado=="1"?"selected":""}}>En reparación</option>
+        <option class="text-danger" value="3" {{$referencia->estado=="3"?"selected":""}}>No ok</option>      
       </select>
     </div>
     <div class="mb-3">

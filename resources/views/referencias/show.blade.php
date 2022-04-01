@@ -27,7 +27,7 @@
     </div>   
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Estado </div>
-      <div class="col-md-4 mb-3 text-{{$referencia->estado!='light'?$referencia->estado:''}} "> {{$referencia->estadoTexto}}</div>
+      <div class="col-md-4 mb-3 text-{{$referencia->estado ? $color[$referencia->estado] : ''}} "> {{$texto[$referencia->estado]}}</div>
     </div> 
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Cavidades  </div>

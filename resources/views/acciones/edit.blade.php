@@ -43,7 +43,7 @@
     </div>
     <div class="mb-3">
       <label for="fechaPrueba" class="form-label">Fecha prueba</label>
-      <input type="date" class="form-control" name="fechaPrueba" id="fechaPrueba" value="{{$accion->fechaPrueba}}">
+      <input type="text" class="form-control" name="fechaPrueba" id="fechaPrueba" value="{{$accion->fechaPrueba}}">
     </div>
     <div class="mb-3">
       <label for="ok" class="form-label">Prueba Ok</label>
