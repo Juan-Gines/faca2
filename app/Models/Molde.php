@@ -18,8 +18,7 @@ class Molde extends Model
         'versionActual',
         'ubicacionReal',
         'ubicacionActual',        
-        'estado',
-        'estadoTexto',
+        'estado',        
         'cavidades',
         'comentario',        
     ];    

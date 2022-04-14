@@ -5,7 +5,7 @@
   <div class="row justify-content-center p-3">
     <h2 class="text-center" style="color: #1652B5;">Modificar intervención referencia nº {{$accion->referencia->numero}}</h2>
   </div>
-  <form method="POST" action="{{route('acciones.update',$accion->id)}}" class="container mt-5" style="max-width: 800px;">
+  <form method="POST" action="{{route('acciones.update',$accion)}}" class="container mt-5" style="max-width: 800px;">
     @csrf
     @method('PUT')
     <input type="hidden" name="referencia_id" id="referencia_id" value="{{$accion->referencia->id}}">
@@ -51,7 +51,7 @@
     </div>   
     <div class="mb-3">
       <button type="submit" class="btn btn-success mb-3"><i class="fa-solid fa-circle-check icon"></i>Guardar</button>
-      <a href="{{route('acciones.show',$accion->id)}}"><button type="button" class="btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
+      <a href="{{route('acciones.show',$accion)}}"><button type="button" class="btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
     </div>
   </form>
 

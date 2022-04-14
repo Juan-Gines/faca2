@@ -12,10 +12,46 @@ class MaquinasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $maquinas=Maquina::all();
-        return view('maquinas.index',compact('maquinas'));
+        $campo=request('campo','id'); 
+        $orden=request('orden','asc');
+        $busqueda=request('busqueda');
+        $filtro=request('filtro');
+        $busqueda=request('busqueda');
+        
+        if (request('filtro')=='inactiva') {
+            $maquinas=Maquina::where('activa',false)
+                        ->where(function($query)use($busqueda){                                       
+                            $query->where('numero','like','%'.$busqueda.'%')
+                            ->orWhere('descripcion','like','%'.$busqueda.'%');
+                        })
+                        ->orderBy($campo,$orden)
+                        ->get();
+        } else if (request('filtro')=='activa'){
+            $maquinas=Maquina::where('activa',true)
+                        ->where(function($query)use($busqueda){                                       
+                            $query->where('numero','like','%'.$busqueda.'%')
+                            ->orWhere('descripcion','like','%'.$busqueda.'%');
+                        })
+                        ->orderBy($campo,$orden)
+                        ->get();
+        }else {            
+            $maquinas=Maquina::where('numero','like','%'.$busqueda.'%')
+                        ->orWhere('descripcion','like','%'.$busqueda.'%')
+                        ->orderBy($campo,$orden)
+                        ->get();
+        } 
+    
+
+        $parametros=[            
+            'campo'=>$campo,
+            'orden'=>$orden,
+            'busqueda'=>$busqueda,
+            'filtro'=>$filtro,            
+        ];
+       
+        return view('maquinas.index',compact('maquinas','parametros'));
     }
 
     public function buscar(Request $request){
@@ -50,7 +86,7 @@ class MaquinasController extends Controller
         $maquina->sala=$request->sala;
         $maquina->activa=false;
         $maquina->save();
-        return view('maquinas.create');
+        return redirect()->route('maquinas.show',compact('maquina'));
 
     }
 
@@ -60,9 +96,8 @@ class MaquinasController extends Controller
      * @param  \App\Models\Maquina  $maquina
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $maquina=Maquina::find($id);
+    public function show(Maquina $maquina)
+    {        
         return view('maquinas.show', compact('maquina'));
     }
 
@@ -72,9 +107,8 @@ class MaquinasController extends Controller
      * @param  \App\Models\Maquina  $maquina
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $maquina=Maquina::find($id);
+    public function edit(Maquina $maquina)
+    {        
         return view('maquinas.edit', compact('maquina'));
     }
 
@@ -85,14 +119,10 @@ class MaquinasController extends Controller
      * @param  \App\Models\Maquina  $maquina
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Maquina $maquina)
     {
-        $maquina=Maquina::find($id);
-        $maquina->numero=$request->numero;
-        $maquina->descripcion=$request->descripcion;
-        $maquina->sala=$request->sala;
-        $maquina->save();
-        return view('maquinas.show',compact('maquina'));
+        $maquina->update($request->all());        
+        return redirect()->route('maquinas.show',compact('maquina'));
     }
 
     /**
@@ -103,6 +133,7 @@ class MaquinasController extends Controller
      */
     public function destroy(Maquina $maquina)
     {
-        //
+        $maquina->delete();
+        return redirect()->route('maquinas.index');
     }
 }

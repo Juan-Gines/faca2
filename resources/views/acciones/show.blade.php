@@ -7,7 +7,7 @@
 </div>
   <div class="col  justify-content-center">
   <div class="row justify-content-center mb-3">
-      <a href="{{route('acciones.edit',$accion->id)}}" class="col-auto"><button class="btn btn-info mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Modificar Intervención</button></a>
+      <a href="{{route('acciones.edit',$accion)}}" class="col-auto"><button class="btn btn-info mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Modificar Intervención</button></a>
       <a href="{{route('referencias.show',$accion->referencia->id)}}" class="col-auto"><button type="button" class="btn btn-outline-primary ms-5 mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
     </div>     
     <div class="row ">
@@ -42,7 +42,7 @@
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> ¿OK?  </div>
       <div class="col-md-4 text-break mb-3">{{$accion->ok}}</div>
     </div>  
-    <form method="post" action="{{route('acciones.destroy',$accion->id)}}">
+    <form method="post" action="{{route('acciones.destroy',$accion)}}">
       @csrf
       @method('DELETE')
       <div class="text-center mb-3">

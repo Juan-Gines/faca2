@@ -25,59 +25,72 @@ class ReferenciasController extends Controller
 
     protected $texto=['Desconocido','En reparación','Ok','No ok','Primario'];
 
-    public function index()
-    {    
-        $referencias=Referencia::orderBy('numero','desc')->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;               
-        return view('referencias.index',compact('referencias','color','texto'));
-    }
-    
-    public function ok()
+    public function index(Request $request)
     {
-     
-        $referencias=Referencia::where('estado','2')->orderBy('numero','desc')->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;       
-        return view('referencias.index',compact('referencias','color','texto'));
-    }
-
-    public function nook()
-    {
-     
-        $referencias=Referencia::where('estado','3')->orderBy('numero','desc')->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;      
-        return view('referencias.index',compact('referencias','color','texto'));
-    }
-
-    public function reparando()
-    {
-     
-        $referencias=Referencia::where('estado','1')->orderBy('numero','desc')->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;        
-        return view('referencias.index',compact('referencias','color','texto'));
-    }
-    public function desconocido()
-    {
-        $referencias=Referencia::where('estado','0')->orderBy('numero','desc')->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;        
-        return view('referencias.index',compact('referencias','color','texto')); 
-        
-    }
-
-    public function buscar(Request $request){
-        $referencias=Referencia::where('numero','like','%'.$request->busqueda.'%')                    
-                    ->orWhere('ubicacion','like','%'.$request->busqueda.'%')                    
-                    ->orWhere('descripcion','like','%'.$request->busqueda.'%')
-                    ->orderBy('numero','desc')
-                    ->paginate(20);
-        $color=$this->color;               
+        $campo=request('campo','numero'); 
+        $orden=request('orden','desc');
+        $busqueda=request('busqueda');
+        $filtro1=request('filtro1');
+        $filtro2=request('filtro2');    
+        if(request('busqueda')&& (request('filtro1')||request('filtro1')==='0')&&request('filtro2')){
+            $referencias=Referencia::where('estado',$filtro1)
+                ->where('tipo',$filtro2)
+                ->where(function($query)use($busqueda){
+                    $query->where('numero','like','%'.$busqueda.'%')                    
+                    ->orWhere('ubicacion','like','%'.$busqueda.'%')                    
+                    ->orWhere('descripcion','like','%'.$busqueda.'%');
+                })                
+                ->orderBy($campo,$orden)
+                ->paginate(15);
+        }elseif(request('busqueda')&& (request('filtro1')||request('filtro1')==='0')){
+            $referencias=Referencia::where('estado',$filtro1)                
+                ->where(function($query)use($busqueda){
+                    $query->where('numero','like','%'.$busqueda.'%')                    
+                    ->orWhere('ubicacion','like','%'.$busqueda.'%')
+                    ->orWhere('descripcion','like','%'.$busqueda.'%');
+                })                
+                ->orderBy($campo,$orden)
+                ->paginate(15);
+        }elseif(request('busqueda')&&request('filtro2')){
+            $referencias=Referencia::where('tipo',$filtro2)
+                ->where(function($query)use($busqueda){
+                    $query->where('numero','like','%'.$busqueda.'%')                    
+                    ->orWhere('ubicacion','like','%'.$busqueda.'%')
+                    ->orWhere('descripcion','like','%'.$busqueda.'%');
+                })                
+                ->orderBy($campo,$orden)
+                ->paginate(15);
+        }elseif((request('filtro1')||request('filtro1')==='0')&&request('filtro2')){
+            $referencias=Referencia::where('estado',$filtro1)
+                ->where('tipo',$filtro2)                              
+                ->orderBy($campo,$orden)
+                ->paginate(15);
+        }elseif(request('busqueda')){
+            $referencias=Referencia::where('numero','like','%'.$busqueda.'%')                    
+            ->orWhere('ubicacion','like','%'.$busqueda.'%')
+            ->orWhere('descripcion','like','%'.$busqueda.'%')
+            ->orderBy($campo,$orden)
+            ->paginate(15);
+        }elseif(request('filtro1')||request('filtro1')==='0'){
+            $referencias=Referencia::where('estado',$filtro1)->orderBy($campo,$orden)->paginate(15);
+        }elseif(request('filtro2')){
+            $referencias=Referencia::where('tipo',$filtro2)->orderBy($campo,$orden)->paginate(15);
+        }else{    
+            $referencias=Referencia::orderBy($campo,$orden)->paginate(15);
+        };
+        $color=$this->color;
         $texto=$this->texto;
-        return view('referencias.index',compact('referencias','color','texto'));
-    }
+        $parametros=[            
+            'campo'=>$campo,
+            'orden'=>$orden,
+            'busqueda'=>$busqueda,
+            'filtro1'=>$filtro1,
+            'filtro2'=>$filtro2
+        ];
+                       
+        return view('referencias.index',compact('referencias','parametros','color','texto'));
+    }    
+    
 
     /**
      * Show the form for creating a new resource.
@@ -106,7 +119,7 @@ class ReferenciasController extends Controller
                 'versionActual'=>'0/0',
                 'cavidades'=>$request->cavidades]
             );                        
-            $referencia=new Referencia;        
+            $referencia=Referencia::create($request->all());        
             $referencia->molde_id=$molde->id;
             $referencia->tipo=$request->tipo;
             $referencia->numero=$request->numero;
@@ -129,10 +142,9 @@ class ReferenciasController extends Controller
      * @param  \App\Models\Referencia  $referencia
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $referencia=Referencia::find($id);        
-        $acciones=Referencia::find($id)->accions->sortBy('fechaEntrada');
+    public function show(Referencia $referencia)
+    {                
+        $acciones=$referencia->accions->sortBy('fechaEntrada');
         $color=$this->color;               
         $texto=$this->texto; 
         return view('referencias.show',compact('referencia','acciones','color','texto'));
@@ -144,9 +156,8 @@ class ReferenciasController extends Controller
      * @param  \App\Models\Referencia  $referencia
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $referencia=Referencia::find($id);
+    public function edit(Referencia $referencia)
+    {        
         $moldes=Molde::where('numero','like','%0')->get();
         $color=$this->color;               
         $texto=$this->texto;
@@ -160,7 +171,7 @@ class ReferenciasController extends Controller
      * @param  \App\Models\Referencia  $referencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request,Referencia $referencia)
     {
         if(preg_match('#^[0-9]{8}$#',$request->molde_id)){
             $molde = Molde::firstOrCreate(
@@ -169,8 +180,8 @@ class ReferenciasController extends Controller
                 'comentario'=>'Registro creado automáticamente, por favor añada ubicaciónes y estado.',
                 'versionActual'=>'0/0',
                 'cavidades'=>$request->cavidades]
-            );                        
-            $referencia=Referencia::find($id);        
+            );
+
             $referencia->molde_id=$molde->id;
             $referencia->numero=$request->numero;
             $referencia->tipo=$request->tipo;
@@ -179,11 +190,10 @@ class ReferenciasController extends Controller
             $referencia->estado=$request->estado;                   
             $referencia->cavidades=$request->cavidades;
             $referencia->comentario=$request->comentario;
-            $referencia->save();
-            $acciones=Referencia::find($id)->accions->sortBy('fechaEntrada');
+            $referencia->save();            
             $color=$this->color;               
             $texto=$this->texto;            
-            return view('referencias.show',compact('referencia','acciones','color','texto'));
+            return redirect()->route('referencias.show',compact('referencia'));
         }else{
             return "no se guardo nada";
         }
@@ -197,7 +207,8 @@ class ReferenciasController extends Controller
      */
     public function destroy(Referencia $referencia)
     {
-        //
+        $referencia->delete();        
+        return redirect()->route('referencias.index');
     }
     public function exportar(){
         return Excel::download(new ReferenciasExport,'tablareferencias.xlsx');

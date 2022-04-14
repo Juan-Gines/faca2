@@ -5,7 +5,7 @@
   <div class="row justify-content-center p-3">
     <h2 class="text-center" style="color: #1652B5;">Actualiza referencia nº {{$referencia->numero}}</h2>
   </div>
-  <form method="POST" action="{{route('referencias.update',$referencia->id)}}" class="container" style="max-width: 800px;">
+  <form method="POST" action="{{route('referencias.update',$referencia)}}" class="container" style="max-width: 800px;">
     @csrf
     @method('PUT')
     <div class="mb-3">

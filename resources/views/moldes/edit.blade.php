@@ -5,7 +5,7 @@
   <div class="row justify-content-center p-3">
     <h2 class="text-center" style="color: #1652B5;">Actualiza molde nº {{$molde->numero}}</h2>
   </div>
-  <form method="POST" action="{{route('moldes.update',$molde->id)}}" class="container" style="max-width: 800px;">
+  <form method="POST" action="{{route('moldes.update',$molde)}}" class="container" style="max-width: 800px;">
     @csrf
     @method('PUT')
     <div class="mb-3">
@@ -47,7 +47,7 @@
     </div>
     <div class="mb-3">
       <button type="submit" class="btn btn-success mb-3"><i class="fa-solid fa-circle-check icon"></i>Guardar</button>
-      <a href="{{route('moldes.show',$molde->id)}}"><button type="button" class="btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
+      <a href="{{route('moldes.show',$molde)}}"><button type="button" class="btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
     </div>
   </form>
 

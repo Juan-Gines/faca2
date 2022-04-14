@@ -2,15 +2,14 @@
 
 
 @section('contenido')
-<pre>
-  
-</pre>
+
 <div class="row justify-content-center p-3">
   <h2 class="text-center" style="color: #1652B5;">Info Referencia nº {{$referencia->numero}}</h2>
 </div>
+<div class="mb-2">
   <div class="col  justify-content-center">
     <div class="row justify-content-center mb-3">
-      <a href="{{route('referencias.edit',$referencia->id)}}" class="col-auto"><button class=" btn btn-info mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Modificar info</button></a>
+      <a href="{{route('referencias.edit',$referencia)}}" class="col-auto"><button class=" btn btn-info mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Modificar info</button></a>
       <a href="{{route('referencias.index')}}"class="col-auto"><button type="button" class=" btn btn-outline-primary mb-3"><i class="fa-solid fa-arrow-up-right-from-square icon"></i>Volver</button></a>
     </div>     
     <div class="row ">
@@ -41,11 +40,21 @@
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Versión montada  </div>
       <div class="col-md-4 mb-3"> {{$referencia->molde->versionActual}}</div>
     </div>  
-    <div class="row ">
+    <div class="row mb-4">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Comentario  </div>
       <div class="col-md-4 text-break mb-3">{{$referencia->comentario}}</div>
     </div>       
   </div>
+  <div class="row justify-content-center">
+    <div class="col-auto fw-bold mb-3">
+      <form action="{{route('referencias.destroy',$referencia)}}" method="POST">
+        @csrf
+        @method('delete')
+        <button class=" btn btn-danger mb-3"><i class="fa-solid fa-trash-can icon"></i>Borrar referencia</button>
+      </form>
+    </div>    
+  </div>  
+</div>
   <div class="row justify-content-center p-3">
     <h2 class="text-center" style="color: #1652B5;">Intervenciones</h2>
   </div>
@@ -65,8 +74,8 @@
           </div>
         </form>
       </div>
-      <a href="{{route('acciones.nuevo',$referencia->id)}}" class="col-auto"><button class=" btn btn-primary mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Nueva intervención</button></a>      
-      <a href="{{route('acciones.exportar',$referencia->id)}}" class="col-auto"><button class=" btn btn-success mb-3"><i class="fa-regular fa-file-excel icon"></i>Excel</button></a>      
+      <a href="{{route('acciones.nuevo',$referencia)}}" class="col-auto"><button class=" btn btn-primary mb-3"><i class="fa-regular fa-pen-to-square icon"></i>Nueva intervención</button></a>      
+      <a href="{{route('acciones.exportar',$referencia)}}" class="col-auto"><button class=" btn btn-success mb-3"><i class="fa-regular fa-file-excel icon"></i>Excel</button></a>      
     </div>
     <div class="row justify-content-center">
       <table class="table table-hover"  >

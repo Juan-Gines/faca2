@@ -2,9 +2,7 @@
 
 
 @section('contenido')
-<pre>
-  
-</pre>
+@dump($producciones)
 <div class="row justify-content-center p-3">
   <h2 class="text-center" style="color: #1652B5;">Info Pedido nº {{$pedido->numero}}</h2>
 </div>
@@ -35,7 +33,7 @@
     </div>     
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Estado </div>
-      <div class="col-md-4 mb-3 text-{{$color[$pedido->estado]}} "> {{$texto[$pedido->estado]}}</div>
+      <div class="col-md-4 mb-3 text-{{$pedido->estado ? $color[$pedido->estado] : ''}} "> {{$texto[$pedido->estado]}}</div>
     </div> 
     <div class="row ">
       <div class="col-md-3 offset-md-3 fw-bold mb-3"> Fecha inicio </div>

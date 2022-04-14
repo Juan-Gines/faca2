@@ -14,7 +14,7 @@
     <div class="mb-3">
       <label for="tipo" class="form-label">Tipo</label>    
       <select class="form-select mb-3" name="tipo" aria-label="tipo" >
-        <option value="tapa">Tapa</option>      
+        <option value="Tapa">Tapa</option>      
         <option value="Tarro">Tarro</option>
         <option value="Tapones">Tapones</option>
         <option value="Sealed">Sealed</option>      

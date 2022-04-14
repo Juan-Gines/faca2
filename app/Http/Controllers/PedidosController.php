@@ -16,17 +16,34 @@ class PedidosController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $color=['light','warning','success','danger','primary'];
+    protected $color=['secondary','warning','success','danger','primary'];
 
     protected $texto=['Sin empezar','En preparación','En producción','Parado avería','Acabado'];
 
-    public function index()
+    public function index(Request $request)
     {
+        $campo=request('campo','numero');
+        $orden=request('orden','desc');
+        $busqueda=request('busqueda');
+        $producciones=Produccion::select('pedido_id',Pedido::raw('MAX(cantidad) as tope'))
+                        ->groupBy('pedido_id');                        
+        $pedidos=Pedido::join('referencias','pedidos.referencia_id','=','referencias.id')
+                        ->join('maquinas','pedidos.maquina_id','=','maquinas.id')
+                        ->joinSub($producciones,'produccion', function ($join){
+                            $join->on('pedidos.id','=','produccion.pedido_id');
+                        })
+                        ->select('pedidos.*','tope','maquinas.numero as maquina','referencias.numero as referencia','referencias.descripcion')
+                        ->orderBy($campo,$orden)->paginate(15);        
+        
+        
         $color=$this->color;
         $texto=$this->texto;
-        $pedidos=Pedido::all();
-        $producciones=Produccion::all()->sortByDesc('cantidad');                              
-        return view('pedidos.index',compact('pedidos','color','texto','producciones'));
+        $parametros=[
+            'campo'=>$campo,
+            'orden'=>$orden,
+            'busqueda'=>$busqueda,
+        ];                              
+        return view('pedidos.index',compact('pedidos','color','texto','parametros'));
     }
 
     /**
@@ -57,7 +74,8 @@ class PedidosController extends Controller
             );
             $maquina = Maquina::firstOrCreate(
                 ['numero' => $request->maquina_id],
-                ['descripcion'=>'Registro creado automáticamente, por favor termine de llenar la info.']
+                ['descripcion'=>'Registro creado automáticamente, por favor termine de llenar la info.',
+                 'estado' => false]
             ); 
             $pedido=new Pedido;        
             $pedido->numero=$request->numero;
@@ -72,10 +90,8 @@ class PedidosController extends Controller
             $pedido->cavidades=$request->cavidades;
             $pedido->material=$request->material;
             $pedido->observaciones=$request->observaciones;
-            $pedido->save();
-            $referencias=Referencia::select('numero')->get();
-            $maquinas=Maquina::select('numero')->get();
-            return view('pedidos.create',compact('referencias','maquinas'));
+            $pedido->save();            
+            return redirect()->route('pedidos.show',compact('pedido'));
         }
     }
 
@@ -85,13 +101,12 @@ class PedidosController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $pedido=Pedido::find($id);
+    public function show(Pedido $pedido)
+    {        
         $color=$this->color;
         $texto=$this->texto;
-        $producciones=Pedido::find($id)->producciones;
-        $mermas=Pedido::find($id)->mermas;
+        $producciones=$pedido->producciones()->orderBy('cantidad')->get();
+        $mermas=$pedido->mermas()->orderBy('fecha')->get();
         return view('pedidos.show',compact('pedido','color','texto','producciones','mermas'));
 
     }
@@ -102,9 +117,8 @@ class PedidosController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {        
-        $pedido=Pedido::find($id);
+    public function edit(Pedido $pedido)
+    {       
         $color=$this->color;
         $texto=$this->texto;
         $referencias=Referencia::select('numero')->get();
@@ -119,7 +133,7 @@ class PedidosController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pedido $pedido)
     {
         if(preg_match('#^[0-9]{8}$#',$request->referencia_id)&&preg_match('#^[0-9]{2}$#',$request->maquina_id)){
             $referencia = Referencia::firstOrCreate(
@@ -130,8 +144,7 @@ class PedidosController extends Controller
             $maquina = Maquina::firstOrCreate(
                 ['numero' => $request->maquina_id],
                 ['descripcion'=>'Registro creado automáticamente, por favor termine de llenar la info.']
-            ); 
-            $pedido=Pedido::find($id);        
+            );                   
             $pedido->numero=$request->numero;
             $pedido->referencia_id=$referencia->id;
             $pedido->maquina_id=$maquina->id;
@@ -146,11 +159,8 @@ class PedidosController extends Controller
             $pedido->observaciones=$request->observaciones;
             $pedido->save();            
             $color=$this->color;
-            $texto=$this->texto;
-            $producciones=$pedido->producciones;
-            $mermas=$pedido->mermas;
-            return view('pedidos.show',compact('pedido','color','texto','producciones','mermas'));
-        }
+            $texto=$this->texto;            
+            return redirect()->route('pedidos.show',compact('pedido'));        }
     }
 
     /**

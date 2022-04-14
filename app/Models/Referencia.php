@@ -11,6 +11,7 @@ class Referencia extends Model
     protected $fillable = [
         'molde_id',
         'numero',
+        'tipo',
         'descripcion',        
         'ubicacion',                
         'estado',

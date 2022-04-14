@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\MoldesExport;
+use App\Http\Requests\StoreMolde;
 use App\Imports\AccionsImport;
 use App\Imports\MoldesImport;
 use App\Imports\ReferenciasImports;
@@ -28,64 +29,50 @@ class MoldesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $color=['secondary','warning','success','danger','primary'];
+    public $color=['secondary','warning','success','danger','primary'];
 
-    protected $texto=['Desconocido','En reparación','Ok','No ok','Primario'];     
+    public $texto=['Desconocido','En reparación','Ok','No ok','Primario'];     
     public function index(Request $request)
     {
-        // $campos=['numero','descripcion','ubicacionReal','ubicacionActual','versionActual','estado','cavidades'];
-
         $campo=request('campo','numero'); 
-        $orden=request('orden','desc');    
-        $moldes=Molde::orderBy($campo,$orden)->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;               
-        return view('moldes.index',compact('moldes','color','texto','campo','orden'));
-    }
-    
-    public function ok()
-    {     
-        $moldes=Molde::where('estado','2')->orderBy('numero','desc')->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;       
-        return view('moldes.index',compact('moldes','color','texto'));
-    }
-
-    public function nook()
-    {     
-        $moldes=Molde::where('estado','3')->orderBy('numero','desc')->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;      
-        return view('moldes.index',compact('moldes','color','texto'));
-    }
-
-    public function reparando()
-    {     
-        $moldes=Molde::where('estado','1')->orderBy('numero','desc')->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;        
-        return view('moldes.index',compact('moldes','color','texto'));
-    }
-    public function desconocido()
-    {
-        $moldes=Molde::where('estado','0')->orderBy('numero','desc')->paginate(20);
-        $color=$this->color;               
-        $texto=$this->texto;        
-        return view('moldes.index',compact('moldes','color','texto')); 
-        
-    }
-
-    public function buscar(Request $request){
-        $moldes=Molde::where('numero','like','%'.$request->busqueda.'%')                    
-                    ->orWhere('ubicacionReal','like','%'.$request->busqueda.'%')
-                    ->orWhere('ubicacionActual','like','%'.$request->busqueda.'%')
-                    ->orWhere('descripcion','like','%'.$request->busqueda.'%')
-                    ->orderBy('numero','desc')
-                    ->paginate(20);
-        $color=$this->color;               
+        $orden=request('orden','desc');
+        $busqueda=request('busqueda');
+        $filtro=request('filtro');        
+        if(request('busqueda')&& (request('filtro')||request('filtro')==='0')){
+            $moldes=Molde::where('estado',$filtro)
+                ->where(function($query)use($busqueda){
+                    $query->where('numero','like','%'.$busqueda.'%')                    
+                    ->orWhere('ubicacionReal','like','%'.$busqueda.'%')
+                    ->orWhere('ubicacionActual','like','%'.$busqueda.'%')
+                    ->orWhere('descripcion','like','%'.$busqueda.'%');
+                })
+                
+                ->orderBy($campo,$orden)
+                ->paginate(15);
+        }elseif(request('busqueda')){
+            $moldes=Molde::where('numero','like','%'.$busqueda.'%')                    
+            ->orWhere('ubicacionReal','like','%'.$busqueda.'%')
+            ->orWhere('ubicacionActual','like','%'.$busqueda.'%')
+            ->orWhere('descripcion','like','%'.$busqueda.'%')
+            ->orderBy($campo,$orden)
+            ->paginate(15);
+        }elseif(request('filtro')||request('filtro')==='0'){
+            $moldes=Molde::where('estado',$filtro)->orderBy($campo,$orden)->paginate(15);
+        }else{    
+            $moldes=Molde::orderBy($campo,$orden)->paginate(15);
+        };
+        $color=$this->color;
         $texto=$this->texto;
-        return view('moldes.index',compact('moldes','color','texto'));
-    }
+        $parametros=[            
+            'campo'=>$campo,
+            'orden'=>$orden,
+            'busqueda'=>$busqueda,
+            'filtro'=>$filtro
+        ];
+                       
+        return view('moldes.index',compact('moldes','parametros','color','texto'));
+    }  
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -102,19 +89,10 @@ class MoldesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $molde=new Molde;        
-        $molde->numero=$request->numero;
-        $molde->descripcion=$request->descripcion;        
-        $molde->ubicacionReal=$request->ubicacionReal;
-        $molde->ubicacionActual=$request->ubicacionActual;
-        $molde->versionActual=$request->versionActual;
-        $molde->estado=$request->estado;               
-        $molde->cavidades=$request->cavidades;
-        $molde->comentario=$request->comentario;
-        $molde->save();
-        return view('moldes.create');
+    public function store(StoreMolde $request)
+    {        
+        $molde=Molde::create($request->all());               
+        return redirect()->route('moldes.show',compact('molde'));
     }
 
     /**
@@ -123,11 +101,10 @@ class MoldesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {        
-        $molde=Molde::find($id);
+    public function show(Molde $molde)
+    {      
         $color=$this->color;               
-        $texto=$this->texto;             
+        $texto=$this->texto;           
         return view('moldes.show',compact('molde','color','texto'));
     }
 
@@ -137,9 +114,8 @@ class MoldesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {       
-        $molde=Molde::find($id);
+    public function edit(Molde $molde)
+    {
         $color=$this->color;               
         $texto=$this->texto;        
         return view('moldes.edit',compact('molde','color','texto'));
@@ -152,21 +128,10 @@ class MoldesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Molde $molde)
     {
-        $molde=Molde::find($id);        
-        $molde->numero=$request->numero;
-        $molde->descripcion=$request->descripcion;
-        $molde->ubicacionReal=$request->ubicacionReal;
-        $molde->ubicacionActual=$request->ubicacionActual;
-        $molde->versionActual=$request->versionActual;
-        $molde->estado=$request->estado;      
-        $molde->cavidades=$request->cavidades;
-        $molde->comentario=$request->comentario;
-        $molde->save();
-        $color=$this->color;               
-        $texto=$this->texto;       
-        return view('moldes.show',compact('molde','color','texto'));
+        $molde->update($request->all());               
+        return redirect()->route('moldes.show',compact('molde'));
     }
 
     /**
@@ -175,9 +140,10 @@ class MoldesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Molde $molde)
     {
-        //
+        $molde->delete();        
+        return redirect()->route('moldes.index');
     }
 
     /*Importar de excel*/

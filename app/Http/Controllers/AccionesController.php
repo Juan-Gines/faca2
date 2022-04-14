@@ -34,14 +34,14 @@ class AccionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
-    {
+    public function create()
+    {        
         
     }
-    public function nuevo($id)
-    {
-        $referencia=Referencia::find($id);
+    public function nuevo(Referencia $referencia)
+    {        
         return view('acciones.create',compact('referencia'));
+        
     }
     /**
      * Store a newly created resource in storage.
@@ -51,8 +51,7 @@ class AccionesController extends Controller
      */
     public function store(Request $request)
     {
-        $accion=$request->all();
-        $resultado=Accion::create($accion);       
+        $accion=Accion::create($request->all());               
         $referencia=Referencia::find($request->referencia_id);
         $acciones=Referencia::find($request->referencia_id)->accions->sortBy('fechaEntrada');       
         $color=$this->color;
@@ -66,10 +65,8 @@ class AccionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $accion=Accion::find($id);        
-
+    public function show(Accion $accion)
+    {        
         return view('acciones.show',compact('accion'));
     }
 
@@ -79,9 +76,8 @@ class AccionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $accion=Accion::find($id);       
+    public function edit(Accion $accion)
+    {      
         return view('acciones.edit',compact('accion'));      
     }
 
@@ -92,19 +88,9 @@ class AccionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Accion $accion)
     {
-        $accion=Accion::find($id);                
-        $accion->referencia_id=$request->referencia_id;
-        $accion->tipo=$request->tipo;
-        $accion->lugar=$request->lugar;
-        $accion->descripcion=$request->descripcion;
-        $accion->reparacion=$request->reparacion;
-        $accion->fechaSalida=$request->fechaSalida;        
-        $accion->fechaPrueba=$request->fechaPrueba;        
-        $accion->fechaEntrada=$request->fechaEntrada;        
-        $accion->ok=$request->ok;       
-        $accion->save();       
+        $accion->update($request->all());       
         return view('acciones.show',compact('accion'));
     }
 
@@ -114,14 +100,13 @@ class AccionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $borrar=Accion::find($id);
-        $referencia=Referencia::find($borrar->referencia->id); 
-        $acciones=$referencia->accions->sortBy('fechaEntrada');
+    public function destroy(Accion $accion)
+    {        
+        $referencia=Referencia::find($accion->referencia->id);      
         $color=$this->color;
         $texto=$this->texto;      
-        $borrar->delete();            
+        $accion->delete();
+        $acciones=$referencia->accions->sortBy('fechaEntrada');            
         return view('referencias.show',compact('referencia','acciones','color','texto'));
     }
     //importar excel

@@ -18,8 +18,8 @@
     <div class="mb-3">
       <label for="sala" class="form-label">Sala</label>    
       <select class="form-select mb-3" name="sala" aria-label="sala" >
-        <option value="a">Sala A</option>      
-        <option selected value="b">Sala B</option>             
+        <option value="A">Sala A</option>      
+        <option selected value="B">Sala B</option>             
       </select>
     </div>        
     <div class="mb-3">

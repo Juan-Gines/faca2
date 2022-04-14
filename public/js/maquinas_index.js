@@ -1,25 +1,20 @@
 
 const numero=document.getElementById('numero');
 const descripcion=document.getElementById('descripcion');
-const ubicacionReal=document.getElementById('ubicacionReal');
-const ubicacionActual=document.getElementById('ubicacionActual');
-const versionActual=document.getElementById('versionActual');
+const sala=document.getElementById('sala');
 const estado=document.getElementById('estado');
-const cavidades=document.getElementById('cavidades');
 
-const sinFiltro=document.getElementById('fino');
-const okFiltro=document.getElementById('fi2');
-const nookFiltro=document.getElementById('fi3');
-const repaFiltro=document.getElementById('fi1');
-const descFiltro=document.getElementById('fi0');
+const sinFiltro=document.getElementById('todos');
+const activa=document.getElementById('activa');
+const inactiva=document.getElementById('inactiva');
 
 const filter=document.getElementById('filter');
-const btnSinFiltro=document.getElementById('btnSinFiltro');
+// const btnSinFiltro=document.getElementById('btnSinFiltro');
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
-const elementos=[numero,descripcion,ubicacionReal,ubicacionActual,versionActual,estado,cavidades];
-const filtros=[okFiltro,nookFiltro,repaFiltro,descFiltro];
+const elementos=[numero,descripcion,sala,estado];
+const filtros=[activa,inactiva];
 const noFiltros=[sinFiltro,btnSinFiltro];
 
 console.log(filtros)
@@ -38,7 +33,7 @@ addEventListener('load',()=>{
       element.prepend(icon);
     }
   });
-  if(parametros.filtro){
+  if(parametros.filtro||parametros.filtro===false){
     filter.classList.add('text-success');
     btnSinFiltro.removeAttribute('disabled');
   }else{
@@ -60,8 +55,8 @@ elementos.forEach(element=>{
 })
 
 filtros.forEach(filt=>{
-  filt.addEventListener('click',()=>{    
-      parametros.filtro=filt.id.substring(2);       
+  filt.addEventListener('click',()=>{        
+      parametros.filtro=filt.id;       
     construirURL();
   })
 })

@@ -57,10 +57,8 @@ class ProduccionesController extends Controller
         }            
         $pedido=Pedido::find($request->pedido_id);
         $color=$this->color;
-        $texto=$this->texto;
-        $producciones=$pedido->producciones;
-        $mermas=$pedido->mermas;
-        return view('pedidos.show',compact('pedido','color','texto','producciones','mermas'));
+        $texto=$this->texto;        
+        return redirect()->route('pedidos.show',compact('pedido'));
     }
 
     /**
