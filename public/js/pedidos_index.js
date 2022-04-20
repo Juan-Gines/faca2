@@ -29,7 +29,7 @@ const contra=document.getElementById('Contra obturador');
 const botella=document.getElementById('Botella'); */
 
 const btnSinFiltro=document.getElementById('btnSinFiltro');
-const filter1=document.getElementById('filter1');
+const filter1=document.getElementById('filter');
 // const filter2=document.getElementById('filter2');
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')

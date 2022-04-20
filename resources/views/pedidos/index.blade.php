@@ -21,7 +21,7 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
       <ul class="navbar-nav ">  
         <li class="nav-item mx-2 ">
-          <a href ="{{route('moldes.create')}}" ><button class="btn btn-primary" type="button"><i class="fa-regular fa-clipboard icon" ></i>Nuevo molde</button></a>
+          <a href ="{{route('pedidos.create')}}" ><button class="btn btn-primary" type="button"><i class="fa-regular fa-clipboard icon" ></i>Nuevo pedido</button></a>
         </li>                      
         <li class="nav-item dropdown mx-2 ">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown09" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
@@ -42,7 +42,7 @@
           <button class="btn btn-outline-dark border-dark " disabled id="btnSinFiltro" ><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </li>
         <li class="nav-item mx-2 ">      
-          <form id="search" action="{{route('moldes.index')}}" method="GET">                                    
+          <form id="search" action="{{route('pedidos.index')}}" method="GET">                                    
               <input class="form-control" type="text" name="busqueda" id="busqueda" value="{{$parametros['busqueda']}}" placeholder="Buscar..." aria-label="Search">                         
           </form>
         </li>

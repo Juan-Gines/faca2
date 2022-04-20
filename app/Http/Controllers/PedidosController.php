@@ -24,15 +24,16 @@ class PedidosController extends Controller
     {
         $campo=request('campo','numero');
         $orden=request('orden','desc');
+        $filtro1=request('filtro1');
         $busqueda=request('busqueda');
         $producciones=Produccion::select('pedido_id',Pedido::raw('MAX(cantidad) as tope'))
                         ->groupBy('pedido_id');                        
-        $pedidos=Pedido::join('referencias','pedidos.referencia_id','=','referencias.id')
+        $pedidos=Pedido::select('pedidos.*','tope','maquinas.numero as maquina','referencias.numero as referencia','referencias.descripcion')
+                        ->join('referencias','pedidos.referencia_id','=','referencias.id')
                         ->join('maquinas','pedidos.maquina_id','=','maquinas.id')
                         ->joinSub($producciones,'produccion', function ($join){
                             $join->on('pedidos.id','=','produccion.pedido_id');
                         })
-                        ->select('pedidos.*','tope','maquinas.numero as maquina','referencias.numero as referencia','referencias.descripcion')
                         ->orderBy($campo,$orden)->paginate(15);        
         
         
@@ -41,6 +42,7 @@ class PedidosController extends Controller
         $parametros=[
             'campo'=>$campo,
             'orden'=>$orden,
+            'filtro1'=>$filtro1,
             'busqueda'=>$busqueda,
         ];                              
         return view('pedidos.index',compact('pedidos','color','texto','parametros'));
